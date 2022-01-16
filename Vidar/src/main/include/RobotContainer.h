@@ -5,12 +5,14 @@
 #pragma once
 
 #include <frc2/command/Command.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "commands/ExampleCommand.h"
 #include "subsystems/ExampleSubsystem.h"
-#include <subsystems/Intake.h>
+#include "subsystems/Intake.h"
 #include "subsystems/Climber.h"
-#include "frc/smartdashboard/SmartDashboard.h"
+#include "commands/FlywheelShoot.h"
+#include "commands/HoodEngage.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -35,6 +37,11 @@ static constexpr int kOutsideClimberMotorRight{8};
   static constexpr int kIntakeleft{5};
   static constexpr int kIntakeright{10};
 
+ static constexpr int kShooterFlywheel{6};
+ static constexpr int kShooterHood{5};
+
+ 
+
  private:
 
   WPI_TalonFX IntakeLeft{kIntakeleft};
@@ -50,6 +57,10 @@ static constexpr int kOutsideClimberMotorRight{8};
   // The robot's subsystems and commands are defined here...
   ExampleSubsystem m_subsystem;
   ExampleCommand m_autonomousCommand;
+
+ WPI_TalonFX mFlywheelMotor{kShooterFlywheel};
+ WPI_TalonFX mHoodMotor{kShooterHood};
+ Shooter mShooter{mFlywheelMotor, mHoodMotor};
 
   void ConfigureButtonBindings();
 };
