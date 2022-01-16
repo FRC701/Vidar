@@ -8,6 +8,7 @@
 
 #include "commands/ExampleCommand.h"
 #include "subsystems/ExampleSubsystem.h"
+#include <subsystems/Intake.h>
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -22,8 +23,14 @@ class RobotContainer {
 
   frc2::Command* GetAutonomousCommand();
 
+  static constexpr int kIntakeleft{5};
+  static constexpr int kIntakeright{10};
+
  private:
-  // The robot's subsystems and commands are defined here...
+
+  WPI_TalonFX IntakeLeft{kIntakeleft};
+  WPI_TalonFX IntakeRight{kIntakeright};
+  Intake mIntake{IntakeLeft, IntakeRight};
   ExampleSubsystem m_subsystem;
   ExampleCommand m_autonomousCommand;
 
