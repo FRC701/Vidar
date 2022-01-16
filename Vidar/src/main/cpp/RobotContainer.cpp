@@ -33,6 +33,13 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
  frc::SmartDashboard::PutData("HoodEngage .04", new HoodEngage(mShooter, 0.04));
  frc::SmartDashboard::PutData("HoodEngage .05", new HoodEngage(mShooter, 0.3));
 
+ frc::SmartDashboard::PutData("HoodEngage .1", new HoodEngage(mShooter, 0.1));
+ frc::SmartDashboard::PutData("HoodEngage .2", new HoodEngage(mShooter, 0.2));
+ frc::SmartDashboard::PutData("HoodEngage .3", new HoodEngage(mShooter, 0.3));
+ frc::SmartDashboard::PutData("HoodEngage .4", new HoodEngage(mShooter, 0.4));
+ frc::SmartDashboard::PutData("HoodEngage .5", new HoodEngage(mShooter, 0.5));
+ frc::SmartDashboard::PutData("HoodEngage 1.0", new HoodEngage(mShooter, 1.0));
+ 
  frc::SmartDashboard::PutData("FlywheelShoot .0.1", new FlywheelShoot(mShooter, 0.1));
  frc::SmartDashboard::PutData("FlywheelShoot 0.2", new FlywheelShoot(mShooter, 0.2));
  frc::SmartDashboard::PutData("FlywheelShoot 0.3", new FlywheelShoot(mShooter, 0.3));

@@ -29,6 +29,6 @@ class FlywheelShoot
   bool IsFinished() override;
 
   private:
-  double motorspeed;
   Shooter& mShooter;
+  double motorspeed;
 };

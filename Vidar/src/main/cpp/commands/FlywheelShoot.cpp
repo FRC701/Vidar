@@ -4,8 +4,8 @@
 
 #include "commands/FlywheelShoot.h"
 
-FlywheelShoot::FlywheelShoot(Shooter& mShooter, double motorspeed) 
-: mShooter(mShooter)
+FlywheelShoot::FlywheelShoot(Shooter& shooter, double motorspeed) 
+: mShooter(shooter)
 , motorspeed(motorspeed)
 {
   // Use addRequirements() here to declare subsystem dependencies.

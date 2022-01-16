@@ -18,7 +18,7 @@
 class HoodEngage
     : public frc2::CommandHelper<frc2::CommandBase, HoodEngage> {
  public:
-  HoodEngage(Shooter& mShooter, double hoodspeed);
+  HoodEngage(Shooter& shooter, double hoodspeed);
 
   void Initialize() override;
 
@@ -29,6 +29,6 @@ class HoodEngage
   bool IsFinished() override;
 
  private:
- double hoodspeed;
  Shooter& mShooter;
+ double mHoodspeed;
 };

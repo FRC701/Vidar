@@ -4,9 +4,9 @@
 
 #include "commands/HoodEngage.h"
 
-HoodEngage::HoodEngage(Shooter& mShooter, double hoodspeed) 
-: mShooter(mShooter)
-, hoodspeed(hoodspeed)
+HoodEngage::HoodEngage(Shooter& shooter, double hoodspeed) 
+: mShooter(shooter)
+, mHoodspeed(hoodspeed)
 
 {
   // Use addRequirements() here to declare subsystem dependencies.
@@ -18,7 +18,7 @@ void HoodEngage::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void HoodEngage::Execute()
  {
-   mShooter.MoveHood(hoodspeed);
+   mShooter.MoveHood(mHoodspeed);
  }
 
 // Called once the command ends or is interrupted.
