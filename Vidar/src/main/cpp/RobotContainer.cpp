@@ -2,9 +2,12 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+#include <frc/smartdashboard/SmartDashboard.h>
+
 #include "RobotContainer.h"
-#include <commands/IntakeSpeed.h>
-#include "frc/smartdashboard/SmartDashboard.h"
+#include "commands/IntakeSpeed.h"
+#include "commands/InsideClimbersMove.h"
+#include "commands/OutsideClimbersMove.h"
 
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
@@ -12,6 +15,19 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
   // Configure the button bindings
   ConfigureButtonBindings();
+
+  frc::SmartDashboard::PutData("InsideClimbers 0.1", new InsideClimbersMove(mClimber, 0.99));
+  frc::SmartDashboard::PutData("InsideClimbers 0.2", new InsideClimbersMove(mClimber, 0.2));
+  frc::SmartDashboard::PutData("InsideClimbers 0.3", new InsideClimbersMove(mClimber, 0.3));
+  frc::SmartDashboard::PutData("InsideClimbers 0.4", new InsideClimbersMove(mClimber, 0.4));
+  frc::SmartDashboard::PutData("InsideClimbers 0.5", new InsideClimbersMove(mClimber, 0.5));
+  frc::SmartDashboard::PutData("OutsideClimbers 0.1", new OutsideClimbersMove(mClimber, 0.1));
+  frc::SmartDashboard::PutData("OutsideClimbers 0.2", new OutsideClimbersMove(mClimber, 0.2));
+  frc::SmartDashboard::PutData("OutsideClimbers 0.3", new OutsideClimbersMove(mClimber, 0.3));
+  frc::SmartDashboard::PutData("OutsideClimbers 0.4", new OutsideClimbersMove(mClimber, 0.4));
+  frc::SmartDashboard::PutData("OutsideClimbers 0.5", new OutsideClimbersMove(mClimber, 0.5));
+
+}
 
  frc::SmartDashboard::PutData("Intake Motor 0.10",new IntakeSpeed(mIntake, .10));
  frc::SmartDashboard::PutData("Intake Motor 0.20", new IntakeSpeed(mIntake, .20));
