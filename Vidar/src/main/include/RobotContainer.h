@@ -26,41 +26,51 @@ class RobotContainer {
   RobotContainer();
 
 // Keep the constants sorted by ID number. (Sorting by the ID is unusual. Lists are usually sorted alphabetically.)
+ 
+ static constexpr int kClimberLeftOutside{3};
+ static constexpr int kClimberLeftInside{7};
+ static constexpr int kClimberRightOutside{6};
+ static constexpr int kClimberRightInside{12};
 
-static constexpr int kInsideClimberMotorLeft{0};
-static constexpr int kOutsideClimberMotorLeft{5};
-static constexpr int kInsideClimberMotorRight{6};
-static constexpr int kOutsideClimberMotorRight{8};
+ static constexpr int kChassisLeftFront{0};
+ static constexpr int kChassisLeftRear{1};
+ static constexpr int kChassisRightFront{18};
+ static constexpr int kChassisRightRear{19};
+
+ static constexpr int kIntakeLeft{2};
+ static constexpr int kIntakeRight{17};
+
+ static constexpr int kFeederLeft{8};
+ static constexpr int kFeederRight{11};
+
+ static constexpr int kShooterFlywheelLeft{9};
+ static constexpr int kShooterFlywheelRight{10};
+
+ static constexpr int kHoodLeft{4};
+ static constexpr int kHoodRight{15};
+
 
   frc2::Command* GetAutonomousCommand();
 
-  static constexpr int kIntakeleft{5};
-  static constexpr int kIntakeright{10};
-
- static constexpr int kShooterFlywheel{6};
- static constexpr int kShooterHood{5};
-
- 
-
  private:
 
-  WPI_TalonFX IntakeLeft{kIntakeleft};
-  WPI_TalonFX IntakeRight{kIntakeright};
+  WPI_TalonFX IntakeLeft{kIntakeLeft};
+  WPI_TalonFX IntakeRight{kIntakeRight};
   Intake mIntake{IntakeLeft, IntakeRight};
 
- WPI_TalonFX InsideMotorLeft{kInsideClimberMotorLeft};
- WPI_TalonFX InsideMotorRight{kInsideClimberMotorRight};
- WPI_TalonFX OutsideMotorLeft{kOutsideClimberMotorLeft};
- WPI_TalonFX OutsideMotorRight{kOutsideClimberMotorRight};
- Climber mClimber{InsideMotorLeft, InsideMotorRight, OutsideMotorLeft, OutsideMotorRight};
+  WPI_TalonFX InsideMotorLeft{kClimberLeftInside};
+  WPI_TalonFX InsideMotorRight{kClimberRightInside};
+  WPI_TalonFX OutsideMotorLeft{kClimberLeftOutside};
+  WPI_TalonFX OutsideMotorRight{kClimberRightOutside};
+  Climber mClimber{InsideMotorLeft, InsideMotorRight, OutsideMotorLeft, OutsideMotorRight};
 
   // The robot's subsystems and commands are defined here...
   ExampleSubsystem m_subsystem;
   ExampleCommand m_autonomousCommand;
 
- WPI_TalonFX mFlywheelMotor{kShooterFlywheel};
- WPI_TalonFX mHoodMotor{kShooterHood};
- Shooter mShooter{mFlywheelMotor, mHoodMotor};
+  WPI_TalonFX mFlywheelMotor{kShooterFlywheelLeft};
+  WPI_TalonFX mHoodMotor{kHoodLeft};
+  Shooter mShooter{mFlywheelMotor, mHoodMotor};
 
   void ConfigureButtonBindings();
 };
