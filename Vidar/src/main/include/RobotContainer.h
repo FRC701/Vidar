@@ -13,7 +13,7 @@
 #include "subsystems/Climber.h"
 #include "commands/FlywheelShoot.h"
 #include "commands/HoodEngage.h"
-
+#include "subsystems/Feeder.h"
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -71,6 +71,11 @@ class RobotContainer {
   WPI_TalonFX mFlywheelMotor{kShooterFlywheelLeft};
   WPI_TalonFX mHoodMotor{kHoodLeft};
   Shooter mShooter{mFlywheelMotor, mHoodMotor};
+
+  WPI_TalonFX FeederLeft{kFeederLeft};
+  WPI_TalonFX FeederRight{kFeederRight};
+  Feeder mFeeder{FeederLeft, FeederRight};
+
 
   void ConfigureButtonBindings();
 };
