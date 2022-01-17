@@ -44,7 +44,7 @@ class RobotContainer {
  static constexpr int kFeederRight{11};
 
  static constexpr int kShooterFlywheelLeft{9};
- static constexpr int kShooterFlywheelRight{10};
+ static constexpr int kShooterFlywheelRight{5}; //10
 
  static constexpr int kHoodLeft{4};
  static constexpr int kHoodRight{15};
@@ -68,9 +68,10 @@ class RobotContainer {
   ExampleSubsystem m_subsystem;
   ExampleCommand m_autonomousCommand;
 
-  WPI_TalonFX mFlywheelMotor{kShooterFlywheelLeft};
+  WPI_TalonFX mFlywheelMotor1{kShooterFlywheelLeft};
+  WPI_TalonFX mFlywheelMotor2{kShooterFlywheelRight};
   WPI_TalonFX mHoodMotor{kHoodLeft};
-  Shooter mShooter{mFlywheelMotor, mHoodMotor};
+  Shooter mShooter{mFlywheelMotor1, mFlywheelMotor2, mHoodMotor};
 
   WPI_TalonFX FeederLeft{kFeederLeft};
   WPI_TalonFX FeederRight{kFeederRight};
