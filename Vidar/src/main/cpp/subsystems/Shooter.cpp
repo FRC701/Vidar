@@ -4,14 +4,16 @@
 
 #include "subsystems/Shooter.h"
 
-Shooter::Shooter(WPI_TalonFX& FlywheelMotor, WPI_TalonFX& HoodMotor) 
-: FlywheelMotor(FlywheelMotor)
+Shooter::Shooter(WPI_TalonFX& FlywheelMotor1, WPI_TalonFX& FlywheelMotor2, WPI_TalonFX& HoodMotor) 
+: FlywheelMotor1(FlywheelMotor1)
+, FlywheelMotor2(FlywheelMotor2)
 , HoodMotor(HoodMotor)
 {}
 
 double Shooter::SpinFlywheel(double speed)
 {
-    FlywheelMotor.Set(speed);
+    FlywheelMotor1.Set(speed);
+    FlywheelMotor2.Set(speed);
     return speed;
 }
 
