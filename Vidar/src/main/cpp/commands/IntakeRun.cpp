@@ -1,0 +1,24 @@
+#include "commands/IntakeRun.h"
+
+IntakeRun::IntakeRun(Intake& intake, double motorSpeed)
+: mIntake(intake)
+, motorSpeed(motorSpeed)
+{
+}
+
+
+void IntakeRun::Initialize() {}
+
+void IntakeRun::Execute() 
+{
+  mIntake.IntakeSpin(motorSpeed);
+}
+
+void IntakeRun::End(bool interrupted) 
+{
+  mIntake.IntakeSpin(0.);
+}
+
+bool IntakeRun::IsFinished() {
+return false;
+}
