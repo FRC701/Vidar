@@ -11,8 +11,8 @@
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/Intake.h"
 #include "subsystems/Climber.h"
+#include "subsystems/Shooter.h"
 #include "commands/FlywheelShoot.h"
-#include "commands/HoodEngage.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -46,9 +46,7 @@ class RobotContainer {
  static constexpr int kShooterFlywheelLeft{9};
  static constexpr int kShooterFlywheelRight{10};
 
- static constexpr int kHoodLeft{4};
- static constexpr int kHoodRight{15};
-
+ 
 
   frc2::Command* GetAutonomousCommand();
 
@@ -69,8 +67,7 @@ class RobotContainer {
   ExampleCommand m_autonomousCommand;
 
   WPI_TalonFX mFlywheelMotor{kShooterFlywheelLeft};
-  WPI_TalonFX mHoodMotor{kHoodLeft};
-  Shooter mShooter{mFlywheelMotor, mHoodMotor};
+  Shooter mShooter{mFlywheelMotor};
 
   void ConfigureButtonBindings();
 };
