@@ -15,35 +15,34 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
   // Configure the button bindings
   ConfigureButtonBindings();
+  {
+    frc2::Button coA {[this]{return coDriver.GetRawButton(1);}};
+    frc2::Button coB {[this]{return coDriver.GetRawButton(2);}};
+    frc2::Button coX {[this]{return coDriver.GetRawButton(3);}};
+    frc2::Button coY {[this]{return coDriver.GetRawButton(4);}};
+    coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    coY.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    coX.ToggleWhenPressed(IntakeRun(mIntake, 0.75));
+  }
 
-  frc::SmartDashboard::PutData("InsideClimbers 0.1", new InsideClimbersMove(mClimber, 0.99));
-  frc::SmartDashboard::PutData("InsideClimbers 0.2", new InsideClimbersMove(mClimber, 0.2));
-  frc::SmartDashboard::PutData("InsideClimbers 0.3", new InsideClimbersMove(mClimber, 0.3));
-  frc::SmartDashboard::PutData("InsideClimbers 0.4", new InsideClimbersMove(mClimber, 0.4));
+  frc::SmartDashboard::PutData("InsideClimbers 0.25", new InsideClimbersMove(mClimber, 0.25));
   frc::SmartDashboard::PutData("InsideClimbers 0.5", new InsideClimbersMove(mClimber, 0.5));
-  frc::SmartDashboard::PutData("OutsideClimbers 0.1", new OutsideClimbersMove(mClimber, 0.1));
-  frc::SmartDashboard::PutData("OutsideClimbers 0.2", new OutsideClimbersMove(mClimber, 0.2));
-  frc::SmartDashboard::PutData("OutsideClimbers 0.3", new OutsideClimbersMove(mClimber, 0.3));
-  frc::SmartDashboard::PutData("OutsideClimbers 0.4", new OutsideClimbersMove(mClimber, 0.4));
+  frc::SmartDashboard::PutData("InsideClimbers 0.75", new InsideClimbersMove(mClimber, 0.75));
+
+  frc::SmartDashboard::PutData("OutsideClimbers 0.25", new OutsideClimbersMove(mClimber, 0.25));
   frc::SmartDashboard::PutData("OutsideClimbers 0.5", new OutsideClimbersMove(mClimber, 0.5));
+  frc::SmartDashboard::PutData("OutsideClimbers 0.75", new OutsideClimbersMove(mClimber, 0.75));
 
- frc::SmartDashboard::PutData("FlywheelShoot .0.1", new FlywheelShoot(mShooter, 0.1));
- frc::SmartDashboard::PutData("FlywheelShoot 0.2", new FlywheelShoot(mShooter, 0.2));
- frc::SmartDashboard::PutData("FlywheelShoot 0.3", new FlywheelShoot(mShooter, 0.3));
- frc::SmartDashboard::PutData("FlywheelShoot 0.5", new FlywheelShoot(mShooter, 0.5));
- frc::SmartDashboard::PutData("FlywheelShoot 0.9", new FlywheelShoot(mShooter, 0.9));
+  frc::SmartDashboard::PutData("FlywheelShoot 0.1", new FlywheelShoot(mShooter, 0.1));
+  frc::SmartDashboard::PutData("FlywheelShoot 0.2", new FlywheelShoot(mShooter, 0.2));
+  frc::SmartDashboard::PutData("FlywheelShoot 0.3", new FlywheelShoot(mShooter, 0.3));
+  frc::SmartDashboard::PutData("FlywheelShoot 0.5", new FlywheelShoot(mShooter, 0.5));
+  frc::SmartDashboard::PutData("FlywheelShoot 0.9", new FlywheelShoot(mShooter, 0.9));
 
- frc::SmartDashboard::PutData("Intake Motor 0.10",new IntakeRun(mIntake, .10));
- frc::SmartDashboard::PutData("Intake Motor 0.20", new IntakeRun(mIntake, .20));
- frc::SmartDashboard::PutData("Intake Motor 0.30", new IntakeRun(mIntake, .30));
- frc::SmartDashboard::PutData("Intake Motor 0.40", new IntakeRun(mIntake, .40));
+ frc::SmartDashboard::PutData("Intake Motor 0.25", new IntakeRun(mIntake, .25));
  frc::SmartDashboard::PutData("Intake Motor 0.50", new IntakeRun(mIntake, .50));
- frc::SmartDashboard::PutData("Intake Motor 0.60", new IntakeRun(mIntake, .60));
- frc::SmartDashboard::PutData("Intake Motor 0.70", new IntakeRun(mIntake, .70));
- frc::SmartDashboard::PutData("Intake Motor 0.80", new IntakeRun(mIntake, .80));
- frc::SmartDashboard::PutData("Intake Motor 0.90", new IntakeRun(mIntake, .90));
- frc::SmartDashboard::PutData("Intake Motor One", new IntakeRun(mIntake, 1.00));
- frc::SmartDashboard::PutData("Intake Motor 0.55", new IntakeRun(mIntake, .55));
+ frc::SmartDashboard::PutData("Intake Motor 0.75", new IntakeRun(mIntake, .75));
  }
 
 void RobotContainer::ConfigureButtonBindings() {

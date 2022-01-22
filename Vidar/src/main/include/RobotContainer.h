@@ -6,6 +6,8 @@
 
 #include <frc2/command/Command.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc2/command/button/JoystickButton.h>
+#include <frc/XboxController.h>
 
 #include "commands/ExampleCommand.h"
 #include "subsystems/ExampleSubsystem.h"
@@ -51,6 +53,9 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
  private:
+ frc::XboxController driver{0};
+ frc::XboxController coDriver{1};
+
 
   WPI_TalonFX IntakeLeft{kIntakeLeft};
   WPI_TalonFX IntakeRight{kIntakeRight};
