@@ -18,9 +18,15 @@ void SpinFeeder::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void SpinFeeder::Execute()
 {
- mFeeder.FeederSpin(motorspeed);
+ if (mFeeder.BallIsComing())
+  {
+   mFeeder.FeederSpin(motorspeed);
+  }
+else 
+  {
+   mFeeder.FeederSpin(0.0);
+  }
 }
-
 // Called once the command ends or is interrupted.
 void SpinFeeder::End(bool interrupted) 
 {

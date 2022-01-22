@@ -14,6 +14,7 @@ class Feeder : public frc2::SubsystemBase {
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
+  bool BallIsComing();
   double FeederSpin(double speed);
  private:
  WPI_TalonFX& FeederLeft;
