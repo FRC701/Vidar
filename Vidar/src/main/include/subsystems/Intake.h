@@ -10,7 +10,7 @@ class Intake : public frc2::SubsystemBase {
     double IntakeSpin(double speed);
 
     void Periodic() override;
-
+ 
  private:
     WPI_TalonFX& IntakeLeft;
     WPI_TalonFX& IntakeRight;

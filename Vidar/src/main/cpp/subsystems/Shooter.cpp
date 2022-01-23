@@ -4,13 +4,17 @@
 
 #include "subsystems/Shooter.h"
 
-Shooter::Shooter(WPI_TalonFX& FlywheelMotor) 
-: FlywheelMotor(FlywheelMotor)
-{}
+Shooter::Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2) 
+: mFlywheelMotor1(flywheelMotor1)
+, mFlywheelMotor2(flywheelMotor2)
+{
+    mFlywheelMotor1.Set(ControlMode::Follower, mFlywheelMotor2.GetDeviceID());
+}
 
 double Shooter::SpinFlywheel(double speed)
 {
-    FlywheelMotor.Set(speed);
+    mFlywheelMotor1.Set(speed);
+    mFlywheelMotor2.Set(speed);
     return speed;
 }
 // This method will be called once per scheduler run

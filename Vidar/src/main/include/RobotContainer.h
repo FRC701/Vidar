@@ -18,7 +18,7 @@
 #include "subsystems/Climber.h"
 #include "subsystems/Shooter.h"
 #include "commands/FlywheelShoot.h"
-
+#include "subsystems/Feeder.h"
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -46,8 +46,8 @@ class RobotContainer {
  static constexpr int kIntakeLeft{2};
  static constexpr int kIntakeRight{17};
 
- static constexpr int kFeederLeft{8};
- static constexpr int kFeederRight{11};
+ static constexpr int kFeederBottom{8};
+ static constexpr int kFeederTop{11};
 
  static constexpr int kShooterFlywheelLeft{9};
  static constexpr int kShooterFlywheelRight{10};
@@ -81,8 +81,14 @@ class RobotContainer {
   ExampleSubsystem m_subsystem;
   ExampleCommand m_autonomousCommand;
 
-  WPI_TalonFX mFlywheelMotor{kShooterFlywheelLeft};
-  Shooter mShooter{mFlywheelMotor};
+  WPI_TalonFX mFlywheelMotor1{kShooterFlywheelLeft};
+  WPI_TalonFX mFlywheelMotor2{kShooterFlywheelRight};
+  Shooter mShooter{mFlywheelMotor1, mFlywheelMotor2};
+
+  WPI_TalonFX mFeederBottom{kFeederBottom};
+  WPI_TalonFX mFeederTop{kFeederTop};
+  Feeder mFeeder{mFeederBottom, mFeederTop};
+
 
   void ConfigureButtonBindings();
 };
