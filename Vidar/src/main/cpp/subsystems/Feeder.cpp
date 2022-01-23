@@ -4,25 +4,31 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "subsystems/Feeder.h"
 
-Feeder::Feeder(WPI_TalonFX& FeederLeft, WPI_TalonFX& FeederRight)
-: FeederLeft(FeederLeft)
-, FeederRight(FeederRight)
+Feeder::Feeder(WPI_TalonFX& FeederBottom, WPI_TalonFX& FeederTop)
+: FeederBottom(FeederBottom)
+, FeederTop(FeederTop)
 {}
 
 // This method will be called once per scheduler run
 void Feeder::Periodic() 
 {
     frc::SmartDashboard::PutBoolean("Ball Entering Feeder", BallIsComing());
+    frc::SmartDashboard::PutBoolean("Ball Exiting Feeder", BallIsExiting());
 }
-    bool Feeder::BallIsComing()
-    {
-        return FeederLeft.IsRevLimitSwitchClosed();
-        return FeederRight.IsRevLimitSwitchClosed();
-    }
+
+bool Feeder::BallIsComing()
+{
+    return FeederBottom.IsRevLimitSwitchClosed();
+}
+bool Feeder::BallIsExiting()
+{
+    return FeederTop.IsRevLimitSwitchClosed();
+}
+
 
 double Feeder::FeederSpin(double speed)
 {
-    FeederLeft.Set(speed);
-    FeederRight.Set(speed);
+    FeederBottom.Set(speed);
+    FeederTop.Set(speed);
     return speed;
 }

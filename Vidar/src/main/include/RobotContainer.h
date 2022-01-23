@@ -40,8 +40,8 @@ class RobotContainer {
  static constexpr int kIntakeLeft{2};
  static constexpr int kIntakeRight{17};
 
- static constexpr int kFeederLeft{8};
- static constexpr int kFeederRight{11};
+ static constexpr int kFeederBottom{8};
+ static constexpr int kFeederTop{11};
 
  static constexpr int kShooterFlywheelLeft{9};
  static constexpr int kShooterFlywheelRight{5}; //10
@@ -73,9 +73,9 @@ class RobotContainer {
   WPI_TalonFX mHoodMotor{kHoodLeft};
   Shooter mShooter{mFlywheelMotor1, mFlywheelMotor2, mHoodMotor};
 
-  WPI_TalonFX FeederLeft{kFeederLeft};
-  WPI_TalonFX FeederRight{kFeederRight};
-  Feeder mFeeder{FeederLeft, FeederRight};
+  WPI_TalonFX FeederBottom{kFeederBottom};
+  WPI_TalonFX FeederTop{kFeederTop};
+  Feeder mFeeder{FeederBottom, FeederTop};
 
 
   void ConfigureButtonBindings();
