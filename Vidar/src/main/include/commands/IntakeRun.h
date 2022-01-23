@@ -3,10 +3,10 @@
 #include <frc2/command/CommandHelper.h>
 #include "subsystems/Intake.h"
 
-class IntakeSpeed
-    : public frc2::CommandHelper<frc2::CommandBase, IntakeSpeed> {
+class IntakeRun
+    : public frc2::CommandHelper<frc2::CommandBase, IntakeRun> {
  public:
-  IntakeSpeed(Intake& intake, double motorSpeed);
+  IntakeRun(Intake& intake, double motorSpeed);
 
   void Initialize() override;
 

@@ -1,12 +1,13 @@
 #include "subsystems/Intake.h"
-
 Intake::Intake(WPI_TalonFX& IntakeLeft, WPI_TalonFX& IntakeRight) 
 : IntakeLeft(IntakeLeft)
 , IntakeRight(IntakeRight)
 {}
 
 
-void Intake::Periodic() {}
+void Intake::Periodic() 
+{
+}
 
 double Intake::IntakeSpin(double speed)
 {

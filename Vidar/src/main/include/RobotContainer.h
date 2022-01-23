@@ -6,13 +6,18 @@
 
 #include <frc2/command/Command.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc2/command/button/JoystickButton.h>
+#include <frc/XboxController.h>
+#include <ctre/phoenix/motorcontrol/can/WPI_TalonFX.h>
+
 
 #include "commands/ExampleCommand.h"
 #include "subsystems/ExampleSubsystem.h"
+#include "subsystems/Chassis.h"
 #include "subsystems/Intake.h"
 #include "subsystems/Climber.h"
+#include "subsystems/Shooter.h"
 #include "commands/FlywheelShoot.h"
-#include "commands/HoodEngage.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -24,6 +29,7 @@
 class RobotContainer {
  public:
   RobotContainer();
+  using WPI_TalonFX = ctre::phoenix::motorcontrol::can::WPI_TalonFX;
 
 // Keep the constants sorted by ID number. (Sorting by the ID is unusual. Lists are usually sorted alphabetically.)
  
@@ -46,13 +52,20 @@ class RobotContainer {
  static constexpr int kShooterFlywheelLeft{9};
  static constexpr int kShooterFlywheelRight{10};
 
- static constexpr int kHoodLeft{4};
- static constexpr int kHoodRight{15};
-
+ 
 
   frc2::Command* GetAutonomousCommand();
 
  private:
+ frc::XboxController driver{0};
+ frc::XboxController coDriver{1};
+
+//Chassis Stuff
+  WPI_TalonFX leftFront{kChassisLeftFront};
+  WPI_TalonFX leftRear{kChassisLeftRear};
+  WPI_TalonFX rightFront{kChassisRightFront};
+  WPI_TalonFX rightRear{kChassisRightRear};
+  Chassis mChassis{leftFront, leftRear, rightFront, rightRear};
 
   WPI_TalonFX IntakeLeft{kIntakeLeft};
   WPI_TalonFX IntakeRight{kIntakeRight};
@@ -69,8 +82,7 @@ class RobotContainer {
   ExampleCommand m_autonomousCommand;
 
   WPI_TalonFX mFlywheelMotor{kShooterFlywheelLeft};
-  WPI_TalonFX mHoodMotor{kHoodLeft};
-  Shooter mShooter{mFlywheelMotor, mHoodMotor};
+  Shooter mShooter{mFlywheelMotor};
 
   void ConfigureButtonBindings();
 };
