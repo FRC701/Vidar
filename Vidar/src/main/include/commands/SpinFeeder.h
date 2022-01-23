@@ -28,5 +28,5 @@ class SpinFeeder
   bool IsFinished() override;
   private:
   Feeder& mFeeder;
-  double motorspeed;
+  double mMotorspeed;
 };

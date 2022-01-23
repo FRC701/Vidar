@@ -4,10 +4,10 @@
 
 #include "commands/SpinFeeder.h"
 
+
 SpinFeeder::SpinFeeder(Feeder& feeder, double motorspeed)
 : mFeeder(feeder)
-, motorspeed(motorspeed)
-
+, mMotorspeed(motorspeed)
 {
   // Use addRequirements() here to declare subsystem dependencies.
 }
@@ -18,14 +18,18 @@ void SpinFeeder::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void SpinFeeder::Execute()
 {
+  double speed = 0;
+
  if (mFeeder.BallIsComing())
   {
-   mFeeder.FeederSpin(motorspeed);
+   speed = mMotorspeed;
   }
-else 
-  {
-   mFeeder.FeederSpin(0.0);
-  }
+ //Exit Check MUST BE LAST in order to overide Enter Check. 
+ if (mFeeder.BallIsExiting())
+ {
+   speed = 0;
+ }
+ mFeeder.FeederSpin(speed);
 }
 // Called once the command ends or is interrupted.
 void SpinFeeder::End(bool interrupted) 
