@@ -72,9 +72,9 @@ class RobotContainer {
   WPI_TalonFX mFlywheelMotor2{kShooterFlywheelRight};
   Shooter mShooter{mFlywheelMotor1, mFlywheelMotor2};
 
-  WPI_TalonFX mFeederLeft{kFeederLeft};
-  WPI_TalonFX mFeederRight{kFeederRight};
-  Feeder mFeeder{mFeederLeft, mFeederRight};
+  WPI_TalonFX mFeederBottom{kFeederBottom};
+  WPI_TalonFX mFeederTop{kFeederTop};
+  Feeder mFeeder{mFeederBottom, mFeederTop};
 
 
   void ConfigureButtonBindings();

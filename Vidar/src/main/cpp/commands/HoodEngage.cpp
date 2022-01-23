@@ -18,13 +18,11 @@ void HoodEngage::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void HoodEngage::Execute()
  {
-   mShooter.MoveHood(mHoodspeed);
  }
 
 // Called once the command ends or is interrupted.
 void HoodEngage::End(bool interrupted) 
 {
-  mShooter.MoveHood(0.0);
 }
 
 // Returns true when the command should end.

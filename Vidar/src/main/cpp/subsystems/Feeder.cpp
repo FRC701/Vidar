@@ -3,12 +3,13 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Feeder.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 Feeder::Feeder(WPI_TalonFX& feederBottom, WPI_TalonFX& feederTop)
-: FeederBottom(feederBottom)
-, FeederTop(feederTop)
+: mFeederBottom(feederBottom)
+, mFeederTop(feederTop)
 {
-    FeederTop.Set(ControlMode::Follower, FeederBottom.GetDeviceID());
+    mFeederTop.Set(ControlMode::Follower, mFeederBottom.GetDeviceID());
 }
 
 // This method will be called once per scheduler run
@@ -20,16 +21,16 @@ void Feeder::Periodic()
  
 bool Feeder::BallIsComing()
 {
-    return FeederBottom.IsRevLimitSwitchClosed();
+    return mFeederBottom.IsRevLimitSwitchClosed();
 }
 bool Feeder::BallIsExiting()
 {
-    return FeederTop.IsRevLimitSwitchClosed();
+    return mFeederTop.IsRevLimitSwitchClosed();
 }
 
 
 double Feeder::FeederSpin(double speed)
 {
-    FeederBottom.Set(speed);
+    mFeederBottom.Set(speed);
     return speed;
 }
