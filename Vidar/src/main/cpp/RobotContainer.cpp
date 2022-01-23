@@ -4,15 +4,17 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
+#include <frc2/command/button/Trigger.h>
+#include <frc2/command/button/JoystickButton.h>
 #include "RobotContainer.h"
 #include "commands/IntakeRun.h"
 #include "commands/InsideClimbersMove.h"
 #include "commands/OutsideClimbersMove.h"
+#include "commands/TankDrive.h"
 
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
-
   // Configure the button bindings
   ConfigureButtonBindings();
   {
@@ -24,6 +26,16 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
     coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
     coY.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
     coX.ToggleWhenPressed(IntakeRun(mIntake, 0.75));
+
+  mChassis.SetDefaultCommand
+  (
+    TankDrive
+    (
+      mChassis,
+      [this] { return -1.0*driver.GetLeftY(); },
+      [this] { return -1.0*driver.GetRightY(); }
+    )
+  );
   }
 
   frc::SmartDashboard::PutData("InsideClimbers 0.25", new InsideClimbersMove(mClimber, 0.25));
