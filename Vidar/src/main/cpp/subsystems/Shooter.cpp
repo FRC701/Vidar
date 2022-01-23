@@ -4,22 +4,19 @@
 
 #include "subsystems/Shooter.h"
 
-Shooter::Shooter(WPI_TalonFX& FlywheelMotor1, WPI_TalonFX& FlywheelMotor2, WPI_TalonFX& HoodMotor) 
-: FlywheelMotor1(FlywheelMotor1)
-, FlywheelMotor2(FlywheelMotor2)
-, HoodMotor(HoodMotor)
-{}
+Shooter::Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2) 
+: mFlywheelMotor1(flywheelMotor1)
+, mFlywheelMotor2(flywheelMotor2)
+{
+    mFlywheelMotor1.Set(ControlMode::Follower, mFlywheelMotor2.GetDeviceID());
+}
 
 double Shooter::SpinFlywheel(double speed)
 {
-    FlywheelMotor1.Set(speed);
-    FlywheelMotor2.Set(speed);
+    mFlywheelMotor1.Set(speed);
+    mFlywheelMotor2.Set(speed);
     return speed;
 }
 
-void Shooter::MoveHood(double speed)
-{
-    HoodMotor.Set(speed);
-}
 // This method will be called once per scheduler run
 void Shooter::Periodic() {}

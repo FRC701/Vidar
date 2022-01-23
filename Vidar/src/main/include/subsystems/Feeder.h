@@ -17,8 +17,8 @@ class Feeder : public frc2::SubsystemBase {
   bool BallIsComing();
   double FeederSpin(double speed);
  private:
- WPI_TalonFX& FeederLeft;
- WPI_TalonFX& FeederRight;
+ WPI_TalonFX& mFeederLeft;
+ WPI_TalonFX& mFeederRight;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };
