@@ -5,18 +5,16 @@ IntakeRun::IntakeRun(Intake& intake, double motorSpeed)
 , motorSpeed(motorSpeed)
 {
 }
-
-
 void IntakeRun::Initialize() {}
 
 void IntakeRun::Execute() 
 {
-  mIntake.IntakeSpin(motorSpeed);
+    mIntake.IntakeSpin(motorSpeed);
 }
 
 void IntakeRun::End(bool interrupted) 
 {
-  mIntake.IntakeSpin(0.);
+  mIntake.IntakeSpin(0);
 }
 
 bool IntakeRun::IsFinished() {
