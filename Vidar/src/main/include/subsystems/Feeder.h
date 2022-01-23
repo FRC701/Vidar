@@ -6,23 +6,20 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
-#include <ctre/phoenix/motorcontrol/can/WPI_TalonFX.h>
-
-class Shooter : public frc2::SubsystemBase {
+class Feeder : public frc2::SubsystemBase {
  public:
-  Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2);
+  Feeder(WPI_TalonFX& feederBottom, WPI_TalonFX& feederTop);
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
-  double SpinFlywheel(double speed);
-
-
+  bool BallIsComing();
+  double FeederSpin(double speed);
+  bool BallIsExiting();
  private:
- WPI_TalonFX& mFlywheelMotor1;
- WPI_TalonFX& mFlywheelMotor2;
-
+ WPI_TalonFX& mFeederBottom;
+ WPI_TalonFX& mFeederTop;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };
