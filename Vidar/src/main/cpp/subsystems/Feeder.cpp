@@ -4,18 +4,32 @@
 
 #include "subsystems/Feeder.h"
 
-Feeder::Feeder(WPI_TalonFX& feederLeft, WPI_TalonFX& feederRight)
-: mFeederLeft(feederLeft)
-, mFeederRight(feederRight)
+Feeder::Feeder(WPI_TalonFX& feederBottom, WPI_TalonFX& feederTop)
+: FeederBottom(feederBottom)
+, FeederTop(feederTop)
 {
-mFeederRight.Set(ControlMode::Follower, mFeederLeft.GetDeviceID());
+    FeederTop.Set(ControlMode::Follower, FeederBottom.GetDeviceID());
 }
 
 // This method will be called once per scheduler run
-void Feeder::Periodic() {}
+void Feeder::Periodic() 
+{
+  frc::SmartDashboard::PutBoolean("Ball Entering Feeder", BallIsComing());
+  frc::SmartDashboard::PutBoolean("Ball Exiting Feeder", BallIsExiting());
+}
+ 
+bool Feeder::BallIsComing()
+{
+    return FeederBottom.IsRevLimitSwitchClosed();
+}
+bool Feeder::BallIsExiting()
+{
+    return FeederTop.IsRevLimitSwitchClosed();
+}
+
 
 double Feeder::FeederSpin(double speed)
 {
-    mFeederLeft.Set(speed);
+    FeederBottom.Set(speed);
     return speed;
 }

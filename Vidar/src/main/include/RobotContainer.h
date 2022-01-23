@@ -40,8 +40,8 @@ class RobotContainer {
  static constexpr int kIntakeLeft{2};
  static constexpr int kIntakeRight{17};
 
- static constexpr int kFeederLeft{8};
- static constexpr int kFeederRight{11};
+ static constexpr int kFeederBottom{8};
+ static constexpr int kFeederTop{11};
 
  static constexpr int kShooterFlywheelLeft{9};
  static constexpr int kShooterFlywheelRight{10};
