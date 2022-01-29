@@ -38,6 +38,7 @@ namespace {
     constexpr double kWheelGearTeeth = 84.0;
     constexpr double kEncoderGearTeeth = 8.0;
 
+    [[maybe_unused]] 
     double feetToTicks(double feet) 
     {
         return feet * 13000;
