@@ -14,9 +14,9 @@ using WPI_TalonFX = ctre::phoenix::motorcontrol::can::WPI_TalonFX;
 
 
 
-namespace{
+namespace {
 
-std::shared_ptr<nt::NetworkTable> limeLightTable = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    std::shared_ptr<nt::NetworkTable> limeLightTable = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
 
     constexpr double kTicksPerRotation {2048};
     constexpr double kHundredMillisPerSecond {10};
