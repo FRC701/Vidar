@@ -30,7 +30,7 @@ std::shared_ptr<nt::NetworkTable> limeLightTable = nt::NetworkTableInstance::Get
 
     constexpr double kWheelDiameterInches = 6.0;
     constexpr double kWheelDiameterFeet = kWheelDiameterInches / 12.0;
-    constexpr double kFeetPerRotation = M_PI * kWheelDiameterFeet;
+    constexpr double kFeetPerRotation = 3.141592653589793238462643383279502 * kWheelDiameterFeet;
     constexpr double kWheelGearTeeth = 84.0;
     constexpr double kEncoderGearTeeth = 8.0;
 
@@ -101,11 +101,6 @@ void Chassis::Periodic()
 void Chassis::TankDrive(double left, double right)
 {
     mDrive.TankDrive(left, right);
-}
-
-void Chassis::SlowTankDrive(double left, double right)
-{
-    mDrive.TankDrive(left * 0.25, right * 0.25);
 }
 
 double Chassis::GetLeftVelocity()

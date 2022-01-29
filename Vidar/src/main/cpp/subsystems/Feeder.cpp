@@ -10,6 +10,7 @@ Feeder::Feeder(WPI_TalonFX& feederBottom, WPI_TalonFX& feederTop)
 , mFeederTop(feederTop)
 {
     mFeederTop.Set(ControlMode::Follower, mFeederBottom.GetDeviceID());
+    mFeederBottom.OverrideLimitSwitchesEnable(false);
 }
 
 // This method will be called once per scheduler run

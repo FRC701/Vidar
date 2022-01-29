@@ -15,17 +15,6 @@
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
-  // Configure the button bindings
-  ConfigureButtonBindings();
-  {
-    frc2::Button coA {[this]{return coDriver.GetRawButton(1);}};
-    frc2::Button coB {[this]{return coDriver.GetRawButton(2);}};
-    frc2::Button coX {[this]{return coDriver.GetRawButton(3);}};
-    frc2::Button coY {[this]{return coDriver.GetRawButton(4);}};
-    coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coY.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coX.ToggleWhenPressed(IntakeRun(mIntake, 0.75));
 
   mChassis.SetDefaultCommand
   (
@@ -70,6 +59,16 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
 void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
+
+    frc2::Button coA {[this]{return coDriver.GetRawButton(1);}};
+    frc2::Button coB {[this]{return coDriver.GetRawButton(2);}};
+    frc2::Button coX {[this]{return coDriver.GetRawButton(3);}};
+    frc2::Button coY {[this]{return coDriver.GetRawButton(4);}};
+    coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    coY.ToggleWhenPressed(SpinFeeder(mFeeder, 1.0));
+    coX.ToggleWhenPressed(IntakeRun(mIntake, 0.75));
+    
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
