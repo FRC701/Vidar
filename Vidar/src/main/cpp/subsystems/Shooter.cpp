@@ -17,5 +17,10 @@ double Shooter::SpinFlywheel(double speed)
     mFlywheelMotor2.Set(speed);
     return speed;
 }
+
+bool Shooter::IsReadyToShoot()
+{
+    return true;
+}
 // This method will be called once per scheduler run
 void Shooter::Periodic() {}

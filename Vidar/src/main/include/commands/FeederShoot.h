@@ -6,6 +6,8 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include "subsystems/Feeder.h"
+#include "subsystems/Shooter.h"
 
 /**
  * An example command.
@@ -17,7 +19,7 @@
 class FeederShoot
     : public frc2::CommandHelper<frc2::CommandBase, FeederShoot> {
  public:
-  FeederShoot();
+  FeederShoot(Feeder& mFeeder, Shooter& mShooter, double feederspeed);
 
   void Initialize() override;
 
@@ -27,6 +29,10 @@ class FeederShoot
 
   bool IsFinished() override;
 private:
+
+Feeder& mFeeder;
+Shooter& mShooter;
+double feederspeed;
 
   enum CommandState
   {

@@ -17,7 +17,6 @@
 #include "subsystems/Intake.h"
 #include "subsystems/Climber.h"
 #include "subsystems/Shooter.h"
-#include "commands/FlywheelShoot.h"
 #include "subsystems/Feeder.h"
 /**
  * This class is where the bulk of the robot should be declared.  Since
