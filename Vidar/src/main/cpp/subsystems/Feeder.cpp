@@ -5,11 +5,10 @@
 #include "subsystems/Feeder.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
-Feeder::Feeder(WPI_TalonFX& feederBottom, WPI_TalonFX& feederTop)
+Feeder::Feeder(WPI_TalonFX& feederBottom)
 : mFeederBottom(feederBottom)
-, mFeederTop(feederTop)
 {
-    mFeederTop.Set(ControlMode::Follower, mFeederBottom.GetDeviceID());
+    mFeederBottom.OverrideLimitSwitchesEnable(false);
 }
 
 // This method will be called once per scheduler run
@@ -25,7 +24,7 @@ bool Feeder::BallIsComing()
 }
 bool Feeder::BallIsExiting()
 {
-    return mFeederTop.IsRevLimitSwitchClosed();
+    return mFeederBottom.IsFwdLimitSwitchClosed();
 }
 
 

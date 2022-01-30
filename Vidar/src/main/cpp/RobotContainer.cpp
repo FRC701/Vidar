@@ -12,10 +12,15 @@
 #include "commands/OutsideClimbersMove.h"
 #include "commands/SpinFeeder.h"
 #include "commands/TankDrive.h"
+#include "commands/AutoEndIntake.h"
+#include "commands/RunIntake.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
   // Configure the button bindings
+
+  // mIntake.SetDefaultCommand(AutoEndIntake(mIntake, mFeeder));
+
   ConfigureButtonBindings();
   {
     frc2::Button coA {[this]{return coDriver.GetRawButton(1);}};
@@ -25,7 +30,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
     coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
     coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
     coY.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coX.ToggleWhenPressed(IntakeRun(mIntake, 0.75));
+    coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
 
   mChassis.SetDefaultCommand
   (
@@ -52,9 +57,11 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("FlywheelShoot 0.5", new FlywheelShoot(mShooter, 0.5));
   frc::SmartDashboard::PutData("FlywheelShoot 0.9", new FlywheelShoot(mShooter, 0.9));
 
- frc::SmartDashboard::PutData("Intake Motor 0.25", new IntakeRun(mIntake, .25));
- frc::SmartDashboard::PutData("Intake Motor 0.50", new IntakeRun(mIntake, .50));
- frc::SmartDashboard::PutData("Intake Motor 0.75", new IntakeRun(mIntake, .75));
+ frc::SmartDashboard::PutData("Intake Motor 0.25", new IntakeRun(mIntake, mFeeder, .25));
+ frc::SmartDashboard::PutData("Intake Motor 0.50", new IntakeRun(mIntake, mFeeder, .50));
+ frc::SmartDashboard::PutData("Intake Motor 0.75", new IntakeRun(mIntake, mFeeder, .75));
+
+ frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
 
  frc::SmartDashboard::PutData("Feeder .1", new SpinFeeder(mFeeder, 0.1));
  frc::SmartDashboard::PutData("Feeder .2", new SpinFeeder(mFeeder, 0.2));

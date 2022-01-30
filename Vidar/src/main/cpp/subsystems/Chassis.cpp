@@ -30,7 +30,7 @@ std::shared_ptr<nt::NetworkTable> limeLightTable = nt::NetworkTableInstance::Get
 
     constexpr double kWheelDiameterInches = 6.0;
     constexpr double kWheelDiameterFeet = kWheelDiameterInches / 12.0;
-    constexpr double kFeetPerRotation = M_PI * kWheelDiameterFeet;
+    constexpr double kFeetPerRotation = 3.14159265358979323 * kWheelDiameterFeet;
     constexpr double kWheelGearTeeth = 84.0;
     constexpr double kEncoderGearTeeth = 8.0;
 

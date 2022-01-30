@@ -9,7 +9,7 @@
 #include <frc2/command/button/JoystickButton.h>
 #include <frc/XboxController.h>
 #include <ctre/phoenix/motorcontrol/can/WPI_TalonFX.h>
-
+#include <frc/DoubleSolenoid.h>
 
 #include "commands/ExampleCommand.h"
 #include "subsystems/ExampleSubsystem.h"
@@ -45,14 +45,15 @@ class RobotContainer {
 
  static constexpr int kIntakeLeft{2};
  static constexpr int kIntakeRight{17};
-
+ 
  static constexpr int kFeederBottom{8};
- static constexpr int kFeederTop{11};
 
  static constexpr int kShooterFlywheelLeft{9};
  static constexpr int kShooterFlywheelRight{10};
 
- 
+
+ static constexpr int kIntakeExtend{4};
+ static constexpr int kIntakeRetract{5};
 
   frc2::Command* GetAutonomousCommand();
 
@@ -69,7 +70,8 @@ class RobotContainer {
 
   WPI_TalonFX IntakeLeft{kIntakeLeft};
   WPI_TalonFX IntakeRight{kIntakeRight};
-  Intake mIntake{IntakeLeft, IntakeRight};
+  frc::DoubleSolenoid IntakePiston{frc::PneumaticsModuleType::CTREPCM, kIntakeExtend, kIntakeRetract};
+  Intake mIntake{IntakeLeft, IntakeRight, IntakePiston};
 
   WPI_TalonFX InsideMotorLeft{kClimberLeftInside};
   WPI_TalonFX InsideMotorRight{kClimberRightInside};
@@ -86,8 +88,7 @@ class RobotContainer {
   Shooter mShooter{mFlywheelMotor1, mFlywheelMotor2};
 
   WPI_TalonFX mFeederBottom{kFeederBottom};
-  WPI_TalonFX mFeederTop{kFeederTop};
-  Feeder mFeeder{mFeederBottom, mFeederTop};
+  Feeder mFeeder{mFeederBottom};
 
 
   void ConfigureButtonBindings();
