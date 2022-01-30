@@ -1,9 +1,11 @@
 #include "commands/IntakeRun.h"
 
-IntakeRun::IntakeRun(Intake& intake, double motorSpeed)
+IntakeRun::IntakeRun(Intake& intake, Feeder& feeder, double motorSpeed)
 : mIntake(intake)
+, mFeeder(feeder)
 , motorSpeed(motorSpeed)
 {
+  
 }
 void IntakeRun::Initialize() {}
 
@@ -18,5 +20,6 @@ void IntakeRun::End(bool interrupted)
 }
 
 bool IntakeRun::IsFinished() {
-return false;
+
+return  mFeeder.BallIsExiting();
 }

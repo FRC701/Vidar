@@ -8,7 +8,7 @@
 #include <ctre/Phoenix.h>
 class Feeder : public frc2::SubsystemBase {
  public:
-  Feeder(WPI_TalonFX& feederBottom, WPI_TalonFX& feederTop);
+  Feeder(WPI_TalonFX& feederBottom);
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
@@ -19,7 +19,6 @@ class Feeder : public frc2::SubsystemBase {
   bool BallIsExiting();
  private:
  WPI_TalonFX& mFeederBottom;
- WPI_TalonFX& mFeederTop;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

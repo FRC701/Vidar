@@ -9,6 +9,7 @@ SpinFeeder::SpinFeeder(Feeder& feeder, double motorspeed)
 : mFeeder(feeder)
 , mMotorspeed(motorspeed)
 {
+  AddRequirements(&mFeeder);
   // Use addRequirements() here to declare subsystem dependencies.
 }
 
