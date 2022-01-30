@@ -5,7 +5,7 @@
 
 class Intake : public frc2::SubsystemBase {
   public:
-    Intake(WPI_TalonFX& IntakeLeft, WPI_TalonFX& IntakeRight, frc::DoubleSolenoid& IntakePiston);
+    Intake(WPI_TalonFX& IntakeMotor, frc::DoubleSolenoid& IntakePiston);
 
     double IntakeSpin(double speed);
 
@@ -18,7 +18,6 @@ class Intake : public frc2::SubsystemBase {
 
  
  private:
-    WPI_TalonFX& IntakeLeft;
-    WPI_TalonFX& IntakeRight;
+    WPI_TalonFX& IntakeMotor;
     frc::DoubleSolenoid& IntakePiston;
 };
