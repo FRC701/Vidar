@@ -14,9 +14,13 @@ using WPI_TalonFX = ctre::phoenix::motorcontrol::can::WPI_TalonFX;
 
 
 
-namespace{
+namespace {
 
-std::shared_ptr<nt::NetworkTable> limeLightTable = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    #ifndef M_PI
+        #define M_PI		3.14159265358979323846	/* pi */
+    #endif
+
+    std::shared_ptr<nt::NetworkTable> limeLightTable = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
 
     constexpr double kTicksPerRotation {2048};
     constexpr double kHundredMillisPerSecond {10};
@@ -34,6 +38,7 @@ std::shared_ptr<nt::NetworkTable> limeLightTable = nt::NetworkTableInstance::Get
     constexpr double kWheelGearTeeth = 84.0;
     constexpr double kEncoderGearTeeth = 8.0;
 
+    [[maybe_unused]] 
     double feetToTicks(double feet) 
     {
         return feet * 13000;
