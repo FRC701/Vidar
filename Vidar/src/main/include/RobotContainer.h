@@ -43,8 +43,7 @@ class RobotContainer {
  static constexpr int kChassisRightFront{18};
  static constexpr int kChassisRightRear{19};
 
- static constexpr int kIntakeLeft{2};
- static constexpr int kIntakeRight{17};
+ static constexpr int kIntakeMotor{2};
  
  static constexpr int kFeederBottom{8};
 
@@ -68,10 +67,9 @@ class RobotContainer {
   WPI_TalonFX rightRear{kChassisRightRear};
   Chassis mChassis{leftFront, leftRear, rightFront, rightRear};
 
-  WPI_TalonFX IntakeLeft{kIntakeLeft};
-  WPI_TalonFX IntakeRight{kIntakeRight};
+  WPI_TalonFX IntakeMotor{kIntakeMotor};
   frc::DoubleSolenoid IntakePiston{frc::PneumaticsModuleType::CTREPCM, kIntakeExtend, kIntakeRetract};
-  Intake mIntake{IntakeLeft, IntakeRight, IntakePiston};
+  Intake mIntake{IntakeMotor, IntakePiston};
 
   WPI_TalonFX InsideMotorLeft{kClimberLeftInside};
   WPI_TalonFX InsideMotorRight{kClimberRightInside};

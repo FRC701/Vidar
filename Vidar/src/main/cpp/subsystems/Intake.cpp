@@ -3,12 +3,11 @@
 constexpr frc::DoubleSolenoid::Value kIntakeExtend {frc::DoubleSolenoid::kForward};
 constexpr frc::DoubleSolenoid::Value kIntakeRetract {frc::DoubleSolenoid::kReverse};
 
-Intake::Intake(WPI_TalonFX& intakeLeft, WPI_TalonFX& intakeRight, frc::DoubleSolenoid& intakePiston)
-: IntakeLeft(intakeLeft)
-, IntakeRight(intakeRight)
+Intake::Intake(WPI_TalonFX& intakeMotor, frc::DoubleSolenoid& intakePiston)
+: IntakeMotor(intakeMotor)
 , IntakePiston(intakePiston)
 {
-    IntakeRight.SetInverted(false);
+
 }
 
 void Intake::Periodic() 
@@ -16,8 +15,8 @@ void Intake::Periodic()
 
 double Intake::IntakeSpin(double speed)
 {
-    IntakeLeft.Set(speed);
-    IntakeRight.Set(speed);
+    IntakeMotor.Set(speed);
+
     return speed;
 }
 
