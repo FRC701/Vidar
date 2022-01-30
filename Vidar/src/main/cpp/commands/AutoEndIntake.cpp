@@ -13,16 +13,14 @@ AutoEndIntake::AutoEndIntake(Intake& mIntake, Feeder& mFeeder)
 }
 
 // Called when the command is initially scheduled.
-void AutoEndIntake::Initialize() {}
+void AutoEndIntake::Initialize() {
+  mIntake.IntakeDisengage();
+}
 
 // Called repeatedly when this Command is scheduled to run
 void AutoEndIntake::Execute() 
 {
-if (mFeeder.BallIsExiting()) 
-{
   mIntake.IntakeSpin(0);
-  mIntake.IntakeDisengage();
-}
 }
 
 // Called once the command ends or is interrupted.

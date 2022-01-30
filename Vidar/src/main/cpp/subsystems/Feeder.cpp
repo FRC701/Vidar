@@ -20,13 +20,12 @@ void Feeder::Periodic()
  
 bool Feeder::BallIsComing()
 {
-    return mFeederBottom.IsRevLimitSwitchClosed();
+    return !mFeederBottom.IsRevLimitSwitchClosed();
 }
 bool Feeder::BallIsExiting()
 {
     return mFeederBottom.IsFwdLimitSwitchClosed();
 }
-
 
 double Feeder::FeederSpin(double speed)
 {

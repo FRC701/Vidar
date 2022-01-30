@@ -19,7 +19,8 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
   // Configure the button bindings
 
-  // mIntake.SetDefaultCommand(AutoEndIntake(mIntake, mFeeder));
+  mIntake.SetDefaultCommand(AutoEndIntake(mIntake, mFeeder));
+  mFeeder.SetDefaultCommand(SpinFeeder(mFeeder, 0.5));
 
   ConfigureButtonBindings();
   {
