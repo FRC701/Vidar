@@ -5,16 +5,20 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "commands/FeederShoot.h"
 
-FeederShoot::FeederShoot(Feeder& feeder, Shooter& shooter, double Feederspeed)
+FeederShoot::FeederShoot(Feeder& feeder, Shooter& shooter, double Feederspeed, units::second_t shooterTimeout)
 : mFeeder(feeder)
 , mShooter(shooter)
 , feederspeed(Feederspeed)
+, mShooterTimeout(shooterTimeout)
+, mTimerIsRunning(false)
+
 {
   AddRequirements(&mFeeder);
 }
 
 // Called when the command is initially scheduled.
-void FeederShoot::Initialize() {
+void FeederShoot::Initialize() 
+{
   mState = CommandState_WaitingForBall;
 }
 
@@ -41,8 +45,16 @@ void FeederShoot::Execute() {
 // Change to WairingForShooter when a ball is found.
 void FeederShoot::WaitingForBall()
 {
+if(mTimerIsRunning == false)
+{
+   mTimer.Reset();
+   mTimer.Start();
+   mTimerIsRunning = true;
+} 
   if(mFeeder.BallIsExiting())
   {
+    mTimer.Stop();
+    mTimerIsRunning = false;
     mState = CommandState_WaitingForShooter;
   }
   else
@@ -79,9 +91,14 @@ void FeederShoot::Shooting()
 }
 
 // Called once the command ends or is interrupted.
-void FeederShoot::End(bool interrupted) {}
+void FeederShoot::End(bool interrupted) 
+{
+    mTimer.Stop();
+    mTimer.Reset();
+    mTimerIsRunning = false;
+}
 
 // Returns true when the command should end.
 bool FeederShoot::IsFinished() {
-  return false;
+  return mTimer.HasElapsed(mShooterTimeout);
 }

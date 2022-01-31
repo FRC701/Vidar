@@ -8,6 +8,7 @@
 #include <frc2/command/CommandHelper.h>
 #include "subsystems/Feeder.h"
 #include "subsystems/Shooter.h"
+#include <frc/Timer.h>
 
 /**
  * An example command.
@@ -19,7 +20,7 @@
 class FeederShoot
     : public frc2::CommandHelper<frc2::CommandBase, FeederShoot> {
  public:
-  FeederShoot(Feeder& mFeeder, Shooter& mShooter, double feederspeed);
+  FeederShoot(Feeder& mFeeder, Shooter& mShooter, double feederspeed, units::second_t shooterTimeout);
 
   void Initialize() override;
 
@@ -46,4 +47,8 @@ double feederspeed;
   void WaitingForBall();
   void WaitingForShooter();
   void Shooting();
+  units::second_t mShooterTimeout;
+  frc::Timer mTimer;
+  bool mTimerIsRunning; // Timer does not expose that the timer is running.
+
 };

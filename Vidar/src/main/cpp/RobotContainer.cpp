@@ -79,10 +79,10 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button coBumperRight {[this]{return coDriver.GetRawButton(6);}};
     coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
     coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coY.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.5));
+    coY.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
-    coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5));
-    //coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
+    // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
+    // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
