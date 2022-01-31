@@ -14,6 +14,8 @@
 #include "commands/TankDrive.h"
 #include "commands/AutoEndIntake.h"
 #include "commands/RunIntake.h"
+#include "commands/FlywheelShoot.h"
+#include "commands/FeederShoot.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -23,15 +25,6 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   mFeeder.SetDefaultCommand(SpinFeeder(mFeeder, 0.5));
 
   ConfigureButtonBindings();
-  {
-    frc2::Button coA {[this]{return coDriver.GetRawButton(1);}};
-    frc2::Button coB {[this]{return coDriver.GetRawButton(2);}};
-    frc2::Button coX {[this]{return coDriver.GetRawButton(3);}};
-    frc2::Button coY {[this]{return coDriver.GetRawButton(4);}};
-    coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coY.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
 
   mChassis.SetDefaultCommand
   (
@@ -42,7 +35,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
       [this] { return -1.0*driver.GetRightY(); }
     )
   );
-  }
+  
 
   frc::SmartDashboard::PutData("InsideClimbers 0.25", new InsideClimbersMove(mClimber, 0.25));
   frc::SmartDashboard::PutData("InsideClimbers 0.5", new InsideClimbersMove(mClimber, 0.5));
@@ -76,8 +69,20 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
  frc::SmartDashboard::PutData("Feeder 1", new SpinFeeder(mFeeder, 1));
  }
 
-void RobotContainer::ConfigureButtonBindings() {
-  // Configure your button bindings here
+void RobotContainer::ConfigureButtonBindings()
+{
+    frc2::Button coA {[this]{return coDriver.GetRawButton(1);}};
+    frc2::Button coB {[this]{return coDriver.GetRawButton(2);}};
+    frc2::Button coX {[this]{return coDriver.GetRawButton(3);}};
+    frc2::Button coY {[this]{return coDriver.GetRawButton(4);}};
+    frc2::Button coBumperLeft {[this]{return coDriver.GetRawButton(5);}};
+    frc2::Button coBumperRight {[this]{return coDriver.GetRawButton(6);}};
+    coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    coY.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
+    coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
+    // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
+    // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
