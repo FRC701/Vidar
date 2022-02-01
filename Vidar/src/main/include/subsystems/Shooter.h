@@ -17,8 +17,9 @@ class Shooter : public frc2::SubsystemBase {
    */
   void Periodic() override;
   double SpinFlywheel(double speed);
+  double FlywheelVelocity();
   bool IsReadyToShoot();
-
+  
  private:
  WPI_TalonFX& mFlywheelMotor1;
  WPI_TalonFX& mFlywheelMotor2;

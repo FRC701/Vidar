@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Shooter.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 Shooter::Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2) 
 : mFlywheelMotor1(flywheelMotor1)
@@ -22,5 +23,14 @@ bool Shooter::IsReadyToShoot()
 {
     return true;
 }
+
+double Shooter::FlywheelVelocity() 
+{
+  return mFlywheelMotor1.GetSelectedSensorVelocity();
+}
+
 // This method will be called once per scheduler run
-void Shooter::Periodic() {}
+void Shooter::Periodic() 
+{
+    frc::SmartDashboard::PutNumber("Flywheel Velocity", FlywheelVelocity());
+}

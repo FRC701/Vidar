@@ -101,6 +101,9 @@ Chassis::Chassis(WPI_TalonFX& leftFront, WPI_TalonFX& leftRear, WPI_TalonFX& rig
 // This method will be called once per scheduler run
 void Chassis::Periodic() 
 {
+    frc::SmartDashboard::PutNumber("Left Velocity", GetLeftVelocity());
+    frc::SmartDashboard::PutNumber("Right Velocity", GetRightVelocity());
+    
 }
 
 void Chassis::TankDrive(double left, double right)
