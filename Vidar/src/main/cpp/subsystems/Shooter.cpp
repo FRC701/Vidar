@@ -9,13 +9,12 @@ Shooter::Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2)
 : mFlywheelMotor1(flywheelMotor1)
 , mFlywheelMotor2(flywheelMotor2)
 {
-    mFlywheelMotor1.Set(ControlMode::Follower, mFlywheelMotor2.GetDeviceID());
+    mFlywheelMotor2.Set(ControlMode::Follower, mFlywheelMotor1.GetDeviceID());
 }
 
 double Shooter::SpinFlywheel(double speed)
 {
     mFlywheelMotor1.Set(speed);
-    mFlywheelMotor2.Set(speed);
     return speed;
 }
 
