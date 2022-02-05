@@ -9,6 +9,9 @@ Shooter::Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2)
 : mFlywheelMotor1(flywheelMotor1)
 , mFlywheelMotor2(flywheelMotor2)
 {
+    constexpr auto kMotor1IsInverted {false};
+    mFlywheelMotor1.SetInverted(kMotor1IsInverted);
+    mFlywheelMotor2.SetInverted(!kMotor1IsInverted);
     mFlywheelMotor2.Set(ControlMode::Follower, mFlywheelMotor1.GetDeviceID());
 }
 
