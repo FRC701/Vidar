@@ -103,7 +103,8 @@ void Chassis::Periodic()
 {
     frc::SmartDashboard::PutNumber("Left Velocity", GetLeftVelocity());
     frc::SmartDashboard::PutNumber("Right Velocity", GetRightVelocity());
-    
+    frc::SmartDashboard::PutNumber("Target Distance", TargetDistance());
+    frc::SmartDashboard::PutNumber("Target Area", TargetOffset());
 }
 
 void Chassis::TankDrive(double left, double right)
@@ -149,6 +150,18 @@ void Chassis::ResetRightPos()
 void Chassis::ArcadeDrive(double speed, double rotation)
 {
     mDrive.ArcadeDrive(speed, rotation);
+}
+
+double Chassis::TargetDistance()
+{
+    double target = limeLightTable->GetNumber("ta", 0.0);
+    return target;
+}
+
+double Chassis::TargetOffset()
+{
+    double target = limeLightTable->GetNumber("tx", 0.0);
+    return target;
 }
 
 void Chassis::limeLightLightsOn()
