@@ -7,13 +7,17 @@
 #include <frc2/command/CommandHelper.h>
 #include <frc2/command/PIDCommand.h>
 
+#include "subsystems/Chassis.h"
+
 // VisionAim is a command that uses PID to aim the chassis at the target
 // The input to the PID is vision information from the Limelight
 // The output is the chassis moving right and left
 class VisionAim
     : public frc2::CommandHelper<frc2::PIDCommand, VisionAim> {
  public:
-  VisionAim();
+  VisionAim(Chassis& chassis);
 
   bool IsFinished() override;
+private:
+  Chassis& mChassis;
 };
