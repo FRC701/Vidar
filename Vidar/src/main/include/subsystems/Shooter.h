@@ -27,6 +27,7 @@ class Shooter : public frc2::SubsystemBase {
  private:
  WPI_TalonFX& mFlywheelMotor1;
  WPI_TalonFX& mFlywheelMotor2;
+ int mutable mThresholdLoops;
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

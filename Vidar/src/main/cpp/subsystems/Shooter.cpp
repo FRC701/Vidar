@@ -28,6 +28,7 @@ constexpr double ticksToRPM(double speed)
 Shooter::Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2) 
 : mFlywheelMotor1(flywheelMotor1)
 , mFlywheelMotor2(flywheelMotor2)
+, mThresholdLoops(0)
 {
     constexpr auto kMotor1IsInverted {false};
     mFlywheelMotor1.SetInverted(kMotor1IsInverted);
@@ -61,8 +62,20 @@ double Shooter::SpinFlywheelRPM(double speedRPM)
 
 bool Shooter::IsReadyToShoot()
 {
-    // TODO Use GetClosedLoopError and a timer to determine ready to shoot
-    return true;
+    constexpr int kErrorThresholdRPM = 100;
+    constexpr int kLoopsToSettle = 30;
+
+    constexpr double kErrorThresholdTicks{RPMToTicks(kErrorThresholdRPM)};
+    int loopError = mFlywheelMotor1.GetClosedLoopError();
+    if (loopError < kErrorThresholdTicks && loopError > -kErrorThresholdTicks)
+    {
+      ++mThresholdLoops;
+    }
+    else
+    {
+      mThresholdLoops = 0;
+    }
+    return mThresholdLoops >= kLoopsToSettle;
 }
 
 double Shooter::FlywheelVelocityRPM() 
