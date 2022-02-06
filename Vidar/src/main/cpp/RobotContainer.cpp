@@ -16,6 +16,8 @@
 #include "commands/RunIntake.h"
 #include "commands/FlywheelShoot.h"
 #include "commands/FeederShoot.h"
+#include "commands/FlywheelShootRPM.h"
+#include "commands/SetFlywheelRPM.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -43,6 +45,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
   frc::SmartDashboard::PutData("OutsideClimbers 0.25", new OutsideClimbersMove(mClimber, 0.25));
   frc::SmartDashboard::PutData("OutsideClimbers 0.5", new OutsideClimbersMove(mClimber, 0.5));
+
   frc::SmartDashboard::PutData("OutsideClimbers 0.75", new OutsideClimbersMove(mClimber, 0.75));
 
   frc::SmartDashboard::PutData("FlywheelShoot 0.1", new FlywheelShoot(mShooter, 0.1));
@@ -50,6 +53,11 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("FlywheelShoot 0.3", new FlywheelShoot(mShooter, 0.3));
   frc::SmartDashboard::PutData("FlywheelShoot 0.5", new FlywheelShoot(mShooter, 0.5));
   frc::SmartDashboard::PutData("FlywheelShoot 0.9", new FlywheelShoot(mShooter, 0.9));
+
+  frc::SmartDashboard::SetDefaultNumber("Flywheel VelocityRPM", 0);
+
+  frc::SmartDashboard::PutData("SetFlywheelRPM", new SetFlywheelRPM(mShooter));
+  
 
  frc::SmartDashboard::PutData("Intake Motor 0.25", new IntakeRun(mIntake, mFeeder, .25));
  frc::SmartDashboard::PutData("Intake Motor 0.50", new IntakeRun(mIntake, mFeeder, .50));
