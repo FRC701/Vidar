@@ -69,6 +69,7 @@ void FeederShoot::WaitingForShooter()
 {
   if(mShooter.IsReadyToShoot())
   {
+    mShooter.ResetVelocity();
     mState = CommandState_Shooting;
   }
   else

@@ -93,8 +93,15 @@ double Shooter::FlywheelVelocity()
   return mFlywheelMotor1.GetSelectedSensorVelocity();
 }
 
+double Shooter::ResetVelocity() 
+{
+  mThresholdLoops = 0;
+  return mThresholdLoops;
+}
+
 // This method will be called once per scheduler run
 void Shooter::Periodic()
 {
   frc::SmartDashboard::PutNumber("Flywheel Velocity", FlywheelVelocity());  
+  frc::SmartDashboard::PutNumber("Threshold Loops", mThresholdLoops);
 }
