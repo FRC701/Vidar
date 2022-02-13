@@ -2,32 +2,35 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/InsideClimbersMove.h"
+#include "commands/Climbers.h"
 
-InsideClimbersMove::InsideClimbersMove(Climber& climber, std::function<double()> tuskanRaiderHooks)
-:mClimber(climber)
-,mTuskanRaiderHooks(tuskanRaiderHooks)
+Climbers::Climbers(Climber& climber, std::function<double()> touchdownHooks, std::function<double()> tuskanRaiderHooks)
+: mClimber(climber)
+, mTouchdownHooks(touchdownHooks)
+, mTuskanRaiderHooks(tuskanRaiderHooks)
 {
-  AddRequirements(&mClimber);
   // Use addRequirements() here to declare subsystem dependencies.
+  AddRequirements(&mClimber);
 }
 
 // Called when the command is initially scheduled.
-void InsideClimbersMove::Initialize() {}
+void Climbers::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void InsideClimbersMove::Execute() 
+void Climbers::Execute() 
 {
+  mClimber.Outside(mTouchdownHooks());
   mClimber.Inside(mTuskanRaiderHooks());
 }
 
 // Called once the command ends or is interrupted.
-void InsideClimbersMove::End(bool interrupted) 
+void Climbers::End(bool interrupted) 
 {
+  mClimber.Outside(0);
   mClimber.Inside(0);
 }
 
 // Returns true when the command should end.
-bool InsideClimbersMove::IsFinished() {
+bool Climbers::IsFinished() {
   return false;
 }

@@ -7,6 +7,7 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 #include "subsystems/Climber.h"
+
 /**
  * An example command.
  *
@@ -14,10 +15,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class InsideClimbersMove
-    : public frc2::CommandHelper<frc2::CommandBase, InsideClimbersMove> {
+class Climbers
+    : public frc2::CommandHelper<frc2::CommandBase, Climbers> {
  public:
-  InsideClimbersMove(Climber& mClimber, std::function<double()> tuskanRaiderHooks);
+  Climbers(Climber& climber, std::function<double()> touchdownHooks, std::function<double()> mTuskanRaiderHooks);
 
   void Initialize() override;
 
@@ -26,7 +27,9 @@ class InsideClimbersMove
   void End(bool interrupted) override;
 
   bool IsFinished() override;
-private:
-Climber& mClimber;
-std::function<double()> mTuskanRaiderHooks;
+
+  private:
+  Climber& mClimber;
+  std::function<double()> mTuskanRaiderHooks;
+  std::function<double()> mTouchdownHooks;
 };

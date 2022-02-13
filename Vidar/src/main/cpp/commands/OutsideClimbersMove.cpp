@@ -4,9 +4,9 @@
 
 #include "commands/OutsideClimbersMove.h"
 
-OutsideClimbersMove::OutsideClimbersMove(Climber& climber, double motorspeed)
+OutsideClimbersMove::OutsideClimbersMove(Climber& climber, std::function<double()> touchdownHooks)
 :mClimber(climber)
-,motorspeed(motorspeed)
+,mTouchdownHooks(touchdownHooks)
 {
   AddRequirements(&mClimber);
   // Use addRequirements() here to declare subsystem dependencies.
@@ -18,7 +18,7 @@ void OutsideClimbersMove::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void OutsideClimbersMove::Execute() 
 {
-  mClimber.Outside(motorspeed);
+  mClimber.Outside(mTouchdownHooks());
 }
 
 // Called once the command ends or is interrupted.

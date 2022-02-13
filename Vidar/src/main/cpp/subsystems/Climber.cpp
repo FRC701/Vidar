@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Climber.h"
+#include "ctre/phoenix/music/Orchestra.h"
 
 Climber::Climber(WPI_TalonFX& InsideMotorLeft, WPI_TalonFX& InsideMotorRight, WPI_TalonFX& OutsideMotorLeft, WPI_TalonFX& OutsideMotorRight)
 : InsideMotorLeft(InsideMotorLeft)
@@ -26,3 +27,4 @@ double Climber::Outside(double speed)
     OutsideMotorRight.Set(speed);
     return speed;
 }
+

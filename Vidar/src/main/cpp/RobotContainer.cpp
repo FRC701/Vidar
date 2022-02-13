@@ -18,6 +18,8 @@
 #include "commands/FeederShoot.h"
 #include "commands/FlywheelShootRPM.h"
 #include "commands/SetFlywheelRPM.h"
+#include "commands/Climbers.h"
+#include "ctre/phoenix/music/Orchestra.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -25,6 +27,16 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
   mIntake.SetDefaultCommand(AutoEndIntake(mIntake, mFeeder));
   mFeeder.SetDefaultCommand(SpinFeeder(mFeeder, 0.5));
+  mClimber.SetDefaultCommand
+  (
+    Climbers
+    (
+      mClimber, 
+      [this] { return 1.0*coDriver.GetRightX(); },
+      [this] { return 1.0*coDriver.GetRightY(); }
+    )
+  );
+  
 
   ConfigureButtonBindings();
 
@@ -39,14 +51,6 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   );
   
 
-  frc::SmartDashboard::PutData("InsideClimbers 0.25", new InsideClimbersMove(mClimber, 0.25));
-  frc::SmartDashboard::PutData("InsideClimbers 0.5", new InsideClimbersMove(mClimber, 0.5));
-  frc::SmartDashboard::PutData("InsideClimbers 0.75", new InsideClimbersMove(mClimber, 0.75));
-
-  frc::SmartDashboard::PutData("OutsideClimbers 0.25", new OutsideClimbersMove(mClimber, 0.25));
-  frc::SmartDashboard::PutData("OutsideClimbers 0.5", new OutsideClimbersMove(mClimber, 0.5));
-
-  frc::SmartDashboard::PutData("OutsideClimbers 0.75", new OutsideClimbersMove(mClimber, 0.75));
 
   frc::SmartDashboard::PutData("FlywheelShoot 0.1", new FlywheelShoot(mShooter, 0.1));
   frc::SmartDashboard::PutData("FlywheelShoot 0.2", new FlywheelShoot(mShooter, 0.2));

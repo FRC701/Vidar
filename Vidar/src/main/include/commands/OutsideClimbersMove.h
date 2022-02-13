@@ -18,7 +18,7 @@
 class OutsideClimbersMove
     : public frc2::CommandHelper<frc2::CommandBase, OutsideClimbersMove> {
  public:
-  OutsideClimbersMove( Climber& mClimber, double motorspeed);
+  OutsideClimbersMove( Climber& mClimber, std::function<double()> touchdownHooks);
 
   void Initialize() override;
 
@@ -29,5 +29,5 @@ class OutsideClimbersMove
   bool IsFinished() override;
   private:
   Climber& mClimber;
-  double motorspeed;
+  std::function<double()> mTouchdownHooks;
 };
