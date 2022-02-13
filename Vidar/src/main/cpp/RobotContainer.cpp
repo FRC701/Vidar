@@ -18,6 +18,7 @@
 #include "commands/FeederShoot.h"
 #include "commands/FlywheelShootRPM.h"
 #include "commands/SetFlywheelRPM.h"
+#include "commands/VisionShoot.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -79,6 +80,21 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
 void RobotContainer::ConfigureButtonBindings()
 {
+  
+    frc2::Button DA {[this]{return driver.GetRawButton(1);}};
+    frc2::Button DB {[this]{return driver.GetRawButton(2);}};
+    frc2::Button DX {[this]{return driver.GetRawButton(3);}};
+    frc2::Button DY {[this]{return driver.GetRawButton(4);}};
+    frc2::Button DBumperLeft {[this]{return driver.GetRawButton(5);}};
+    frc2::Button DBumperRight {[this]{return driver.GetRawButton(6);}};
+    DA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    DB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    DY.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
+    DX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
+    DBumperLeft.ToggleWhenPressed(new VisionShoot(mShooter, mChassis));
+    DBumperRight.ToggleWhenPressed(new VisionShoot(mShooter, mChassis));    
+
+
     frc2::Button coA {[this]{return coDriver.GetRawButton(1);}};
     frc2::Button coB {[this]{return coDriver.GetRawButton(2);}};
     frc2::Button coX {[this]{return coDriver.GetRawButton(3);}};
@@ -89,8 +105,8 @@ void RobotContainer::ConfigureButtonBindings()
     coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
     coY.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
-    // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
-    // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
+    coBumperLeft.ToggleWhenPressed(new FlywheelShoot(mShooter, 0.5));
+    coBumperRight.ToggleWhenPressed(new FlywheelShoot(mShooter, 0.75));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
