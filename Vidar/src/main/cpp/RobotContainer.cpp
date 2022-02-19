@@ -11,6 +11,8 @@
 #include "commands/InsideClimbersMove.h"
 #include "commands/OutsideClimbersMove.h"
 #include "commands/SpinFeeder.h"
+#include "commands/IntakeExtend.h"
+#include "commands/IntakeRetract.h"
 #include "commands/TankDrive.h"
 #include "commands/AutoEndIntake.h"
 #include "commands/RunIntake.h"
@@ -67,6 +69,9 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
  frc::SmartDashboard::PutData("Intake Motor 0.50", new IntakeRun(mIntake, mFeeder, .50));
  frc::SmartDashboard::PutData("Intake Motor 0.75", new IntakeRun(mIntake, mFeeder, .75));
 
+ frc::SmartDashboard::PutData("IntakeExtend", new IntakeExtend(mIntake));
+ frc::SmartDashboard::PutData("IntakeRetract", new IntakeRetract(mIntake));
+ 
  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
 
  frc::SmartDashboard::PutData("Feeder .1", new SpinFeeder(mFeeder, 0.1));
