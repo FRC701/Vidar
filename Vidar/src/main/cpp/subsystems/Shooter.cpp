@@ -35,12 +35,14 @@ Shooter::Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2)
   mFlywheelMotor1.SetInverted(kMotor1IsInverted);
   mFlywheelMotor2.SetInverted(!kMotor1IsInverted);
   mFlywheelMotor2.Set(ControlMode::Follower, mFlywheelMotor1.GetDeviceID());
+  mFlywheelMotor1.ConfigOpenloopRamp(0.5);
+  mFlywheelMotor1.ConfigClosedloopRamp(1.0);
 
   constexpr int kDefaultSlotId{0};
-  constexpr double kP{0};
-  constexpr double kI{0};
+  constexpr double kP{0.00003};
+  constexpr double kI{1e-08};
   constexpr double kD{0};
-  constexpr double kF{0};
+  constexpr double kF{.016};
 
   mFlywheelMotor1.Config_kP(kDefaultSlotId, kP);
   mFlywheelMotor1.Config_kI(kDefaultSlotId, kI);
