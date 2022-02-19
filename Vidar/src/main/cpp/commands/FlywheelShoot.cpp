@@ -8,6 +8,7 @@ FlywheelShoot::FlywheelShoot(Shooter& shooter, double motorspeed)
 : mShooter(shooter)
 , motorspeed(motorspeed)
 {
+  AddRequirements(&mShooter);
   // Use addRequirements() here to declare subsystem dependencies.
 }
 

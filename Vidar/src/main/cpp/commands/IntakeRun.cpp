@@ -5,7 +5,7 @@ IntakeRun::IntakeRun(Intake& intake, Feeder& feeder, double motorSpeed)
 , mFeeder(feeder)
 , motorSpeed(motorSpeed)
 {
-  
+  AddRequirements(&mIntake);
 }
 void IntakeRun::Initialize() {}
 
