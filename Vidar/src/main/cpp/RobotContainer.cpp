@@ -23,6 +23,10 @@
 #include "commands/Climbers.h"
 #include "commands/FeederSpin.h"
 #include "ctre/phoenix/music/Orchestra.h"
+#include "commands/VisionShoot.h"
+#include "commands/VisionAim.h"
+#include "commands/ParallelShoot.h"
+
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -103,8 +107,8 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button coBumperLeft {[this]{return coDriver.GetRawButton(5);}};
     frc2::Button coBumperRight {[this]{return coDriver.GetRawButton(6);}};
     coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coY.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
+    coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.25));
+    coY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
     // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
