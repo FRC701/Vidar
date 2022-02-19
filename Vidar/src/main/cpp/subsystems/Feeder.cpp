@@ -24,7 +24,7 @@ bool Feeder::BallIsComing()
 }
 bool Feeder::BallIsExiting()
 {
-    return mFeederBottom.IsFwdLimitSwitchClosed();
+    return !mFeederBottom.IsFwdLimitSwitchClosed();
 }
 
 double Feeder::FeederSpin(double speed)

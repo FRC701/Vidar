@@ -21,6 +21,7 @@
 #include "commands/FlywheelShootRPM.h"
 #include "commands/SetFlywheelRPM.h"
 #include "commands/Climbers.h"
+#include "commands/FeederSpin.h"
 #include "ctre/phoenix/music/Orchestra.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
@@ -59,6 +60,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("FlywheelShoot 0.3", new FlywheelShoot(mShooter, 0.3));
   frc::SmartDashboard::PutData("FlywheelShoot 0.5", new FlywheelShoot(mShooter, 0.5));
   frc::SmartDashboard::PutData("FlywheelShoot 0.9", new FlywheelShoot(mShooter, 0.9));
+  frc::SmartDashboard::PutData("FlywheelShoot 1.0", new FlywheelShoot(mShooter, 1.0));
 
   frc::SmartDashboard::SetDefaultNumber("Flywheel VelocityRPM", 0);
 
@@ -74,6 +76,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
  
  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
 
+ 
  frc::SmartDashboard::PutData("Feeder .1", new SpinFeeder(mFeeder, 0.1));
  frc::SmartDashboard::PutData("Feeder .2", new SpinFeeder(mFeeder, 0.2));
  frc::SmartDashboard::PutData("Feeder .3", new SpinFeeder(mFeeder, 0.3));
@@ -84,6 +87,11 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
  frc::SmartDashboard::PutData("Feeder .8", new SpinFeeder(mFeeder, 0.8));
  frc::SmartDashboard::PutData("Feeder .9", new SpinFeeder(mFeeder, 0.9));
  frc::SmartDashboard::PutData("Feeder 1", new SpinFeeder(mFeeder, 1));
+
+  frc::SmartDashboard::PutData("Only Feeder .25", new FeederSpin(mFeeder, 0.25));
+  frc::SmartDashboard::PutData("Only Feeder .5", new FeederSpin(mFeeder, 0.5));
+  frc::SmartDashboard::PutData("Only Feeder .75", new FeederSpin(mFeeder, 0.75));
+  frc::SmartDashboard::PutData("Only Feeder 1.0", new FeederSpin(mFeeder, 1.0));
  }
 
 void RobotContainer::ConfigureButtonBindings()
