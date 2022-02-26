@@ -26,7 +26,7 @@
 #include "commands/VisionShoot.h"
 #include "commands/VisionAim.h"
 #include "commands/ParallelShoot.h"
-
+#include "commands/ParallelShootRPM.h"
 #include "commands/ParallelFlywheelShoot.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
@@ -70,6 +70,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::SetDefaultNumber("Set Flywheel VelocityRPM", 0);
 
   frc::SmartDashboard::PutData("SetFlywheelRPM", new SetFlywheelRPM(mShooter));
+  frc::SmartDashboard::PutData("Run Parallel Shooter", new ParallelShootRPM(mFeeder, mShooter));
   
 
  frc::SmartDashboard::PutData("Intake Motor 0.25", new IntakeRun(mIntake, mFeeder, .25));
