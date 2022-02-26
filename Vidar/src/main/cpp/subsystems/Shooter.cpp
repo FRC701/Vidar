@@ -35,14 +35,14 @@ Shooter::Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2)
   mFlywheelMotor1.SetInverted(kMotor1IsInverted);
   mFlywheelMotor2.SetInverted(!kMotor1IsInverted);
   mFlywheelMotor2.Set(ControlMode::Follower, mFlywheelMotor1.GetDeviceID());
-  mFlywheelMotor1.ConfigOpenloopRamp(0.5);
-  mFlywheelMotor1.ConfigClosedloopRamp(1.0);
+  mFlywheelMotor1.ConfigOpenloopRamp(1.75);
+  mFlywheelMotor1.ConfigClosedloopRamp(1.75);
 
   constexpr int kDefaultSlotId{0};
-  constexpr double kP{0.00003};
-  constexpr double kI{1e-08};
+  constexpr double kP{0.3};
+  constexpr double kI{0.0003};
   constexpr double kD{0};
-  constexpr double kF{.016};
+  constexpr double kF{0.05};
 
   mFlywheelMotor1.Config_kP(kDefaultSlotId, kP);
   mFlywheelMotor1.Config_kI(kDefaultSlotId, kI);
@@ -62,16 +62,22 @@ double Shooter::SpinFlywheelRPM(double speedRPM)
   frc::SmartDashboard::PutNumber("SpinFlywheelRPM", speedRPM);
   double speed = RPMToTicks(speedRPM);
   mFlywheelMotor1.Set(ControlMode::Velocity, speed);
-  return speedRPM;
+  return speed;
 }
 
 bool Shooter::IsReadyToShoot()
-{
-    constexpr int kErrorThresholdRPM = 100;
-    constexpr int kLoopsToSettle = 30;
+{  
+    constexpr int kErrorThresholdRPM = 50;
+    constexpr int kLoopsToSettle = 15;
 
     constexpr double kErrorThresholdTicks{RPMToTicks(kErrorThresholdRPM)};
     int loopError = mFlywheelMotor1.GetClosedLoopError();
+    double target = mFlywheelMotor1.GetClosedLoopTarget();
+
+    frc::SmartDashboard::PutNumber("Error Threshold", kErrorThresholdTicks);  
+    frc::SmartDashboard::PutNumber("Loop Error", loopError);
+    frc::SmartDashboard::PutNumber("Loop Target", target);
+
     if (loopError < kErrorThresholdTicks && loopError > -kErrorThresholdTicks)
     {
       ++mThresholdLoops;
@@ -104,6 +110,13 @@ double Shooter::ResetVelocity()
 // This method will be called once per scheduler run
 void Shooter::Periodic()
 {
-  frc::SmartDashboard::PutNumber("Flywheel Velocity", FlywheelVelocity());  
+  frc::SmartDashboard::PutNumber("Flywheel Velocity", FlywheelVelocity());
+  frc::SmartDashboard::PutNumber("Flywheel Velocity RPM", FlywheelVelocityRPM());
+  frc::SmartDashboard::PutNumber("Flywheel Velocity RPM", FlywheelVelocityRPM());
+  frc::SmartDashboard::PutNumber("Loop Target", mFlywheelMotor1.GetClosedLoopTarget());
+  frc::SmartDashboard::PutNumber("Loop Error", mFlywheelMotor1.GetClosedLoopError());
+  frc::SmartDashboard::PutNumber("Flywheeel Output Voltage", mFlywheelMotor1.GetMotorOutputVoltage());
+  frc::SmartDashboard::PutNumber("Flywheeel Output Current", mFlywheelMotor1.GetOutputCurrent());
+
   frc::SmartDashboard::PutNumber("Threshold Loops", mThresholdLoops);
 }
