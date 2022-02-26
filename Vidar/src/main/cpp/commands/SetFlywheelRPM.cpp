@@ -12,13 +12,14 @@ SetFlywheelRPM::SetFlywheelRPM(Shooter& shooter)
 }
 
 // Called when the command is initially scheduled.
-void SetFlywheelRPM::Initialize() {}
+void SetFlywheelRPM::Initialize() {
+  mShooter.ResetVelocity();
+}
 
 // Called repeatedly when this Command is scheduled to run
 void SetFlywheelRPM::Execute() 
 {
-  double velocity = frc::SmartDashboard::GetNumber("Flywheel VelocityRPM", 0);
-  //double velocity = 1000;
+  double velocity = frc::SmartDashboard::GetNumber("Set Flywheel VelocityRPM", 0);
   mShooter.SpinFlywheelRPM(velocity);  
 }
 

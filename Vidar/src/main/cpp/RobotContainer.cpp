@@ -66,7 +66,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("FlywheelShoot 0.9", new FlywheelShoot(mShooter, 0.9));
   frc::SmartDashboard::PutData("FlywheelShoot 1.0", new FlywheelShoot(mShooter, 1.0));
 
-  frc::SmartDashboard::SetDefaultNumber("Flywheel VelocityRPM", 0);
+  frc::SmartDashboard::SetDefaultNumber("Set Flywheel VelocityRPM", 0);
 
   frc::SmartDashboard::PutData("SetFlywheelRPM", new SetFlywheelRPM(mShooter));
   
