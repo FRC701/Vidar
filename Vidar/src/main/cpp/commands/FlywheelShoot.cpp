@@ -18,7 +18,7 @@ void FlywheelShoot::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void FlywheelShoot::Execute() 
 {
-mShooter.SpinFlywheel(motorspeed);
+  mShooter.SpinFlywheel(motorspeed);
 }
 
 // Called once the command ends or is interrupted.

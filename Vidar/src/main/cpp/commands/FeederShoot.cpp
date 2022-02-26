@@ -45,12 +45,13 @@ void FeederShoot::Execute() {
 // Change to WairingForShooter when a ball is found.
 void FeederShoot::WaitingForBall()
 {
-if(mTimerIsRunning == false)
-{
-   mTimer.Reset();
-   mTimer.Start();
-   mTimerIsRunning = true;
-} 
+  if(mTimerIsRunning == false)
+  {
+    mTimer.Reset();
+    mTimer.Start();
+    mTimerIsRunning = true;
+  } 
+
   if(mFeeder.BallIsExiting())
   {
     mTimer.Stop();
@@ -59,7 +60,7 @@ if(mTimerIsRunning == false)
   }
   else
   {
-  mFeeder.FeederSpin(feederspeed);
+    mFeeder.FeederSpin(feederspeed);
   }
 }
 
@@ -74,7 +75,7 @@ void FeederShoot::WaitingForShooter()
   }
   else
   {
-  mFeeder.FeederSpin(0);
+  mFeeder.FeederSpin(0.0);
   }
 }
 
