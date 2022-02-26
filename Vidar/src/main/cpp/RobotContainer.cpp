@@ -27,6 +27,7 @@
 #include "commands/VisionAim.h"
 #include "commands/ParallelShoot.h"
 
+#include "commands/ParallelFlywheelShoot.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -107,9 +108,10 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button coBumperLeft {[this]{return coDriver.GetRawButton(5);}};
     frc2::Button coBumperRight {[this]{return coDriver.GetRawButton(6);}};
     coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
-    coB.ToggleWhenPressed(FlywheelShoot(mShooter, 0.25));
+    coB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
     coY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
+    coBumperLeft.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
     // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
 }
