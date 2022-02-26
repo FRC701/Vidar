@@ -10,15 +10,15 @@
 // For more information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 ParallelShoot::ParallelShoot(Feeder& feeder, Shooter& shooter, Chassis& chassis)
-:mFeeder(feeder)
+: CommandHelper(
+      FeederShoot(feeder, shooter, 0.4, units::second_t(4.0)))
+, mFeeder(feeder)
 ,mShooter(shooter)
 ,mChassis(chassis)
-    , CommandHelper(
-      FeederShoot(mFeeder, mShooter, 0.4, units::second_t(4.0))) {
+{
   // Add your commands here, e.g.
   // AddCommands(FooCommand(), BarCommand());
   AddCommands(
-  FeederShoot(mFeeder, mShooter, 0.4, units::second_t(4.0)),
-  VisionShoot(mShooter, mChassis)
+    VisionShoot(mShooter, mChassis)
   );
 }
