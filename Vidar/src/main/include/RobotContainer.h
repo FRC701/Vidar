@@ -50,8 +50,8 @@ class RobotContainer {
  static constexpr int kShooterFlywheelRight{10};
 
 
- static constexpr int kIntakeExtend{4};
- static constexpr int kIntakeRetract{5};
+ static constexpr int kIntakeExtend{7};
+ static constexpr int kIntakeRetract{0};
 
   frc2::Command* GetAutonomousCommand();
 
