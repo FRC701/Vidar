@@ -61,6 +61,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   
 
 
+  frc::SmartDashboard::PutData("Vision Aim", new VisionAim(mChassis));
   frc::SmartDashboard::PutData("FlywheelShoot 0.1", new FlywheelShoot(mShooter, 0.1));
   frc::SmartDashboard::PutData("FlywheelShoot 0.2", new FlywheelShoot(mShooter, 0.2));
   frc::SmartDashboard::PutData("FlywheelShoot 0.3", new FlywheelShoot(mShooter, 0.3));

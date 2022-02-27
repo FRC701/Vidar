@@ -14,9 +14,11 @@
 // The output is the chassis moving right and left
 class VisionAim
     : public frc2::CommandHelper<frc2::PIDCommand, VisionAim> {
+ typedef frc2::CommandHelper<frc2::PIDCommand, VisionAim> super;
  public:
   VisionAim(Chassis& chassis);
 
+  void Initialize() override;
   bool IsFinished() override;
 private:
   Chassis& mChassis;
