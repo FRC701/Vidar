@@ -33,4 +33,6 @@ class VisionShoot
 private:
   Shooter& mShooter;
   Chassis& mChassis;
+
+  double mspeed;
 };
