@@ -11,10 +11,10 @@
 
 namespace {
 
-double kP = 0.1;  // Adjust kP first
+double kP = 0.05;  // Adjust kP first
 double kI = 0.0;  // Keep 0. 
 double kD = 0.0;  // Keep 0.
-double kF = 0.5;  // Adjust to get out of the deadband
+double kF = 0;  // Adjust to get out of the deadband
 
 }
 
@@ -34,12 +34,16 @@ VisionAim::VisionAim(Chassis& chassis)
             // Use the output here
             // Left turn is negative, right turn is positive
             // TODO Is this backward?
-            mChassis.TankDrive(kF - output, kF + output);
+            mChassis.ArcadeDrive(0, kF - output);
           })
     , mChassis(chassis) {
-    GetController().SetTolerance(0.0); // TODO Should the tolerance be opened?
+    GetController().SetTolerance(0); // TODO Should the tolerance be opened?
     AddRequirements(&mChassis);
   }
+void VisionAim::Initialize() {
+  mChassis.limeLightLightsOn();
+  super::Initialize();
+}
 
 // Returns true when the command should end.
 bool VisionAim::IsFinished() {

@@ -2,32 +2,30 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/FlywheelShoot.h"
+#include "commands/FeederSpin.h"
 
-FlywheelShoot::FlywheelShoot(Shooter& shooter, double motorspeed) 
-: mShooter(shooter)
-, motorspeed(motorspeed)
+
+
+FeederSpin::FeederSpin(Feeder& mFeeder, double motorspeed) 
+:mFeeder(mFeeder), mMotorSpeed(motorspeed)
 {
-  AddRequirements(&mShooter);
+  AddRequirements(&mFeeder);
   // Use addRequirements() here to declare subsystem dependencies.
 }
 
 // Called when the command is initially scheduled.
-void FlywheelShoot::Initialize() {}
+void FeederSpin::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void FlywheelShoot::Execute() 
+void FeederSpin::Execute() 
 {
-  mShooter.SpinFlywheel(motorspeed);
+  mFeeder.FeederSpin(mMotorSpeed);
 }
 
 // Called once the command ends or is interrupted.
-void FlywheelShoot::End(bool interrupted) 
-{
-  mShooter.SpinFlywheel(0.0);
-}
+void FeederSpin::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool FlywheelShoot::IsFinished() {
+bool FeederSpin::IsFinished() {
   return false;
 }

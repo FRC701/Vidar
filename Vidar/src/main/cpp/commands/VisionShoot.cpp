@@ -5,6 +5,7 @@
 #include <algorithm>
 
 #include "commands/VisionShoot.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 namespace {
 
@@ -17,11 +18,10 @@ namespace {
 
 VisionToSpeed VisionToSpeeds []
 {
-  {10, 2.5, 300},
-  {15, 3.5, 350},
-  {20, 4.5, 400},
-  {25, 5.5, 450},
-  {30, 6.5, 500}
+  {20, 0.00107, 3800},
+  {15, 0.00224, 2900},
+  {10, 0.00462, 2150},
+  {5 , 0.00673, 1850}
 };
 
 bool isLessThanTargetAreaBySpeed(const VisionToSpeed& visionToSpeeds, double targetArea)
@@ -56,16 +56,21 @@ VisionToSpeed* upper_bound(double targetarea)
 double TargetAreaToSpeed(double targetarea)
 {
   VisionToSpeed*
-  VisionToSpeed1 = lower_bound(targetarea);  
+  VisionToSpeed2 = lower_bound(targetarea);  
   
   VisionToSpeed*
-  VisionToSpeed2 = upper_bound(targetarea);
+  VisionToSpeed1 = upper_bound(targetarea);
 
   double x1 = VisionToSpeed1->TargetArea;
   double y1 = VisionToSpeed1->SpeedRPM;
   double x2 = VisionToSpeed2->TargetArea;
   double y2 = VisionToSpeed2->SpeedRPM;
-  
+
+    frc::SmartDashboard::PutNumber("x1", x1);
+    frc::SmartDashboard::PutNumber("y1", y1);
+    frc::SmartDashboard::PutNumber("x2", x2);
+    frc::SmartDashboard::PutNumber("y2", y2);
+
 
   double m = y2-y1/x2-x1;
   double b = y1-m*x1;
@@ -84,14 +89,17 @@ VisionShoot::VisionShoot(Shooter& shooter, Chassis& chassis)
 }
 
 // Called when the command is initially scheduled.
-void VisionShoot::Initialize() {}
+void VisionShoot::Initialize() {
+    double targetArea = mChassis.TargetDistance();
+    mspeed = TargetAreaToSpeed(targetArea);
+  frc::SmartDashboard::PutNumber("Target Area VS", targetArea);
+  frc::SmartDashboard::PutNumber("Target Speed VS", mspeed);
+}
 
 // Called repeatedly when this Command is scheduled to run
 void VisionShoot::Execute() 
 {
-    double targetArea = mChassis.TargetDistance();
-    double speed = TargetAreaToSpeed(targetArea);
-    mShooter.SpinFlywheel(speed); // Change to SpinFlywheelRPM
+    mShooter.SpinFlywheelRPM(mspeed); // Change to SpinFlywheelRPM
 }
 
 

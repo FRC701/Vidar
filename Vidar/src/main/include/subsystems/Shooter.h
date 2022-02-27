@@ -23,6 +23,7 @@ class Shooter : public frc2::SubsystemBase {
   double FlywheelVelocity();
   double FlywheelVelocityRPM();
   bool IsReadyToShoot();
+  double ResetVelocity();
   
  private:
  WPI_TalonFX& mFlywheelMotor1;

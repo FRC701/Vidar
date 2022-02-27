@@ -6,21 +6,19 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include "subsystems/Shooter.h"
-#include "subsystems/Chassis.h"
+#include "subsystems/Feeder.h"
 
 /**
  * An example command.
  *
- * <p>Note that this extends CommandHelmper, rather extending CommandBase
+ * <p>Note that this extends CommandHelper, rather extending CommandBase
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
- * hi 
  */
-class VisionShoot
-    : public frc2::CommandHelper<frc2::CommandBase, VisionShoot> {
+class FeederSpin
+    : public frc2::CommandHelper<frc2::CommandBase, FeederSpin> {
  public:
-  VisionShoot(Shooter& shooter, Chassis& chassis);
+  FeederSpin(Feeder& mFeeder, double motorspeed);
 
   void Initialize() override;
 
@@ -30,9 +28,9 @@ class VisionShoot
 
   bool IsFinished() override;
 
-private:
-  Shooter& mShooter;
-  Chassis& mChassis;
+  double Spin();
 
-  double mspeed;
+  private:
+  Feeder& mFeeder;
+  double mMotorSpeed;
 };
