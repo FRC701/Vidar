@@ -33,6 +33,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
   // Configure the button bindings
 
+  mShooter.SetDefaultCommand(FlywheelShoot(mShooter, 0));
   mIntake.SetDefaultCommand(AutoEndIntake(mIntake, mFeeder));
   mFeeder.SetDefaultCommand(SpinFeeder(mFeeder, 0.5));
   mClimber.SetDefaultCommand
@@ -94,25 +95,38 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
  frc::SmartDashboard::PutData("Feeder .9", new SpinFeeder(mFeeder, 0.9));
  frc::SmartDashboard::PutData("Feeder 1", new SpinFeeder(mFeeder, 1));
 
+  frc::SmartDashboard::PutData("FeederShoot 0.4", new FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
+
   frc::SmartDashboard::PutData("Only Feeder .25", new FeederSpin(mFeeder, 0.25));
   frc::SmartDashboard::PutData("Only Feeder .5", new FeederSpin(mFeeder, 0.5));
   frc::SmartDashboard::PutData("Only Feeder .75", new FeederSpin(mFeeder, 0.75));
   frc::SmartDashboard::PutData("Only Feeder 1.0", new FeederSpin(mFeeder, 1.0));
+
+  frc::SmartDashboard::PutData("Shoot 1000", new FlywheelShootRPM(mShooter, 1000));
+  frc::SmartDashboard::PutData("Shoot 2000", new FlywheelShootRPM(mShooter, 2000));
+  frc::SmartDashboard::PutData("Shoot 3000", new FlywheelShootRPM(mShooter, 3000));
+  frc::SmartDashboard::PutData("Shoot 4000", new FlywheelShootRPM(mShooter, 4000));
+  frc::SmartDashboard::PutData("Shoot 5000", new FlywheelShootRPM(mShooter, 5000));
+  frc::SmartDashboard::PutData("Shoot 6000", new FlywheelShootRPM(mShooter, 6000));
+
+
  }
 
 void RobotContainer::ConfigureButtonBindings()
 {
     frc2::Button coA {[this]{return coDriver.GetRawButton(1);}};
     frc2::Button coB {[this]{return coDriver.GetRawButton(2);}};
-    frc2::Button coX {[this]{return coDriver.GetRawButton(3);}};
+    frc2::Button coX {[this]{return coDriver.GetRawButton(3);}};                                                               
     frc2::Button coY {[this]{return coDriver.GetRawButton(4);}};
     frc2::Button coBumperLeft {[this]{return coDriver.GetRawButton(5);}};
     frc2::Button coBumperRight {[this]{return coDriver.GetRawButton(6);}};
-    coA.ToggleWhenPressed(FlywheelShoot(mShooter, 0.75));
+    coA.ToggleWhenPressed(SetFlywheelRPM(mShooter));
     coB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
     coY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
     coBumperLeft.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
+    coBumperRight.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
+
     // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
 }
