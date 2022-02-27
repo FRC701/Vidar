@@ -16,6 +16,12 @@ namespace {
     double SpeedRPM;
   };
 
+
+// Recording for future information
+// Low shots
+// {0,  850}  Touching the hub - 850 RPM
+// {5, 1250}  5 feet back from the hub, 1250 RPM 
+// (there's no reference for 5 feet so not that much help)
 VisionToSpeed VisionToSpeeds []
 {
   {20, 0.00107, 3800},
