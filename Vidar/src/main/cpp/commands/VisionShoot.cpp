@@ -8,17 +8,6 @@
 #include "commands/VisionToSpeed.h"
 #include "frc/smartdashboard/SmartDashboard.h"
 
-// Implement the additional vision_shoot namespace here for convenience.
-namespace vision_shoot {
-
-double FindSpeed(VisionToSpeed* begin, VisionToSpeed* end, double targetArea)
-{
-  // First iteration. Returning 0 is the easiest result to return.
-  return 0.0;
-}
-
-}
-
 namespace {
 
 using vision_shoot::VisionToSpeed;
@@ -90,7 +79,18 @@ double TargetAreaToSpeed(double targetarea)
   return y;
 }
 
+} // end namespace
+
+// Implement the additional vision_shoot namespace here for convenience.
+namespace vision_shoot {
+
+double FindSpeed(VisionToSpeed* begin, VisionToSpeed* end, double targetArea)
+{
+  double speedRPM = TargetAreaToSpeed(begin, end, targetArea);  
+  return speedRPM;
 }
+
+} // end namespace vision_shoot
 
 
 VisionShoot::VisionShoot(Shooter& shooter, Chassis& chassis) 
