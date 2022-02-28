@@ -28,6 +28,7 @@
 #include "commands/ParallelShoot.h"
 #include "commands/ParallelShootRPM.h"
 #include "commands/ParallelFlywheelShoot.h"
+#include "commands/ExtendClimberArms.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -60,6 +61,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   );
   
 
+  frc::SmartDashboard::PutData("Climber Extend", new ExtendClimberArms(mClimber));
 
   frc::SmartDashboard::PutData("Vision Aim", new VisionAim(mChassis));
   frc::SmartDashboard::PutData("Vision Shoot", new VisionShoot(mShooter, mChassis));

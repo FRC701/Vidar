@@ -19,8 +19,8 @@ void Climbers::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void Climbers::Execute() 
 {
-  mClimber.Outside(mTouchdownHooks());
-  mClimber.Inside(mTuskanRaiderHooks());
+  mClimber.Inside(mTouchdownHooks());
+  mClimber.Outside(mTuskanRaiderHooks());
 }
 
 // Called once the command ends or is interrupted.

@@ -5,14 +5,20 @@
 #include "subsystems/Climber.h"
 #include "ctre/phoenix/music/Orchestra.h"
 
-Climber::Climber(WPI_TalonFX& InsideMotorLeft, WPI_TalonFX& InsideMotorRight, WPI_TalonFX& OutsideMotorLeft, WPI_TalonFX& OutsideMotorRight)
+constexpr frc::DoubleSolenoid::Value kClimberExtend {frc::DoubleSolenoid::kForward};
+constexpr frc::DoubleSolenoid::Value kClimberRetract {frc::DoubleSolenoid::kReverse};
+
+Climber::Climber(WPI_TalonFX& InsideMotorLeft, WPI_TalonFX& InsideMotorRight, WPI_TalonFX& OutsideMotorLeft, WPI_TalonFX& OutsideMotorRight, frc::DoubleSolenoid& ClimberPiston)
 : InsideMotorLeft(InsideMotorLeft)
 , InsideMotorRight(InsideMotorRight)
 , OutsideMotorLeft(OutsideMotorLeft)
 , OutsideMotorRight(OutsideMotorRight)
+, ClimberPiston(ClimberPiston)
 {}
 // This method will be called once per scheduler run
-void Climber::Periodic() {}
+void Climber::Periodic() 
+{
+}
  
 double Climber::Inside(double speed)
 {
@@ -28,3 +34,12 @@ double Climber::Outside(double speed)
     return speed;
 }
 
+void Climber::ExtendArms()
+{
+    ClimberPiston.Set(kClimberExtend);
+}
+
+void Climber::RetractArms()
+{
+    ClimberPiston.Set(kClimberRetract);
+}
