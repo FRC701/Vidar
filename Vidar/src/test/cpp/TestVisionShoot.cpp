@@ -203,6 +203,25 @@ TEST_F(TestVisionShoot, greaterThanTargetArea) {
     EXPECT_EQ(speed, kExpectedSpeed);
 }
 
+TEST_F(TestVisionShoot, exactlyFirstTargetArea) {
+    VisionToSpeed simpleVisionToSpeeds[] {
+        { 10.0, 1.0,  5000.0},
+        { 20.0, 5.0,  3500.0},
+        { 30.0, 35.0, 2200.0},
+        { 40.0, 45.0, 1400.0},
+        { 50.0, 75.0, 500.0}
+    };
+    constexpr double kTestTargetArea = 1.0;
+
+    constexpr double kExpectedSpeed = 5000.0;
+    double speed 
+        = FindSpeed(
+            std::begin(simpleVisionToSpeeds), 
+            std::end(simpleVisionToSpeeds), 
+            kTestTargetArea);
+    EXPECT_EQ(speed, kExpectedSpeed);
+}
+
 TEST_F(TestVisionShoot, exactlyLastTargetArea) {
     VisionToSpeed simpleVisionToSpeeds[] {
         { 10.0, 1.0,  5000.0},

@@ -66,17 +66,24 @@ double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double target
   // Several error conditions
   // 1. if lower == begin, then there are not values less than targetArea
   // 2. if lower == end, then targetArea is greater than the the largest in the table 
-  if (lower != begin && lower != end) {
-    VisionToSpeed* previous = lower - 1;
-    double x1 = previous->targetArea;
-    double y1 = previous->speedRPM;
-    double x2 = lower->targetArea;
-    double y2 = lower->speedRPM;
+  if (lower != end) {
+    if (lower != begin) {
+      VisionToSpeed* previous = lower - 1;
+      double x1 = previous->targetArea;
+      double y1 = previous->speedRPM;
+      double x2 = lower->targetArea;
+      double y2 = lower->speedRPM;
 
-    double m = (y2 - y1)/(x2 - x1);
-    double b = y1 - m * x1;
-    double y = m * targetArea + b;
-    return y;
+      double m = (y2 - y1)/(x2 - x1);
+      double b = y1 - m * x1;
+      double y = m * targetArea + b;
+      return y;
+    }
+    else
+    {
+      // Special case for an exact match to the first value in the table
+      return (lower->targetArea == targetArea ? lower->speedRPM : 0.0);
+    }
   }
   else
   {
