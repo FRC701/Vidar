@@ -29,7 +29,7 @@ TEST_F(TestVisionShoot, EmptyDataFails) {
 TEST_F(TestVisionShoot, SingleValueFails) {
     // A single valued table is probably also not very useful for linear interpolation
     VisionToSpeed singleVisionToSpeeds[] {
-        { 0, 1, 2}  // Any values as this should fail
+        { 0, 1, 2}  // Any values as this test should fail
     };
     constexpr double kTestTargetArea = 0.1; // Use any target area for this test
 
@@ -39,5 +39,27 @@ TEST_F(TestVisionShoot, SingleValueFails) {
             std::end(singleVisionToSpeeds), 
             kTestTargetArea);
     EXPECT_EQ(speed, 0.0);
+}
+
+// Build the simplest real test possible. 
+// 1. Two values
+// 2. Test for a value directly between the values
+TEST_F(TestVisionShoot, SimpleInterpolation) {
+    VisionToSpeed simpleVisionToSpeeds[] {
+        { 30.0, 1.0, 300.0},
+        { 10.0, 3.0, 100.0}
+    };
+    constexpr double kTestTargetArea = 2.0;
+    // With this data the expected result for half way between the two values
+    // would be half way between the speeds, so 200.0.
+
+    // The value should probably be calculated, but this is good for this simple test.
+    constexpr double kExpectedSpeed = 200.0;
+    double speed 
+        = FindSpeed(
+            std::begin(simpleVisionToSpeeds), 
+            std::end(simpleVisionToSpeeds), 
+            kTestTargetArea);
+    EXPECT_EQ(speed, kExpectedSpeed);
 }
 
