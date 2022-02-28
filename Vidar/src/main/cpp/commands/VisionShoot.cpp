@@ -59,7 +59,11 @@ double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double target
   VisionToSpeed* lower = std::lower_bound(begin, end, targetArea, isLessThanTargetAreaBySpeed);
   VisionToSpeed* upper = std::upper_bound(begin, end, targetArea, isLessThanTargetAreaByTargetArea);
 
-  if (lower != end && upper != end) {
+  // Several error conditions
+  // 1. can't find a lower
+  // 2. can't find an upper
+  // 3. lower and upper cannot be the same
+  if (lower != end && upper != end && lower != upper) {
     double x1 = lower->targetArea;
     double y1 = lower->speedRPM;
     double x2 = upper->targetArea;
