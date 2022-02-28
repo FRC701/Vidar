@@ -26,3 +26,18 @@ TEST_F(TestVisionShoot, EmptyDataFails) {
     EXPECT_EQ(speed, 0.0);
 }
 
+TEST_F(TestVisionShoot, SingleValueFails) {
+    // A single valued table is probably also not very useful for linear interpolation
+    VisionToSpeed singleVisionToSpeeds[] {
+        { 0, 1, 2}  // Any values as this should fail
+    };
+    constexpr double kTestTargetArea = 0.1; // Use any target area for this test
+
+    double speed 
+        = FindSpeed(
+            std::begin(singleVisionToSpeeds), 
+            std::end(singleVisionToSpeeds), 
+            kTestTargetArea);
+    EXPECT_EQ(speed, 0.0);
+}
+
