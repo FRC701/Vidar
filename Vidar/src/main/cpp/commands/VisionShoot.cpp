@@ -59,15 +59,21 @@ double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double target
   VisionToSpeed* lower = std::lower_bound(begin, end, targetArea, isLessThanTargetAreaBySpeed);
   VisionToSpeed* upper = std::upper_bound(begin, end, targetArea, isLessThanTargetAreaByTargetArea);
 
-  double x1 = lower->targetArea;
-  double y1 = lower->speedRPM;
-  double x2 = upper->targetArea;
-  double y2 = upper->speedRPM;
+  if (lower != end && upper != end) {
+    double x1 = lower->targetArea;
+    double y1 = lower->speedRPM;
+    double x2 = upper->targetArea;
+    double y2 = upper->speedRPM;
 
-  double m = (y2 - y1)/(x2 - x1);
-  double b = y1 - m * x1;
-  double y = m * targetArea + b;
-  return y;
+    double m = (y2 - y1)/(x2 - x1);
+    double b = y1 - m * x1;
+    double y = m * targetArea + b;
+    return y;
+  }
+  else
+  {
+    return 0.0;  // Sentinel value that means, something is wrong.
+  }
 }
 
 double TargetAreaToSpeed(double targetarea)
