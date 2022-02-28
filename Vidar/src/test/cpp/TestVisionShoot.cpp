@@ -126,3 +126,22 @@ TEST_F(TestVisionShoot, threeQuarterInterpolation) {
             kTestTargetArea);
     EXPECT_EQ(speed, kExpectedSpeed);
 }
+
+TEST_F(TestVisionShoot, nonLinearInterpolation) {
+    VisionToSpeed simpleVisionToSpeeds[] {
+        { 10.0, 1.0,  5000.0},
+        { 20.0, 5.0,  3500.0},
+        { 30.0, 35.0, 2200.0},
+        { 40.0, 45.0, 1400.0},
+        { 50.0, 75.0, 500.0}
+    };
+    constexpr double kTestTargetArea = 42.5;
+
+    constexpr double kExpectedSpeed = 1600.0;
+    double speed 
+        = FindSpeed(
+            std::begin(simpleVisionToSpeeds), 
+            std::end(simpleVisionToSpeeds), 
+            kTestTargetArea);
+    EXPECT_EQ(speed, kExpectedSpeed);
+}
