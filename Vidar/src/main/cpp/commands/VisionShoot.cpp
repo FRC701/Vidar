@@ -5,17 +5,12 @@
 #include <algorithm>
 
 #include "commands/VisionShoot.h"
+#include "commands/VisionToSpeed.h"
 #include "frc/smartdashboard/SmartDashboard.h"
 
 namespace {
 
-  struct VisionToSpeed
-  {
-    double Distance;
-    double TargetArea;
-    double SpeedRPM;
-  };
-
+using vision_shoot::VisionToSpeed;
 
 // Recording for future information
 // Low shots
@@ -32,12 +27,12 @@ VisionToSpeed VisionToSpeeds []
 
 bool isLessThanTargetAreaBySpeed(const VisionToSpeed& visionToSpeeds, double targetArea)
 {
-  return visionToSpeeds.TargetArea < targetArea;
+  return visionToSpeeds.targetArea < targetArea;
 }
 
 bool isLessThanTargetAreaByTargetArea(double targetArea, const VisionToSpeed& visionToSpeeds)
 {
-  return visionToSpeeds.TargetArea < targetArea;
+  return visionToSpeeds.targetArea < targetArea;
 }
 
 VisionToSpeed* lower_bound(double targetarea)
@@ -67,10 +62,10 @@ double TargetAreaToSpeed(double targetarea)
   VisionToSpeed*
   VisionToSpeed1 = upper_bound(targetarea);
 
-  double x1 = VisionToSpeed1->TargetArea;
-  double y1 = VisionToSpeed1->SpeedRPM;
-  double x2 = VisionToSpeed2->TargetArea;
-  double y2 = VisionToSpeed2->SpeedRPM;
+  double x1 = VisionToSpeed1->targetArea;
+  double y1 = VisionToSpeed1->speedRPM;
+  double x2 = VisionToSpeed2->targetArea;
+  double y2 = VisionToSpeed2->speedRPM;
 
     frc::SmartDashboard::PutNumber("x1", x1);
     frc::SmartDashboard::PutNumber("y1", y1);
