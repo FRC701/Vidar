@@ -56,18 +56,22 @@ VisionToSpeed* upper_bound(double targetarea)
 
 double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double targetArea)
 {
+  // Find the lower bound. This is the value that is not less than targetArea. 
+  // That is the returned value is greater than or equal to targetArea.
   VisionToSpeed* lower = std::lower_bound(begin, end, targetArea, isLessThanTargetAreaBySpeed);
-  VisionToSpeed* upper = std::upper_bound(begin, end, targetArea, isLessThanTargetAreaByTargetArea);
+
+  // Two values are needed in order to do linear interpolation, lower bound and the entry before
+  // lower bound. However, a check must be made to determine if there is a value before lower bound.
 
   // Several error conditions
-  // 1. can't find a lower
-  // 2. can't find an upper
-  // 3. lower and upper cannot be the same
-  if (lower != end && upper != end && lower != upper) {
-    double x1 = lower->targetArea;
-    double y1 = lower->speedRPM;
-    double x2 = upper->targetArea;
-    double y2 = upper->speedRPM;
+  // 1. if lower == begin, then there are not values less than targetArea
+  // 2. if lower == end, then targetArea is greater than the the largest in the table 
+  if (lower != begin && lower != end) {
+    VisionToSpeed* previous = lower - 1;
+    double x1 = previous->targetArea;
+    double y1 = previous->speedRPM;
+    double x2 = lower->targetArea;
+    double y2 = lower->speedRPM;
 
     double m = (y2 - y1)/(x2 - x1);
     double b = y1 - m * x1;
