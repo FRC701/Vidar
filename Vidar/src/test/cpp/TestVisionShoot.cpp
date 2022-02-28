@@ -9,8 +9,6 @@
 using vision_shoot::VisionToSpeed;
 using vision_shoot::FindSpeed;
 
-
-
 TEST_F(TestVisionShoot, EmptyDataFails) {
     VisionToSpeed emptyVisionToSpeeds {};
     constexpr double kTestTargetArea = 0.1; // Use any target area for this test
@@ -63,3 +61,68 @@ TEST_F(TestVisionShoot, SimpleInterpolation) {
     EXPECT_EQ(speed, kExpectedSpeed);
 }
 
+TEST_F(TestVisionShoot, largeInterpolation) {
+    VisionToSpeed simpleVisionToSpeeds[] {
+        { 10.0, 1.0, 100.0},
+        { 20.0, 2.0, 200.0},
+        { 30.0, 3.0, 300.0},
+        { 40.0, 4.0, 400.0},
+        { 50.0, 5.0, 500.0}
+    };
+    constexpr double kTestTargetArea = 1.5;
+    // With this data the expected result for half way between two values
+    // would be half way between the speeds, so 150.0.
+
+    // The value should probably be calculated, but this is good for this simple test.
+    constexpr double kExpectedSpeed = 150.0;
+    double speed 
+        = FindSpeed(
+            std::begin(simpleVisionToSpeeds), 
+            std::end(simpleVisionToSpeeds), 
+            kTestTargetArea);
+    EXPECT_EQ(speed, kExpectedSpeed);
+}
+
+TEST_F(TestVisionShoot, quarterInterpolation) {
+    VisionToSpeed simpleVisionToSpeeds[] {
+        { 10.0, 1.0, 100.0},
+        { 20.0, 2.0, 200.0},
+        { 30.0, 3.0, 300.0},
+        { 40.0, 4.0, 400.0},
+        { 50.0, 5.0, 500.0}
+    };
+    constexpr double kTestTargetArea = 1.25;
+    // With this data the expected result for a quarter way between two values
+    // would be quarter way between the speeds, so 125.0.
+
+    // The value should probably be calculated, but this is good for this simple test.
+    constexpr double kExpectedSpeed = 125.0;
+    double speed 
+        = FindSpeed(
+            std::begin(simpleVisionToSpeeds), 
+            std::end(simpleVisionToSpeeds), 
+            kTestTargetArea);
+    EXPECT_EQ(speed, kExpectedSpeed);
+}
+
+TEST_F(TestVisionShoot, threeQuarterInterpolation) {
+    VisionToSpeed simpleVisionToSpeeds[] {
+        { 10.0, 1.0, 100.0},
+        { 20.0, 2.0, 200.0},
+        { 30.0, 3.0, 300.0},
+        { 40.0, 4.0, 400.0},
+        { 50.0, 5.0, 500.0}
+    };
+    constexpr double kTestTargetArea = 3.75;
+    // With this data the expected result for 3/4 way between two values
+    // would be half way between the speeds, so 375.0.
+
+    // The value should probably be calculated, but this is good for this simple test.
+    constexpr double kExpectedSpeed = 375.0;
+    double speed 
+        = FindSpeed(
+            std::begin(simpleVisionToSpeeds), 
+            std::end(simpleVisionToSpeeds), 
+            kTestTargetArea);
+    EXPECT_EQ(speed, kExpectedSpeed);
+}
