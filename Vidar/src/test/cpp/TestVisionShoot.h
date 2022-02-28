@@ -7,6 +7,7 @@
 #include <gtest/gtest.h>
 
 #include "commands/VisionShoot.h"
+#include "commands/VisionToSpeed.h"
 
 class TestVisionShoot : public testing::Test {
  protected:
