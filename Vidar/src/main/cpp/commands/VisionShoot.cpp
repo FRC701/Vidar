@@ -76,23 +76,19 @@ double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double target
   // Two values are needed in order to do linear interpolation, lower bound and the entry before
   // lower bound. However, a check must be made to determine if there is a value before lower bound.
 
-  // Several error conditions
-  // 1. if lower == begin, then there are not values less than targetArea
-  // 2. if lower == end, then targetArea is greater than the the largest in the table 
-  if (lower != end) {
-    if (lower != begin) {
-      return InterpolateSpeed(lower - 1, lower, targetArea);
-    }
-    else
-    {
-      // Special case for an exact match to the first value in the table
-      return (lower->targetArea == targetArea ? lower->speedRPM : 0.0);
-    }
-  }
-  else
-  {
+  // Error conditions
+  // 1. if lower == end, then targetArea is greater than the the largest in the table 
+  // 2. if lower == begin, then there are not values less than targetArea
+  if (lower == end) {
     return 0.0;  // Sentinel value that means, something is wrong.
   }
+
+  if (lower == begin) {
+    // Special case for an exact match to the first value in the table
+    return (lower->targetArea == targetArea ? lower->speedRPM : 0.0);
+  }
+
+  return InterpolateSpeed(lower - 1, lower, targetArea);
 }
 
 double TargetAreaToSpeed(double targetarea)
