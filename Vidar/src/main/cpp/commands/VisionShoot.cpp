@@ -54,6 +54,22 @@ VisionToSpeed* upper_bound(double targetarea)
 
 }
 
+double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double targetArea)
+{
+  VisionToSpeed* lower = std::lower_bound(begin, end, targetArea, isLessThanTargetAreaBySpeed);
+  VisionToSpeed* upper = std::upper_bound(begin, end, targetArea, isLessThanTargetAreaByTargetArea);
+
+  double x1 = lower->targetArea;
+  double y1 = lower->speedRPM;
+  double x2 = upper->targetArea;
+  double y2 = upper->speedRPM;
+
+  double m = (y2 - y1)/(x2 - x1);
+  double b = y1 - m * x1;
+  double y = m * targetArea + b;
+  return y;
+}
+
 double TargetAreaToSpeed(double targetarea)
 {
   VisionToSpeed*
