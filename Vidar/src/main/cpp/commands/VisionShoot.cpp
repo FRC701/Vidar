@@ -25,7 +25,7 @@ VisionToSpeed VisionToSpeeds []
   {5 , 0.00673, 1850}
 };
 
-bool isLessThanTargetAreaBySpeed(const VisionToSpeed& visionToSpeeds, double targetArea)
+bool isLessThanTargetArea(const VisionToSpeed& visionToSpeeds, double targetArea)
 {
   return visionToSpeeds.targetArea < targetArea;
 }
@@ -47,20 +47,21 @@ double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double target
 {
   // Find the lower bound. This is the value that is not less than targetArea. 
   // That is the returned value is greater than or equal to targetArea.
-  VisionToSpeed* lower = std::lower_bound(begin, end, targetArea, isLessThanTargetAreaBySpeed);
+  VisionToSpeed* lower = std::lower_bound(begin, end, targetArea, isLessThanTargetArea);
 
   // Two values are needed in order to do linear interpolation, lower bound and the entry before
   // lower bound. However, a check must be made to determine if there is a value before lower bound.
 
-  // Error conditions
-  // 1. if lower == end, then targetArea is greater than the the largest in the table 
-  // 2. if lower == begin, then there are not values less than targetArea
+  // Error condition
+  // if lower == end, then targetArea is greater than the the largest in the table 
   if (lower == end) {
     return 0.0;  // Sentinel value that means, something is wrong.
   }
 
+  // Error condition
+  // if lower == begin, then there are not values less than targetArea
+  // Special case when the targetArea is exactly the first value
   if (lower == begin) {
-    // Special case for an exact match to the first value in the table
     return (lower->targetArea == targetArea ? lower->speedRPM : 0.0);
   }
 
