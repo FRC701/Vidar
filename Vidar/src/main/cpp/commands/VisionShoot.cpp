@@ -32,7 +32,7 @@ bool isLessThanTargetAreaBySpeed(const VisionToSpeed& visionToSpeeds, double tar
 
 bool isLessThanTargetAreaByTargetArea(double targetArea, const VisionToSpeed& visionToSpeeds)
 {
-  return visionToSpeeds.targetArea < targetArea;
+  return targetArea < visionToSpeeds.targetArea;
 }
 
 VisionToSpeed* lower_bound(double targetarea)
