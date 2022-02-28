@@ -54,6 +54,19 @@ VisionToSpeed* upper_bound(double targetarea)
 
 }
 
+double InterpolateSpeed(VisionToSpeed* first, VisionToSpeed* second, double targetArea)
+{
+      double x1 = first->targetArea;
+      double y1 = first->speedRPM;
+      double x2 = second->targetArea;
+      double y2 = second->speedRPM;
+
+      double m = (y2 - y1)/(x2 - x1);
+      double b = y1 - m * x1;
+      double y = m * targetArea + b;
+      return y;
+}
+
 double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double targetArea)
 {
   // Find the lower bound. This is the value that is not less than targetArea. 
@@ -68,16 +81,7 @@ double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double target
   // 2. if lower == end, then targetArea is greater than the the largest in the table 
   if (lower != end) {
     if (lower != begin) {
-      VisionToSpeed* previous = lower - 1;
-      double x1 = previous->targetArea;
-      double y1 = previous->speedRPM;
-      double x2 = lower->targetArea;
-      double y2 = lower->speedRPM;
-
-      double m = (y2 - y1)/(x2 - x1);
-      double b = y1 - m * x1;
-      double y = m * targetArea + b;
-      return y;
+      return InterpolateSpeed(lower - 1, lower, targetArea);
     }
     else
     {
