@@ -30,30 +30,6 @@ bool isLessThanTargetAreaBySpeed(const VisionToSpeed& visionToSpeeds, double tar
   return visionToSpeeds.targetArea < targetArea;
 }
 
-bool isLessThanTargetAreaByTargetArea(double targetArea, const VisionToSpeed& visionToSpeeds)
-{
-  return targetArea < visionToSpeeds.targetArea;
-}
-
-VisionToSpeed* lower_bound(double targetarea)
-{
-  return std::lower_bound(
-    std::begin(VisionToSpeeds), 
-    std::end(VisionToSpeeds),
-    targetarea,
-    isLessThanTargetAreaBySpeed);
-
-}
-VisionToSpeed* upper_bound(double targetarea)
-{
-  return std::upper_bound(
-    std::begin(VisionToSpeeds), 
-    std::end(VisionToSpeeds),
-    targetarea,
-    isLessThanTargetAreaByTargetArea);
-
-}
-
 double InterpolateSpeed(VisionToSpeed* first, VisionToSpeed* second, double targetArea)
 {
       double x1 = first->targetArea;
@@ -91,29 +67,9 @@ double TargetAreaToSpeed(VisionToSpeed* begin, VisionToSpeed* end, double target
   return InterpolateSpeed(lower - 1, lower, targetArea);
 }
 
-double TargetAreaToSpeed(double targetarea)
+double TargetAreaToSpeed(double targetArea)
 {
-  VisionToSpeed*
-  VisionToSpeed2 = lower_bound(targetarea);  
-  
-  VisionToSpeed*
-  VisionToSpeed1 = upper_bound(targetarea);
-
-  double x1 = VisionToSpeed1->targetArea;
-  double y1 = VisionToSpeed1->speedRPM;
-  double x2 = VisionToSpeed2->targetArea;
-  double y2 = VisionToSpeed2->speedRPM;
-
-    frc::SmartDashboard::PutNumber("x1", x1);
-    frc::SmartDashboard::PutNumber("y1", y1);
-    frc::SmartDashboard::PutNumber("x2", x2);
-    frc::SmartDashboard::PutNumber("y2", y2);
-
-
-  double m = y2-y1/x2-x1;
-  double b = y1-m*x1;
-  double y = m*targetarea+b;
-  return y;
+  return TargetAreaToSpeed(std::begin(VisionToSpeeds), std::end(VisionToSpeeds), targetArea);
 }
 
 } // end namespace
@@ -157,5 +113,5 @@ void VisionShoot::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool VisionShoot::IsFinished() {
-  return false;
+  return mspeed == 0.0;
 }
