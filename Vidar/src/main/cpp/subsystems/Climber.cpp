@@ -4,6 +4,7 @@
 
 #include "subsystems/Climber.h"
 #include "ctre/phoenix/music/Orchestra.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 constexpr frc::DoubleSolenoid::Value kClimberExtend {frc::DoubleSolenoid::kForward};
 constexpr frc::DoubleSolenoid::Value kClimberRetract {frc::DoubleSolenoid::kReverse};
@@ -14,10 +15,19 @@ Climber::Climber(WPI_TalonFX& InsideMotorLeft, WPI_TalonFX& InsideMotorRight, WP
 , OutsideMotorLeft(OutsideMotorLeft)
 , OutsideMotorRight(OutsideMotorRight)
 , ClimberPiston(ClimberPiston)
-{}
+{
+    InsideMotorLeft.SetInverted(true);
+    OutsideMotorLeft.SetInverted(false);
+    OutsideMotorRight.SetInverted(true);
+    InsideMotorRight.SetInverted(false);
+}
 // This method will be called once per scheduler run
 void Climber::Periodic() 
 {
+    frc::SmartDashboard::PutBoolean("RightClimberIsDown", RightClimberIsDown());
+    frc::SmartDashboard::PutBoolean("LeftClimberIsDown", LeftClimberIsDown());
+    frc::SmartDashboard::PutBoolean("TouchdownFwd", TouchdownFwd());
+    frc::SmartDashboard::PutBoolean("TouchdownRev", TouchdownRev());
 }
  
 double Climber::Inside(double speed)
@@ -42,4 +52,24 @@ void Climber::ExtendArms()
 void Climber::RetractArms()
 {
     ClimberPiston.Set(kClimberRetract);
+}
+
+bool Climber::RightClimberIsDown()
+{
+    return OutsideMotorRight.IsFwdLimitSwitchClosed();
+}
+
+bool Climber::LeftClimberIsDown()
+{
+    return OutsideMotorLeft.IsRevLimitSwitchClosed();
+}
+
+bool Climber::TouchdownFwd()
+{
+    return InsideMotorRight.IsFwdLimitSwitchClosed();
+}
+
+bool Climber::TouchdownRev()
+{
+    return InsideMotorRight.IsRevLimitSwitchClosed();
 }

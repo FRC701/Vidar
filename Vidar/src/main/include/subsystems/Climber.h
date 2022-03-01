@@ -17,15 +17,19 @@ class Climber : public frc2::SubsystemBase {
   double Outside(double speed);
   double Inside(double speed);
   void Periodic() override;
-  bool LeftClimberIsDown();
 
+  bool LeftClimberIsDown();
+  bool RightClimberIsDown();
+
+  bool TouchdownFwd();
+  bool TouchdownRev();
+  
  private:
  WPI_TalonFX& InsideMotorLeft;
  WPI_TalonFX& InsideMotorRight;
  WPI_TalonFX& OutsideMotorLeft;
  WPI_TalonFX& OutsideMotorRight;
  frc::DoubleSolenoid& ClimberPiston;
-
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

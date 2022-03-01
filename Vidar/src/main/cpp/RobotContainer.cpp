@@ -43,7 +43,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
     (
       mClimber, 
       [this] { return 1.0*coDriver.GetRightX(); },
-      [this] { return 1.0*coDriver.GetRightY(); }
+      [this] { return 1.0*coDriver.GetLeftY(); }
     )
   );
   
