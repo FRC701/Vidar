@@ -134,7 +134,21 @@ void RobotContainer::ConfigureButtonBindings()
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
 }
 
+void RobotContainer::ConfigureAutoChooser()
+{
+  mChooser.AddDefault("Auto Taxi And Shoot", new AutoSimpleTaxiShoot(mChassis, mIntake, mShooter, mFeeder));
+  mChooser.AddOption("Auto Taxi", new AutoTaxi(mChassis, 
+            units::second_t(3.25),
+            0.0, 
+            -0.5, 
+            -0.5));
+  mChooser.AddOption("Auto Taxi and Shoot Once", new AutoOneShotTaxi(mChassis, mShooter, mFeeder));
+
+  frc::SmartDashboard::PutData("Autonomous Chooser", &mChooser);
+}
+
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return &m_autonomousCommand;
+
+  return mChooser.GetSelected();
 }

@@ -10,6 +10,7 @@
 #include <frc/XboxController.h>
 #include <ctre/phoenix/motorcontrol/can/WPI_TalonFX.h>
 #include <frc/DoubleSolenoid.h>
+#include <frc/smartdashboard/SendableChooser.h>
 
 #include "commands/ExampleCommand.h"
 #include "subsystems/ExampleSubsystem.h"
@@ -89,4 +90,5 @@ class RobotContainer {
 
 
   void ConfigureButtonBindings();
+  void ConfigureAutoChooser();
 };
