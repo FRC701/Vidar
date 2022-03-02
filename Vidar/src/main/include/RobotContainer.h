@@ -57,6 +57,9 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
  private:
+ using Chooser = frc::SendableChooser<frc2::Command*>;
+ Chooser mChooser;
+ 
  frc::XboxController driver{0};
  frc::XboxController coDriver{1};
 

@@ -17,12 +17,12 @@ AutoOneShotTaxi::AutoOneShotTaxi(Chassis& chassis, Shooter& shooter, Feeder& fee
 {
   // Add your commands here, e.g.
   // AddCommands(FooCommand(), BarCommand());
-  const double ChassisFirstMovement {-0.8};
+  const double ChassisFirstMovement {-0.4};
   const double LeftChassisSecondMovement {0};
   const double RightChassisSecondMovement {0};
   AddCommands(
     AutoTaxi(mChassis, 
-            units::second_t(3),
+            units::second_t(2.5),
             ChassisFirstMovement, 
             LeftChassisSecondMovement, 
             RightChassisSecondMovement),

@@ -18,6 +18,6 @@ DeadParallelShootRPM::DeadParallelShootRPM(Feeder& feeder, Shooter& shooter)
   // Add your commands here, e.g.
   // AddCommands(FooCommand(), BarCommand());
   AddCommands(
-    FlywheelShootRPM(mShooter, 3800)
+    FlywheelShootRPM(mShooter, 1900)
   );
 }
