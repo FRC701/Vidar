@@ -64,6 +64,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   
 
 
+
   frc::SmartDashboard::PutData("Vision Aim", new VisionAim(mChassis));
   frc::SmartDashboard::PutData("Vision Shoot", new VisionShoot(mShooter, mChassis));
 
@@ -116,7 +117,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("Shoot 6000", new FlywheelShootRPM(mShooter, 6000));
 
   frc::SmartDashboard::PutData("Auto Taxi and Shoot Once", new AutoOneShotTaxi(mChassis, mShooter, mFeeder));
-
+  frc::SmartDashboard::PutData("Auto Taxi Pick Up and Shoot Twice", new AutoSimpleTaxiShoot(mChassis, mIntake, mShooter, mFeeder));
  }
 
 void RobotContainer::ConfigureButtonBindings()

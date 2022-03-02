@@ -6,6 +6,7 @@
 #include "commands/RunIntake.h"
 #include "commands/DeadParallelShootRPM.h"
 #include "commands/AutoTaxi.h"
+#include "commands/AutoIntake.h"
 // NOTE:  Consider using this command inline, rather than writing a subclass.
 // For more information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
@@ -17,17 +18,9 @@ AutoSimpleTaxiShoot::AutoSimpleTaxiShoot(Chassis& chassis, Intake& intake, Shoot
 {
   // Add your commands here, e.g.
   // AddCommands(FooCommand(), BarCommand());
-  const double ChassisFirstMovement {-0.5};
-  const double LeftChassisSecondMovement {0.5};
-  const double RightChassisSecondMovement {-0.5};
 
   AddCommands(
-    RunIntake(mIntake, mFeeder),
-    AutoTaxi(mChassis, 
-            units::second_t(5),
-            ChassisFirstMovement, 
-            LeftChassisSecondMovement, 
-            RightChassisSecondMovement),
+    AutoIntake(mIntake, mFeeder, mChassis),
     DeadParallelShootRPM(mFeeder, mShooter)
   );
 }

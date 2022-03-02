@@ -22,14 +22,17 @@ void AutoTaxi::Execute()
 {
   mTimer.Start();
   mChassis.TankDrive(mChassisDrive, mChassisDrive);
-  if(mTimer.HasElapsed(units::second_t(3)))
+  if(mTimer.HasElapsed(units::second_t(3.0)))
   {
     mChassis.TankDrive(mleftChassis, mrightChassis);
   }
 }
 
 // Called once the command ends or is interrupted.
-void AutoTaxi::End(bool interrupted) {}
+void AutoTaxi::End(bool interrupted) 
+{
+  mTimer.Reset();
+}
 
 // Returns true when the command should end.
 bool AutoTaxi::IsFinished() {
