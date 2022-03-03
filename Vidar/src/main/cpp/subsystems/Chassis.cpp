@@ -106,8 +106,8 @@ void Chassis::Periodic()
 {
     frc::SmartDashboard::PutNumber("Left Velocity", GetLeftVelocity());
     frc::SmartDashboard::PutNumber("Right Velocity", GetRightVelocity());
-    frc::SmartDashboard::PutNumber("Target Distance", TargetDistance());
-    frc::SmartDashboard::PutNumber("Target Area", TargetOffset());
+    frc::SmartDashboard::PutNumber("Target Distance", TargetOffset());
+    frc::SmartDashboard::PutNumber("Target Area", TargetDistance());
 }
 
 void Chassis::TankDrive(double left, double right)
@@ -170,10 +170,4 @@ double Chassis::TargetOffset()
 void Chassis::limeLightLightsOn()
 {
     limeLightTable->PutNumber("ledMode", 0);
-}
-
-
-void Chassis::limeLightLightsOff()
-{
-    limeLightTable->PutNumber("ledMode", 1);
 }

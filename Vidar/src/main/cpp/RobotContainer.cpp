@@ -74,7 +74,9 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::SetDefaultNumber("Set Flywheel VelocityRPM", 0);
 
   frc::SmartDashboard::PutData("SetFlywheelRPM", new SetFlywheelRPM(mShooter));
-  frc::SmartDashboard::PutData("Run Parallel Shooter", new ParallelShootRPM(mFeeder, mShooter));
+  //frc::SmartDashboard::PutData("Run Parallel Shooter", new ParallelShootRPM(mFeeder, mShooter));
+  frc::SmartDashboard::PutData("Parallel Shooter", new ParallelShoot(mFeeder, mShooter, mChassis));
+
   
 
  frc::SmartDashboard::PutData("Intake Motor 0.25", new IntakeRun(mIntake, mFeeder, .25));
@@ -123,14 +125,13 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button coY {[this]{return coDriver.GetRawButton(4);}};
     frc2::Button coBumperLeft {[this]{return coDriver.GetRawButton(5);}};
     frc2::Button coBumperRight {[this]{return coDriver.GetRawButton(6);}};
-    coA.ToggleWhenPressed(SetFlywheelRPM(mShooter));
-    coB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
-    coY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
-    coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
-    coBumperLeft.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
-    coBumperRight.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
+    coA.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 850));    //replace 
+    coB.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2000));    //replace 
+    coBumperLeft.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));    //vision shooting 
+    coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));   //keep
 
-    // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
+    coBumperRight.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter)); //replace 
+    coY.ToggleWhenPressed(VisionAim(mChassis));
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
 }
 
