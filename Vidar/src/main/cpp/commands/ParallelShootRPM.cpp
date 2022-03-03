@@ -11,15 +11,16 @@
 // NOTE:  Consider using this command inline, rather than writing a subclass.
 // For more information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-ParallelShootRPM::ParallelShootRPM(Feeder& feeder, Shooter& shooter)
+ParallelShootRPM::ParallelShootRPM(Feeder& feeder, Shooter& shooter, int rpmspeed)
 : CommandHelper(FeederShoot(feeder, shooter, 0.4, units::second_t(3.0)))
 , mFeeder(feeder)
 , mShooter(shooter)
+, mrpmspeed(rpmspeed)
 {
   // Add your commands here, e.g.
 
   // AddCommands(FooCommand(), BarCommand());
   AddCommands(
-    SetFlywheelRPM(mShooter)
+    FlywheelShootRPM(mShooter, mrpmspeed)
   );
 }

@@ -12,10 +12,11 @@ class ParallelShootRPM
     : public frc2::CommandHelper<frc2::ParallelCommandGroup,
                                  ParallelShootRPM> {
  public:
-  ParallelShootRPM(Feeder& mFeeder, Shooter& mShooter);
+  ParallelShootRPM(Feeder& mFeeder, Shooter& mShooter, int mrpmspeed);
 
 private:
 
 Feeder& mFeeder;
 Shooter& mShooter;
+int mrpmspeed;
 };
