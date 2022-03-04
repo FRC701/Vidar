@@ -26,6 +26,6 @@ AutoOneShotTaxi::AutoOneShotTaxi(Chassis& chassis, Shooter& shooter, Feeder& fee
             ChassisFirstMovement, 
             LeftChassisSecondMovement, 
             RightChassisSecondMovement),
-    DeadParallelShootRPM(mFeeder, mShooter)
+    DeadParallelShootRPM(mFeeder, mShooter, 1900)
   );
 }

@@ -13,9 +13,10 @@ class DeadParallelShootRPM
     : public frc2::CommandHelper<frc2::ParallelDeadlineGroup,
                                  DeadParallelShootRPM> {
  public:
-  DeadParallelShootRPM(Feeder& mFeeder, Shooter& mShooter);
+  DeadParallelShootRPM(Feeder& mFeeder, Shooter& mShooter, int msrpm);
 
 private:
 Feeder& mFeeder;
 Shooter& mShooter;
+int msrpm;
 };

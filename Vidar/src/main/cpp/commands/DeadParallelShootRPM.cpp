@@ -10,14 +10,15 @@
 // NOTE:  Consider using this command inline, rather than writing a subclass.
 // For more information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-DeadParallelShootRPM::DeadParallelShootRPM(Feeder& feeder, Shooter& shooter)
+DeadParallelShootRPM::DeadParallelShootRPM(Feeder& feeder, Shooter& shooter, int srpm)
     : CommandHelper(FeederShoot(feeder, shooter, 0.4, units::second_t(3.0)))
           , mFeeder(feeder)
           , mShooter(shooter)
+          , msrpm(srpm)
 {
   // Add your commands here, e.g.
   // AddCommands(FooCommand(), BarCommand());
   AddCommands(
-    FlywheelShootRPM(mShooter, 1900)
+    FlywheelShootRPM(mShooter, msrpm)
   );
 }

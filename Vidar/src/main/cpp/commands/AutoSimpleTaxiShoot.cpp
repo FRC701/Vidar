@@ -7,6 +7,7 @@
 #include "commands/DeadParallelShootRPM.h"
 #include "commands/AutoTaxi.h"
 #include "commands/AutoIntake.h"
+#include "commands/VisionAim.h"
 // NOTE:  Consider using this command inline, rather than writing a subclass.
 // For more information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
@@ -21,6 +22,7 @@ AutoSimpleTaxiShoot::AutoSimpleTaxiShoot(Chassis& chassis, Intake& intake, Shoot
 
   AddCommands(
     AutoIntake(mIntake, mFeeder, mChassis),
-    DeadParallelShootRPM(mFeeder, mShooter)
+    //VisionAim(mChassis),
+    DeadParallelShootRPM(mFeeder, mShooter, 2050)
   );
 }

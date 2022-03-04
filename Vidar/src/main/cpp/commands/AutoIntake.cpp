@@ -7,16 +7,17 @@
 #include <frc2/command/InstantCommand.h>
 #include "commands/RunIntake.h"
 #include "commands/AutoTaxi.h"
+#include "commands/SpinFeeder.h"
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.
 // For more information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 AutoIntake::AutoIntake(Intake& intake, Feeder& feeder, Chassis& chassis)
     : CommandHelper(AutoTaxi(chassis, 
-            units::second_t(4.5),
-            0.5, 
-            0.7, 
-            -0.7))
+            units::second_t(6.2),
+            0.425, 
+            0.425, 
+            -0.425))
           // The deadline comand
           , mIntake(intake)
           , mFeeder(feeder)
@@ -25,5 +26,5 @@ AutoIntake::AutoIntake(Intake& intake, Feeder& feeder, Chassis& chassis)
   // Add your commands here, e.g.
   //AddRequirements(&mIntake);
   // AddCommands(FooCommand(), BarCommand());
-  AddCommands(RunIntake(mIntake, mFeeder));
+  AddCommands(RunIntake(mIntake, mFeeder), SpinFeeder(mFeeder, 0.4));
 }
