@@ -107,7 +107,7 @@ void RobotContainer::ConfigureButtonBindings()
     driverB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
     driverY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
     driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
-    BumperLeft.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
+    BumperLeft.ToggleWhenPressed(FeederSpin(mFeeder, 0.6));
     BumperRight.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
     // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
