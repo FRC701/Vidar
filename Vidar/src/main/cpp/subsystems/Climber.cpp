@@ -17,9 +17,9 @@ Climber::Climber(WPI_TalonFX& InsideMotorLeft, WPI_TalonFX& InsideMotorRight, WP
 , ClimberPiston(ClimberPiston)
 {
     InsideMotorLeft.SetInverted(true);
-    OutsideMotorLeft.SetInverted(false);
-    OutsideMotorRight.SetInverted(true);
-    InsideMotorRight.SetInverted(false);
+    //InsideMotorRight.Follow(InsideMotorLeft);
+    OutsideMotorLeft.SetInverted(true);
+    //OutsideMotorRight.Follow(OutsideMotorLeft);
 }
 // This method will be called once per scheduler run
 void Climber::Periodic() 

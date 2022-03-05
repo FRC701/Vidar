@@ -43,12 +43,11 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
     Climbers
     (
       mClimber, 
-      [this] { return 1.0*coDriver.GetRightX(); },
-      [this] { return 1.0*coDriver.GetLeftY(); }
+      [this] { return .30*coDriver.GetRightX(); },
+      [this] { return .70*coDriver.GetLeftY(); }
     )
   );
   
-
   ConfigureButtonBindings();
 
   mChassis.SetDefaultCommand
