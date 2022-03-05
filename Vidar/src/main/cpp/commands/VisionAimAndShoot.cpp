@@ -16,7 +16,7 @@ VisionAimAndShoot::VisionAimAndShoot(Shooter& shooter, Chassis& chassis)
   // Add your commands here, e.g.
   // AddCommands(FooCommand(), BarCommand());
   AddCommands(
-    VisionAim(mChassis),
+    // VisionAim(mChassis),
     VisionShoot(mShooter, mChassis)
   );
 }
