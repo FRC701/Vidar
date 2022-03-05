@@ -79,7 +79,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::SetDefaultNumber("Set Flywheel VelocityRPM", 0);
 
   frc::SmartDashboard::PutData("SetFlywheelRPM", new SetFlywheelRPM(mShooter));
-  frc::SmartDashboard::PutData("Run Parallel Shooter", new ParallelShootRPM(mFeeder, mShooter));
+  frc::SmartDashboard::PutData("Run Parallel Shooter", new ParallelShootRPM(mFeeder, mShooter, 1500));
 
   frc::SmartDashboard::PutData("IntakeExtend", new IntakeExtend(mIntake));
   frc::SmartDashboard::PutData("IntakeRetract", new IntakeRetract(mIntake));
@@ -118,7 +118,7 @@ void RobotContainer::ConfigureButtonBindings()
     driverY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
     driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
     BumperLeft.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
-    BumperRight.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
+    BumperRight.ToggleWhenPressed(ParallelVisionShoot(mChassis, mFeeder, mShooter));
     // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
 }
