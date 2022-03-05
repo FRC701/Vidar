@@ -29,6 +29,7 @@
 #include "commands/ParallelShoot.h"
 #include "commands/ParallelShootRPM.h"
 #include "commands/ParallelFlywheelShoot.h"
+#include "commands/ParallelVisionShoot.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -65,6 +66,8 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("Vision Aim", new VisionAim(mChassis));
   frc::SmartDashboard::PutData("Vision Shoot", new VisionShoot(mShooter, mChassis));
   frc::SmartDashboard::PutData("Vision Aim and Shoot", new VisionAimAndShoot(mShooter, mChassis));
+  frc::SmartDashboard::PutData("Parallel Vision Aim and Shoot", new ParallelVisionShoot(mChassis, mFeeder, mShooter));
+
 
   frc::SmartDashboard::PutData("FlywheelShoot 0.1", new FlywheelShoot(mShooter, 0.1));
   frc::SmartDashboard::PutData("FlywheelShoot 0.2", new FlywheelShoot(mShooter, 0.2));
@@ -132,7 +135,7 @@ void RobotContainer::ConfigureButtonBindings()
     coBumperLeft.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));    //vision shooting 
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));   //keep
 
-    coBumperRight.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter)); //replace 
+    coBumperRight.ToggleWhenPressed(ParallelVisionShoot(mChassis, mFeeder, mShooter)); //replace 
     coY.ToggleWhenPressed(VisionAim(mChassis));
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
 }
