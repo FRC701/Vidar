@@ -29,4 +29,5 @@ class SpinFeeder
   private:
   Feeder& mFeeder;
   double mMotorspeed;
+  int mDebounceCount;
 };
