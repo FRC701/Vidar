@@ -25,6 +25,7 @@
 #include "ctre/phoenix/music/Orchestra.h"
 #include "commands/VisionShoot.h"
 #include "commands/VisionAim.h"
+#include "commands/VisionAimAndShoot.h"
 #include "commands/ParallelShoot.h"
 #include "commands/ParallelShootRPM.h"
 #include "commands/ParallelFlywheelShoot.h"
@@ -63,6 +64,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
   frc::SmartDashboard::PutData("Vision Aim", new VisionAim(mChassis));
   frc::SmartDashboard::PutData("Vision Shoot", new VisionShoot(mShooter, mChassis));
+  frc::SmartDashboard::PutData("Vision Aim and Shoot", new VisionAimAndShoot(mShooter, mChassis));
 
   frc::SmartDashboard::PutData("FlywheelShoot 0.1", new FlywheelShoot(mShooter, 0.1));
   frc::SmartDashboard::PutData("FlywheelShoot 0.2", new FlywheelShoot(mShooter, 0.2));
