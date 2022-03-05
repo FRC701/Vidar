@@ -79,46 +79,18 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::SetDefaultNumber("Set Flywheel VelocityRPM", 0);
 
   frc::SmartDashboard::PutData("SetFlywheelRPM", new SetFlywheelRPM(mShooter));
-  //frc::SmartDashboard::PutData("Run Parallel Shooter", new ParallelShootRPM(mFeeder, mShooter));
-  frc::SmartDashboard::PutData("Parallel Shooter", new ParallelShoot(mFeeder, mShooter, mChassis));
+  frc::SmartDashboard::PutData("Run Parallel Shooter", new ParallelShootRPM(mFeeder, mShooter));
 
-  
-
- frc::SmartDashboard::PutData("Intake Motor 0.25", new IntakeRun(mIntake, mFeeder, .25));
- frc::SmartDashboard::PutData("Intake Motor 0.50", new IntakeRun(mIntake, mFeeder, .50));
- frc::SmartDashboard::PutData("Intake Motor 0.75", new IntakeRun(mIntake, mFeeder, .75));
-
- frc::SmartDashboard::PutData("IntakeExtend", new IntakeExtend(mIntake));
- frc::SmartDashboard::PutData("IntakeRetract", new IntakeRetract(mIntake));
+  frc::SmartDashboard::PutData("IntakeExtend", new IntakeExtend(mIntake));
+  frc::SmartDashboard::PutData("IntakeRetract", new IntakeRetract(mIntake));
  
- frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
-
- 
- frc::SmartDashboard::PutData("Feeder .1", new SpinFeeder(mFeeder, 0.1));
- frc::SmartDashboard::PutData("Feeder .2", new SpinFeeder(mFeeder, 0.2));
- frc::SmartDashboard::PutData("Feeder .3", new SpinFeeder(mFeeder, 0.3));
- frc::SmartDashboard::PutData("Feeder .4", new SpinFeeder(mFeeder, 0.4));
- frc::SmartDashboard::PutData("Feeder .5", new SpinFeeder(mFeeder, 0.5));
- frc::SmartDashboard::PutData("Feeder .6", new SpinFeeder(mFeeder, 0.6));
- frc::SmartDashboard::PutData("Feeder .7", new SpinFeeder(mFeeder, 0.7));
- frc::SmartDashboard::PutData("Feeder .8", new SpinFeeder(mFeeder, 0.8));
- frc::SmartDashboard::PutData("Feeder .9", new SpinFeeder(mFeeder, 0.9));
- frc::SmartDashboard::PutData("Feeder 1", new SpinFeeder(mFeeder, 1));
+  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
 
   frc::SmartDashboard::PutData("FeederShoot 0.4", new FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
-
-  frc::SmartDashboard::PutData("Only Feeder .25", new FeederSpin(mFeeder, 0.25));
+  
   frc::SmartDashboard::PutData("Only Feeder .5", new FeederSpin(mFeeder, 0.5));
-  frc::SmartDashboard::PutData("Only Feeder .75", new FeederSpin(mFeeder, 0.75));
-  frc::SmartDashboard::PutData("Only Feeder 1.0", new FeederSpin(mFeeder, 1.0));
 
-  frc::SmartDashboard::PutData("Shoot 1000", new FlywheelShootRPM(mShooter, 1000));
-  frc::SmartDashboard::PutData("Shoot 2000", new FlywheelShootRPM(mShooter, 2000));
   frc::SmartDashboard::PutData("Shoot 3000", new FlywheelShootRPM(mShooter, 3000));
-  frc::SmartDashboard::PutData("Shoot 4000", new FlywheelShootRPM(mShooter, 4000));
-  frc::SmartDashboard::PutData("Shoot 5000", new FlywheelShootRPM(mShooter, 5000));
-  frc::SmartDashboard::PutData("Shoot 6000", new FlywheelShootRPM(mShooter, 6000));
-
 
  }
 
@@ -135,8 +107,19 @@ void RobotContainer::ConfigureButtonBindings()
     coBumperLeft.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));    //vision shooting 
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));   //keep
 
-    coBumperRight.ToggleWhenPressed(ParallelVisionShoot(mChassis, mFeeder, mShooter)); //replace 
-    coY.ToggleWhenPressed(VisionAim(mChassis));
+    frc2::Button driverA {[this]{return driver.GetRawButton(1);}};
+    frc2::Button driverB {[this]{return driver.GetRawButton(2);}};
+    frc2::Button driverX {[this]{return driver.GetRawButton(3);}};                                                               
+    frc2::Button driverY {[this]{return driver.GetRawButton(4);}};
+    frc2::Button BumperLeft {[this]{return driver.GetRawButton(5);}};
+    frc2::Button BumperRight {[this]{return driver.GetRawButton(6);}};
+    driverA.ToggleWhenPressed(SetFlywheelRPM(mShooter));
+    driverB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
+    driverY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
+    driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
+    BumperLeft.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
+    BumperRight.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
+    // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
 }
 
