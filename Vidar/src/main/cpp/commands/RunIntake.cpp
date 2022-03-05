@@ -18,6 +18,6 @@ RunIntake::RunIntake(Intake& mIntake, Feeder& mFeeder)
   // AddCommands(FooCommand(), BarCommand());
   AddCommands(
     IntakeExtend(mIntake),
-    IntakeRun(mIntake, mFeeder, 0.65)
+    IntakeRun(mIntake, mFeeder, 0.40)
   );
 }
