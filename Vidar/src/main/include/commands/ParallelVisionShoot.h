@@ -5,13 +5,13 @@
 #pragma once
 
 #include <frc2/command/CommandHelper.h>
-#include <frc2/command/ParallelDeadlineGroup.h>
+#include <frc2/command/ParallelRaceGroup.h>
 #include "subsystems/Chassis.h"
 #include "subsystems/Feeder.h"
 #include "subsystems/Shooter.h"
 
 class ParallelVisionShoot
-    : public frc2::CommandHelper<frc2::ParallelDeadlineGroup,
+    : public frc2::CommandHelper<frc2::ParallelRaceGroup,
                                  ParallelVisionShoot> {
  public:
   ParallelVisionShoot(Chassis& chassis, Feeder& feeder, Shooter& shooter);

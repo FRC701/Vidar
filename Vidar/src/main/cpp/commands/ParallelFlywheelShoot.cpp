@@ -17,7 +17,7 @@ ParallelFlywheelShoot::ParallelFlywheelShoot(Feeder& feeder, Shooter& shooter)
   FeederShoot(feeder, shooter, 0.4, units::second_t(3.0)))
   , mFeeder(feeder)
   ,mShooter(shooter)
- { 
+ {
           // The deadline command
 //          frc2::InstantCommand([] {})) {
   // Add your commands here, e.g.

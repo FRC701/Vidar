@@ -23,14 +23,13 @@ void SpinFeeder::Initialize() {
 void SpinFeeder::Execute()
 {
   // 20ms per cycle
-  constexpr int kDebounceCount = 25; // TODO Do math for ms to count
+  constexpr int kDebounceCount = 10; // TODO Do math for ms to count
   double speed = 0.0;
 
   if (mFeeder.BallIsComing())
   {
     if (mDebounceCount > kDebounceCount) {
       speed = mMotorspeed;
-      mDebounceCount = 0;
     }
     else {
       ++mDebounceCount;

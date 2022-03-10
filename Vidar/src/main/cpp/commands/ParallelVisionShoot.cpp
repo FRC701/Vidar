@@ -14,9 +14,9 @@
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 ParallelVisionShoot::ParallelVisionShoot(Chassis& chassis, Feeder& feeder, Shooter& shooter)
     : CommandHelper(
-      FeederShoot(feeder, shooter, 0.4, units::second_t(3.0)))
+      FeederShoot(feeder, shooter, 0.4, units::second_t(2.0)))
   {
-          // The deadline command
+          // The deadline command[]]\[]
          // frc2::InstantCommand([] {})) {
   // Add your commands hermChassise, e.g.
   // AddCommands(FooCommand(), BarCommand());
