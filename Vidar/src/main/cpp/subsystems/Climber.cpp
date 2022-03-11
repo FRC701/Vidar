@@ -54,6 +54,30 @@ void Climber::RetractArms()
     ClimberPiston.Set(kClimberRetract);
 }
 
+double Climber::TDleft(double speed)
+{
+    InsideMotorLeft.Set(speed);
+    return speed;
+}
+
+double Climber::TDright(double speed)
+{
+    InsideMotorRight.Set(speed);
+    return speed;
+}
+
+double Climber::TRleft(double speed)
+{
+    OutsideMotorLeft.Set(speed);
+    return speed;
+}
+
+double Climber::TRright(double speed) 
+{
+    OutsideMotorRight.Set(speed);
+    return speed;
+}
+
 bool Climber::RightClimberIsDown()
 {
     return OutsideMotorRight.IsFwdLimitSwitchClosed();

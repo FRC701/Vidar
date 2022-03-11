@@ -16,6 +16,12 @@ class Climber : public frc2::SubsystemBase {
   void RetractArms();
   double Outside(double speed);
   double Inside(double speed);
+
+  double TDleft(double speed);
+  double TDright(double speed);
+  double TRleft(double speed);
+  double TRright(double speed);
+
   void Periodic() override;
 
   bool LeftClimberIsDown();

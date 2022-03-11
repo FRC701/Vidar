@@ -30,6 +30,8 @@
 #include "commands/ParallelFlywheelShoot.h"
 #include "commands/LockTuskanClimbers.h"
 #include "commands/UnlockTuskanClimbers.h"
+#include "commands/TRleft.h"
+#include "commands/TRright.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -83,6 +85,12 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
  frc::SmartDashboard::PutData("IntakeExtend", new IntakeExtend(mIntake));
  frc::SmartDashboard::PutData("IntakeRetract", new IntakeRetract(mIntake));
+ 
+ 
+ frc::SmartDashboard::PutData("TRright down", new TRright(mClimber, -0.1));
+ frc::SmartDashboard::PutData("TRleft down", new TRleft(mClimber, -0.1));
+ frc::SmartDashboard::PutData("TRright up", new TRright(mClimber, 0.1));
+ frc::SmartDashboard::PutData("TRleft up", new TRleft(mClimber, 0.1));
  
  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
 
