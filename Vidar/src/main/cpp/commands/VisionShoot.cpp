@@ -19,10 +19,10 @@ using vision_shoot::VisionToSpeed;
 // (there's no reference for 5 feet so not that much help)
 VisionToSpeed VisionToSpeeds []
 {
-  {20, 0.00107, 3800},
-  {15, 0.00224, 2900},
-  {10, 0.00462, 2150},
-  {5 , 0.00673, 1850}
+  {20, 0.220, 3800},
+  {15, 0.398, 2900},
+  {10, 0.694, 2150}, 
+  {5 , 01.318, 1850}
 };
 
 bool isLessThanTargetArea(const VisionToSpeed& visionToSpeeds, double targetArea)
