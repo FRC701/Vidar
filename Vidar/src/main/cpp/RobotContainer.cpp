@@ -28,6 +28,10 @@
 #include "commands/ParallelShoot.h"
 #include "commands/ParallelShootRPM.h"
 #include "commands/ParallelFlywheelShoot.h"
+#include "commands/LockTuskanClimbers.h"
+#include "commands/UnlockTuskanClimbers.h"
+#include "commands/TRleft.h"
+#include "commands/TRright.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -41,12 +45,11 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
     Climbers
     (
       mClimber, 
-      [this] { return 1.0*coDriver.GetRightX(); },
-      [this] { return 1.0*coDriver.GetRightY(); }
+      [this] { return .30*coDriver.GetRightX(); },
+      [this] { return .70*coDriver.GetLeftY(); }
     )
   );
   
-
   ConfigureButtonBindings();
 
   mChassis.SetDefaultCommand
@@ -59,7 +62,6 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
     )
   );
   
-
 
   frc::SmartDashboard::PutData("Vision Aim", new VisionAim(mChassis));
   frc::SmartDashboard::PutData("Vision Shoot", new VisionShoot(mShooter, mChassis));
@@ -83,6 +85,12 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
  frc::SmartDashboard::PutData("IntakeExtend", new IntakeExtend(mIntake));
  frc::SmartDashboard::PutData("IntakeRetract", new IntakeRetract(mIntake));
+ 
+ 
+ frc::SmartDashboard::PutData("TRright down", new TRright(mClimber, -0.1));
+ frc::SmartDashboard::PutData("TRleft down", new TRleft(mClimber, -0.1));
+ frc::SmartDashboard::PutData("TRright up", new TRright(mClimber, 0.1));
+ frc::SmartDashboard::PutData("TRleft up", new TRleft(mClimber, 0.1));
  
  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
 
@@ -127,8 +135,9 @@ void RobotContainer::ConfigureButtonBindings()
     coB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
     coY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
-    coBumperLeft.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
-    coBumperRight.ToggleWhenPressed(FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
+    coBumperLeft.ToggleWhenPressed(UnlockTuskanClimbers(mClimber));
+    coBumperRight.ToggleWhenPressed(LockTuskanClimbers(mClimber));
+
 
     // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
     // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
