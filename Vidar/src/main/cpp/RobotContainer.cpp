@@ -30,6 +30,7 @@
 #include "commands/ParallelShootRPM.h"
 #include "commands/ParallelFlywheelShoot.h"
 #include "commands/ParallelVisionShoot.h"
+#include "commands/ShortShotDeadline.h"
 #include "commands/LockTuskanClimbers.h"
 #include "commands/UnlockTuskanClimbers.h"
 #include "commands/TRleft.h"
@@ -111,10 +112,12 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button coY {[this]{return coDriver.GetRawButton(4);}};
     frc2::Button coBumperLeft {[this]{return coDriver.GetRawButton(5);}};
     frc2::Button coBumperRight {[this]{return coDriver.GetRawButton(6);}};
-    coA.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 850));    //replace 
+    coA.ToggleWhenPressed(ShortShotDeadline(mFeeder, mShooter, 850));    //replace 
     coB.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2000));    //replace 
-    coBumperLeft.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));    //vision shooting 
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));   //keep
+    coY.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
+    coBumperLeft.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));    //vision shooting 
+
 
     frc2::Button driverA {[this]{return driver.GetRawButton(1);}};
     frc2::Button driverB {[this]{return driver.GetRawButton(2);}};
@@ -126,10 +129,8 @@ void RobotContainer::ConfigureButtonBindings()
     driverB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
     driverY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
     driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
-    BumperLeft.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
-    BumperRight.ToggleWhenPressed(ParallelVisionShoot(mChassis, mFeeder, mShooter));
-    // coBumperLeft.ToggleWhenPressed(new FeederShoot(mFeeder, mShooter, 0.5, units::second_t(4.0)));
-    // coBumperRight.ToggleWhenPressed(new WinchHook(mWinch, kWinchNudge));
+    BumperLeft.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
+
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
