@@ -20,7 +20,10 @@ void TimedSpinFeeder::Initialize() {}
 void TimedSpinFeeder::Execute() 
 {
   mTimer.Start();
+  if(mTimer.HasElapsed(units::second_t(0.25)))
+  {
   mFeeder.FeederSpin(motorspeed);
+  }
 }
 
 // Called once the command ends or is interrupted.
