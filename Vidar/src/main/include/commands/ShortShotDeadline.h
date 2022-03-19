@@ -8,15 +8,14 @@
 #include <frc2/command/ParallelDeadlineGroup.h>
 #include "subsystems/Feeder.h"
 #include "subsystems/Shooter.h"
-class ParallelShootRPM
+
+class ShortShotDeadline
     : public frc2::CommandHelper<frc2::ParallelDeadlineGroup,
-                                 ParallelShootRPM> {
+                                 ShortShotDeadline> {
  public:
-  ParallelShootRPM(Feeder& mFeeder, Shooter& mShooter, int mrpmspeed);
-
-private:
-
-Feeder& mFeeder;
-Shooter& mShooter;
-int mrpmspeed;
+  ShortShotDeadline(Feeder& mFeeder, Shooter& mShooter, double speedrpm);
+ private:
+ double speedrpm;
+ Feeder& mFeeder;
+ Shooter& mShooter;
 };

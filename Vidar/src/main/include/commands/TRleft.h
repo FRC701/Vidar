@@ -6,7 +6,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include "subsystems/Feeder.h"
+#include "subsystems/Climber.h"
 /**
  * An example command.
  *
@@ -14,10 +14,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class SpinFeeder
-    : public frc2::CommandHelper<frc2::CommandBase, SpinFeeder> {
+class TRleft
+    : public frc2::CommandHelper<frc2::CommandBase, TRleft> {
  public:
-  SpinFeeder(Feeder& feeder, double motorspeed);
+  TRleft(Climber& mClimber, double motorspeed);
 
   void Initialize() override;
 
@@ -26,8 +26,8 @@ class SpinFeeder
   void End(bool interrupted) override;
 
   bool IsFinished() override;
-  private:
-  Feeder& mFeeder;
-  double mMotorspeed;
-  int mDebounceCount;
+
+private:
+ Climber& mClimber;
+ double motorspeed;
 };

@@ -7,6 +7,8 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 #include "subsystems/Feeder.h"
+#include "frc/Timer.h"
+
 /**
  * An example command.
  *
@@ -14,10 +16,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class SpinFeeder
-    : public frc2::CommandHelper<frc2::CommandBase, SpinFeeder> {
+class TimedSpinFeeder
+    : public frc2::CommandHelper<frc2::CommandBase, TimedSpinFeeder> {
  public:
-  SpinFeeder(Feeder& feeder, double motorspeed);
+  TimedSpinFeeder(double motorspeed, Feeder& mFeeder, units::second_t mTimeout);
 
   void Initialize() override;
 
@@ -26,8 +28,11 @@ class SpinFeeder
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+
   private:
+  double motorspeed;
   Feeder& mFeeder;
-  double mMotorspeed;
-  int mDebounceCount;
+  units::second_t mTimeout;
+  frc::Timer mTimer;
+
 };

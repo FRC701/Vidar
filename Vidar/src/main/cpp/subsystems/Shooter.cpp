@@ -40,9 +40,9 @@ Shooter::Shooter(WPI_TalonFX& flywheelMotor1, WPI_TalonFX& flywheelMotor2)
 
   constexpr int kDefaultSlotId{0};
   constexpr double kP{0.3};
-  constexpr double kI{0.0003};
+  constexpr double kI{0};
   constexpr double kD{0};
-  constexpr double kF{0.05};
+  constexpr double kF{0.057};
 
   mFlywheelMotor1.Config_kP(kDefaultSlotId, kP);
   mFlywheelMotor1.Config_kI(kDefaultSlotId, kI);

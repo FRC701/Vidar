@@ -37,7 +37,8 @@ VisionAim::VisionAim(Chassis& chassis)
             mChassis.ArcadeDrive(0, kF - output);
           })
     , mChassis(chassis) {
-    GetController().SetTolerance(0.5); // TODO Should the tolerance be opened?
+    GetController().SetTolerance(2); // TODO Should the tolerance be opened?
+
     AddRequirements(&mChassis);
   }
   
