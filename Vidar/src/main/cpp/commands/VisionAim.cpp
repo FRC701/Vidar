@@ -38,8 +38,10 @@ VisionAim::VisionAim(Chassis& chassis)
           })
     , mChassis(chassis) {
     GetController().SetTolerance(2); // TODO Should the tolerance be opened?
+
     AddRequirements(&mChassis);
   }
+  
 void VisionAim::Initialize() {
   mChassis.limeLightLightsOn();
   super::Initialize();

@@ -72,13 +72,6 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("Parallel Vision Aim and Shoot", new ParallelVisionShoot(mChassis, mFeeder, mShooter));
 
 
-  frc::SmartDashboard::PutData("FlywheelShoot 0.1", new FlywheelShoot(mShooter, 0.1));
-  frc::SmartDashboard::PutData("FlywheelShoot 0.2", new FlywheelShoot(mShooter, 0.2));
-  frc::SmartDashboard::PutData("FlywheelShoot 0.3", new FlywheelShoot(mShooter, 0.3));
-  frc::SmartDashboard::PutData("FlywheelShoot 0.5", new FlywheelShoot(mShooter, 0.5));
-  frc::SmartDashboard::PutData("FlywheelShoot 0.9", new FlywheelShoot(mShooter, 0.9));
-  frc::SmartDashboard::PutData("FlywheelShoot 1.0", new FlywheelShoot(mShooter, 1.0));
-
   frc::SmartDashboard::SetDefaultNumber("Set Flywheel VelocityRPM", 0);
 
   frc::SmartDashboard::PutData("SetFlywheelRPM", new SetFlywheelRPM(mShooter));
@@ -87,7 +80,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("IntakeExtend", new IntakeExtend(mIntake));
   frc::SmartDashboard::PutData("IntakeRetract", new IntakeRetract(mIntake));
  
-  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
+  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));5
  
  frc::SmartDashboard::PutData("TRright down", new TRright(mClimber, -0.1));
  frc::SmartDashboard::PutData("TRleft down", new TRleft(mClimber, -0.1));
@@ -95,6 +88,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
  frc::SmartDashboard::PutData("TRleft up", new TRleft(mClimber, 0.1));
  
  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
+
 
   frc::SmartDashboard::PutData("FeederShoot 0.4", new FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
   
@@ -119,6 +113,7 @@ void RobotContainer::ConfigureButtonBindings()
     coBumperLeft.ToggleWhenPressed(UnlockTuskanClimbers(mClimber));    //vision shooting 
     coBumperRight.ToggleWhenPressed(LockTuskanClimbers(mClimber));
 
+
     frc2::Button driverA {[this]{return driver.GetRawButton(1);}};
     frc2::Button driverB {[this]{return driver.GetRawButton(2);}};
     frc2::Button driverX {[this]{return driver.GetRawButton(3);}};                                                               
@@ -130,7 +125,6 @@ void RobotContainer::ConfigureButtonBindings()
     driverY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
     driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
     BumperLeft.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
-
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
