@@ -48,7 +48,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
     Climbers
     (
       mClimber, 
-      [this] { return .30*coDriver.GetRightX(); },
+      [this] { return .15*coDriver.GetRightX(); },
       [this] { return .70*coDriver.GetLeftY(); }
     )
   );
@@ -116,8 +116,8 @@ void RobotContainer::ConfigureButtonBindings()
     coB.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2000));    //replace 
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));   //keep
     coY.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
-    coBumperLeft.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));    //vision shooting 
-
+    coBumperLeft.ToggleWhenPressed(UnlockTuskanClimbers(mClimber));    //vision shooting 
+    coBumperRight.ToggleWhenPressed(LockTuskanClimbers(mClimber));
 
     frc2::Button driverA {[this]{return driver.GetRawButton(1);}};
     frc2::Button driverB {[this]{return driver.GetRawButton(2);}};

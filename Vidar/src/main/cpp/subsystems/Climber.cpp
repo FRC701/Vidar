@@ -18,7 +18,7 @@ Climber::Climber(WPI_TalonFX& InsideMotorLeft, WPI_TalonFX& InsideMotorRight, WP
 {
     InsideMotorLeft.SetInverted(false);
     //InsideMotorRight.Follow(InsideMotorLeft);
-    OutsideMotorLeft.SetInverted(true);
+    OutsideMotorLeft.SetInverted(false);
     OutsideMotorRight.SetInverted(true);
     //OutsideMotorRight.Follow(OutsideMotorLeft);
 }
