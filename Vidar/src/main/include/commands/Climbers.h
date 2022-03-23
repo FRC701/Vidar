@@ -30,6 +30,6 @@ class Climbers
 
   private:
   Climber& mClimber;
-  std::function<double()> mTuskanRaiderHooks;
   std::function<double()> mTouchdownHooks;
+  std::function<double()> mTuskanRaiderHooks;
 };

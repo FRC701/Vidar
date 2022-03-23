@@ -15,7 +15,7 @@ TankDrive::TankDrive(Chassis& chassis,
 // Called when the command is initially scheduled.
 void TankDrive::Initialize()
 {
-  mChassis.limeLightLightsOff();
+  mChassis.limeLightLightsOn();
 }
 
 // Called repeatedly when this Command is scheduled to run

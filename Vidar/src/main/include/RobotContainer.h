@@ -58,11 +58,15 @@ class RobotContainer {
  static constexpr int kIntakeExtend{7};
  static constexpr int kIntakeRetract{0};
 
+ static constexpr int kClimberExtend{6};
+ static constexpr int kClimberRetract{1};
+
+
   frc2::Command* GetAutonomousCommand();
 
  private:
  frc::SendableChooser<frc2::Command*> mChooser;
- 
+
  frc::XboxController driver{0};
  frc::XboxController coDriver{1};
 
@@ -81,7 +85,8 @@ class RobotContainer {
   WPI_TalonFX InsideMotorRight{kClimberRightInside};
   WPI_TalonFX OutsideMotorLeft{kClimberLeftOutside};
   WPI_TalonFX OutsideMotorRight{kClimberRightOutside};
-  Climber mClimber{InsideMotorLeft, InsideMotorRight, OutsideMotorLeft, OutsideMotorRight};
+  frc::DoubleSolenoid ClimberPiston{frc::PneumaticsModuleType::CTREPCM, kClimberExtend, kClimberRetract};
+  Climber mClimber{InsideMotorLeft, InsideMotorRight, OutsideMotorLeft, OutsideMotorRight, ClimberPiston};
 
   // The robot's subsystems and commands are defined here...
   ExampleSubsystem m_subsystem;

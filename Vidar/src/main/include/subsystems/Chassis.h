@@ -47,7 +47,6 @@ class Chassis : public frc2::SubsystemBase {
   double TargetOffset();
   double TargetDistance();
 
-  void limeLightLightsOff();
   void limeLightLightsOn(); 
  
  private:
