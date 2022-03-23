@@ -29,6 +29,10 @@
 #include "commands/ParallelShoot.h"
 #include "commands/ParallelShootRPM.h"
 #include "commands/ParallelFlywheelShoot.h"
+
+#include "commands/AutoTaxi.h"
+#include "commands/AutoSimpleTaxiShoot.h"
+#include "commands/AutoOneShotTaxi.h"
 #include "commands/ParallelVisionShoot.h"
 #include "commands/ShortShotDeadline.h"
 #include "commands/LockTuskanClimbers.h"
@@ -36,10 +40,20 @@
 #include "commands/TRleft.h"
 #include "commands/TRright.h"
 
+
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
   // Configure the button bindings
 
+
+  //Auto Chooser
+  mChooser.AddOption("Auto Taxi And Shoot", &mAutoSimpleTaxiShoot);
+  mChooser.AddOption("Auto Taxi", &mAutoTaxi);
+  mChooser.AddDefault("Auto Taxi and Shoot Once", &mAutoOneShotTaxi);
+
+  frc::SmartDashboard::PutData("Autonomous Chooser", &mChooser);
+
+  //Default Commands
   mShooter.SetDefaultCommand(FlywheelShoot(mShooter, 0));
   mIntake.SetDefaultCommand(AutoEndIntake(mIntake, mFeeder));
   mFeeder.SetDefaultCommand(SpinFeeder(mFeeder, 0.5));
@@ -96,6 +110,9 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
   frc::SmartDashboard::PutData("Shoot 3000", new FlywheelShootRPM(mShooter, 3000));
 
+  frc::SmartDashboard::PutData("Auto Taxi and Shoot Once", new AutoOneShotTaxi(mChassis, mShooter, mFeeder));
+  frc::SmartDashboard::PutData("Auto Taxi Pick Up and Shoot Twice", new AutoSimpleTaxiShoot(mChassis, mIntake, mShooter, mFeeder));
+
  }
 
 void RobotContainer::ConfigureButtonBindings()
@@ -127,7 +144,10 @@ void RobotContainer::ConfigureButtonBindings()
     BumperLeft.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
 }
 
+void RobotContainer::ConfigureAutoChooser(){}
+
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return &m_autonomousCommand;
+
+  return mChooser.GetSelected();
 }
