@@ -19,6 +19,10 @@
 #include "subsystems/Climber.h"
 #include "subsystems/Shooter.h"
 #include "subsystems/Feeder.h"
+#include "commands/AutoSimpleTaxiShoot.h"
+#include "commands/AutoOneShotTaxi.h"
+#include "commands/AutoTaxi.h"
+
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -57,8 +61,7 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
  private:
- using Chooser = frc::SendableChooser<frc2::Command*>;
- Chooser mChooser;
+ frc::SendableChooser<frc2::Command*> mChooser;
  
  frc::XboxController driver{0};
  frc::XboxController coDriver{1};
@@ -90,6 +93,10 @@ class RobotContainer {
 
   WPI_TalonFX mFeederBottom{kFeederBottom};
   Feeder mFeeder{mFeederBottom};
+
+  AutoSimpleTaxiShoot mAutoSimpleTaxiShoot{mChassis, mIntake, mShooter, mFeeder};
+  AutoOneShotTaxi mAutoOneShotTaxi{mChassis, mShooter, mFeeder};
+  AutoTaxi mAutoTaxi{mChassis, units::second_t(5), -0.5, -0.5, -0.5};
 
 
   void ConfigureButtonBindings();
