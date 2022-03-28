@@ -67,8 +67,8 @@ double Shooter::SpinFlywheelRPM(double speedRPM)
 
 bool Shooter::IsReadyToShoot()
 {  
-    constexpr int kErrorThresholdRPM = 50;
-    constexpr int kLoopsToSettle = 15;
+    constexpr int kErrorThresholdRPM = 75;
+    constexpr int kLoopsToSettle = 10;
 
     constexpr double kErrorThresholdTicks{RPMToTicks(kErrorThresholdRPM)};
     int loopError = mFlywheelMotor1.GetClosedLoopError();
