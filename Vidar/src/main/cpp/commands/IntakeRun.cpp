@@ -21,5 +21,5 @@ void IntakeRun::End(bool interrupted)
 
 bool IntakeRun::IsFinished() {
 
-return  mFeeder.BallIsExiting();
+return mFeeder.BallIsExiting();
 }

@@ -54,7 +54,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("Autonomous Chooser", &mChooser);
 
   //Default Commands
-  mShooter.SetDefaultCommand(FlywheelShoot(mShooter, 0));
+  mShooter.SetDefaultCommand(FlywheelShootRPM(mShooter, 2000));
   mIntake.SetDefaultCommand(AutoEndIntake(mIntake, mFeeder));
   mFeeder.SetDefaultCommand(SpinFeeder(mFeeder, 0.5));
   mClimber.SetDefaultCommand
@@ -94,7 +94,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("IntakeExtend", new IntakeExtend(mIntake));
   frc::SmartDashboard::PutData("IntakeRetract", new IntakeRetract(mIntake));
  
-  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));5
+  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
  
  frc::SmartDashboard::PutData("TRright down", new TRright(mClimber, -0.1));
  frc::SmartDashboard::PutData("TRleft down", new TRleft(mClimber, -0.1));
@@ -126,7 +126,8 @@ void RobotContainer::ConfigureButtonBindings()
     coA.ToggleWhenPressed(ShortShotDeadline(mFeeder, mShooter, 850));    //replace 
     coB.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2000));    //replace 
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));   //keep
-    coY.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
+    coY.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2500));    //replace 
+    //coY.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
     coBumperLeft.ToggleWhenPressed(UnlockTuskanClimbers(mClimber));    //vision shooting 
     coBumperRight.ToggleWhenPressed(LockTuskanClimbers(mClimber));
 
@@ -137,7 +138,7 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button driverY {[this]{return driver.GetRawButton(4);}};
     frc2::Button BumperLeft {[this]{return driver.GetRawButton(5);}};
     frc2::Button BumperRight {[this]{return driver.GetRawButton(6);}};
-    driverA.ToggleWhenPressed(SetFlywheelRPM(mShooter));
+    driverA.WhileHeld(FlywheelShootRPM(mShooter, 0.0));
     driverB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
     driverY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
     driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
