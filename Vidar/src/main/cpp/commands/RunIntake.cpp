@@ -10,14 +10,15 @@
 // NOTE:  Consider using this command inline, rather than writing a subclass.
 // For more information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-RunIntake::RunIntake(Intake& mIntake, Feeder& mFeeder) 
+RunIntake::RunIntake(Intake& mIntake, Feeder& mFeeder, double speed) 
 : mIntake(mIntake)
 , mFeeder(mFeeder)
+, speed(speed)
 {
   // Add your commands here, e.g.
   // AddCommands(FooCommand(), BarCommand());
   AddCommands(
     IntakeExtend(mIntake),
-    IntakeRun(mIntake, mFeeder, 0.40)
+    IntakeRun(mIntake, mFeeder, speed)
   );
 }

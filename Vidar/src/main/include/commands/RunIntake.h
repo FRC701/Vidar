@@ -12,9 +12,10 @@ class RunIntake
     : public frc2::CommandHelper<frc2::SequentialCommandGroup,
                                  RunIntake> {
  public:
-  RunIntake(Intake& mIntake, Feeder& mFeeder);
+  RunIntake(Intake& mIntake, Feeder& mFeeder, double speed);
 
  private:
  Intake& mIntake; 
  Feeder& mFeeder;
+ double speed; 
 };

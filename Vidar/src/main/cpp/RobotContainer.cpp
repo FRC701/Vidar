@@ -94,16 +94,13 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   frc::SmartDashboard::PutData("IntakeExtend", new IntakeExtend(mIntake));
   frc::SmartDashboard::PutData("IntakeRetract", new IntakeRetract(mIntake));
  
-  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
+  frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder, 0.40));
  
- frc::SmartDashboard::PutData("TRright down", new TRright(mClimber, -0.1));
- frc::SmartDashboard::PutData("TRleft down", new TRleft(mClimber, -0.1));
- frc::SmartDashboard::PutData("TRright up", new TRright(mClimber, 0.1));
- frc::SmartDashboard::PutData("TRleft up", new TRleft(mClimber, 0.1));
+  frc::SmartDashboard::PutData("TRright down", new TRright(mClimber, -0.1));
+  frc::SmartDashboard::PutData("TRleft down", new TRleft(mClimber, -0.1));
+  frc::SmartDashboard::PutData("TRright up", new TRright(mClimber, 0.1));
+  frc::SmartDashboard::PutData("TRleft up", new TRleft(mClimber, 0.1));
  
- frc::SmartDashboard::PutData("Run Intake Sequence", new RunIntake(mIntake, mFeeder));
-
-
   frc::SmartDashboard::PutData("FeederShoot 0.4", new FeederShoot(mFeeder, mShooter, 0.4, units::second_t(3.0)));
   
   frc::SmartDashboard::PutData("Only Feeder .5", new FeederSpin(mFeeder, 0.5));
@@ -141,7 +138,7 @@ void RobotContainer::ConfigureButtonBindings()
     driverA.WhileHeld(FlywheelShootRPM(mShooter, 0.0));
     driverB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
     driverY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
-    driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));
+    driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder, -0.40));
     BumperLeft.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
 }
 
