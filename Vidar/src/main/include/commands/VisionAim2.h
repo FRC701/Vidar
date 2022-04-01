@@ -33,6 +33,8 @@ private:
 
 Chassis& mChassis;
 
-frc2::PIDController controller{0.027, 0, 0};
+frc2::PIDController controller{0.065, 0, 0.005}; 
+
+//p-0.1 i-0.0 d-0.03 accurate but takes long
 
 };

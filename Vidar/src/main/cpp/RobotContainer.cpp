@@ -39,6 +39,8 @@
 #include "commands/UnlockTuskanClimbers.h"
 #include "commands/TRleft.h"
 #include "commands/TRright.h"
+#include "commands/VisionAim2.h"
+#include "commands/NormalVisionShoot.h"
 
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
@@ -121,8 +123,8 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button coBumperLeft {[this]{return coDriver.GetRawButton(5);}};
     frc2::Button coBumperRight {[this]{return coDriver.GetRawButton(6);}};
     coA.ToggleWhenPressed(ShortShotDeadline(mFeeder, mShooter, 850));    //replace 
-    coB.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2000));    //replace 
-    coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder));   //keep
+    coB.ToggleWhenPressed(NormalVisionShoot(mShooter, mChassis, mFeeder, 2000));    //replace 
+    coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder, 0.40));   //keep
     coY.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2500));    //replace 
     //coY.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
     coBumperLeft.ToggleWhenPressed(UnlockTuskanClimbers(mClimber));    //vision shooting 
