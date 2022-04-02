@@ -108,6 +108,10 @@ void Chassis::Periodic()
     frc::SmartDashboard::PutNumber("Right Velocity", GetRightVelocity());
     frc::SmartDashboard::PutNumber("Target Distance", TargetOffset());
     frc::SmartDashboard::PutNumber("Target Area", TargetDistance());
+
+    frc::SmartDashboard::PutNumber("LeftChassisPosition", GetLeftPos());
+    frc::SmartDashboard::PutNumber("RightChassisPosition", GetRightPos());
+
 }
 
 void Chassis::TankDrive(double left, double right)

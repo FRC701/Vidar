@@ -39,7 +39,7 @@
 #include "commands/UnlockTuskanClimbers.h"
 #include "commands/TRleft.h"
 #include "commands/TRright.h"
-
+#include "commands/ResetChassisSensorPosition.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -79,11 +79,14 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
     )
   );
   
+  frc::SmartDashboard::PutData("Vision Aim", new VisionAim(mChassis));
 
   frc::SmartDashboard::PutData("Vision Aim", new VisionAim(mChassis));
   frc::SmartDashboard::PutData("Vision Shoot", new VisionShoot(mShooter, mChassis));
   frc::SmartDashboard::PutData("Vision Aim and Shoot", new VisionAimAndShoot(mShooter, mChassis));
   frc::SmartDashboard::PutData("Parallel Vision Aim and Shoot", new ParallelVisionShoot(mChassis, mFeeder, mShooter));
+
+  frc::SmartDashboard::PutData("ChassisEncoderReset", new ResetChassisSensorPosition(mChassis));
 
 
   frc::SmartDashboard::SetDefaultNumber("Set Flywheel VelocityRPM", 0);
