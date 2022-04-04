@@ -26,5 +26,5 @@ AutoIntake::AutoIntake(Intake& intake, Feeder& feeder, Chassis& chassis)
   // Add your commands here, e.g.
   //AddRequirements(&mIntake);
   // AddCommands(FooCommand(), BarCommand());
-  AddCommands(RunIntake(mIntake, mFeeder), SpinFeeder(mFeeder, 0.4));
+  AddCommands(RunIntake(mIntake, mFeeder, 0.40), SpinFeeder(mFeeder, 0.4));
 }

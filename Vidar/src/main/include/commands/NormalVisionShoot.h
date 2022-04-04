@@ -6,16 +6,23 @@
 
 #include <frc2/command/CommandHelper.h>
 #include <frc2/command/SequentialCommandGroup.h>
-#include "subsystems/Intake.h"
+#include "subsystems/Shooter.h"
+#include "subsystems/Chassis.h"
 #include "subsystems/Feeder.h"
-class RunIntake
-    : public frc2::CommandHelper<frc2::SequentialCommandGroup,
-                                 RunIntake> {
- public:
-  RunIntake(Intake& mIntake, Feeder& mFeeder, double speed);
 
- private:
- Intake& mIntake; 
- Feeder& mFeeder;
- double speed; 
+class NormalVisionShoot
+    : public frc2::CommandHelper<frc2::SequentialCommandGroup,
+                                 NormalVisionShoot> {
+ public:
+  NormalVisionShoot(Shooter& mShooter,
+Chassis& mChassis,
+Feeder& mFeeder,
+double liam);
+
+private:
+
+Shooter& mShooter;
+Chassis& mChassis;
+Feeder& mFeeder;
+double liam;
 };
