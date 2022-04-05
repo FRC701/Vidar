@@ -4,7 +4,7 @@
 
 #include "commands/VisionAimAndShoot.h"
 #include "commands/VisionShoot.h"
-#include "commands/VisionAim.h"
+#include "commands/VisionAim2.h"
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.
 // For more information, see:
@@ -16,7 +16,7 @@ VisionAimAndShoot::VisionAimAndShoot(Shooter& shooter, Chassis& chassis)
   // Add your commands here, e.g.
   // AddCommands(FooCommand(), BarCommand());
   AddCommands(
-    // VisionAim(mChassis),
+    VisionAim2(mChassis),
     VisionShoot(mShooter, mChassis)
   );
 }
