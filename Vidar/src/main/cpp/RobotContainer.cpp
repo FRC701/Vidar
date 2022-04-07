@@ -41,7 +41,8 @@
 #include "commands/TRright.h"
 #include "commands/VisionAim2.h"
 #include "commands/NormalVisionShoot.h"
-
+#include "commands/VisionAimAndShoot2.h"
+#include "commands/VisionFeeder.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -84,7 +85,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
   frc::SmartDashboard::PutData("Vision Aim", new VisionAim(mChassis));
   frc::SmartDashboard::PutData("Vision Shoot", new VisionShoot(mShooter, mChassis));
-  frc::SmartDashboard::PutData("Vision Aim and Shoot", new VisionAimAndShoot(mShooter, mChassis));
+ // frc::SmartDashboard::PutData("Vision Aim and Shoot", new VisionAimAndShoot(mShooter, mChassis));
   frc::SmartDashboard::PutData("Parallel Vision Aim and Shoot", new ParallelVisionShoot(mChassis, mFeeder, mShooter));
 
 
@@ -122,13 +123,20 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button coY {[this]{return coDriver.GetRawButton(4);}};
     frc2::Button coBumperLeft {[this]{return coDriver.GetRawButton(5);}};
     frc2::Button coBumperRight {[this]{return coDriver.GetRawButton(6);}};
+
+    frc2::Button coPOV0 {[this]{return coDriver.GetPOV(0);}};
+    frc2::Button coPOV90 {[this]{return coDriver.GetPOV(4);}};
+
+    
     coA.ToggleWhenPressed(ShortShotDeadline(mFeeder, mShooter, 850));    //replace 
     coB.ToggleWhenPressed(NormalVisionShoot(mShooter, mChassis, mFeeder, 2000));    //replace 
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder, 0.40));   //keep
-    coY.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2500));    //replace 
+    coY.ToggleWhenPressed(VisionAimAndShoot(mShooter, mChassis, mFeeder));    //replace 
     //coY.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
     coBumperLeft.ToggleWhenPressed(UnlockTuskanClimbers(mClimber));    //vision shooting 
     coBumperRight.ToggleWhenPressed(LockTuskanClimbers(mClimber));
+    coPOV0.ToggleWhenPressed(VisionAimAndShoot(mShooter, mChassis, mFeeder));
+    coPOV90.ToggleWhenPressed(VisionFeeder(mFeeder, 0.4));
 
 
     frc2::Button driverA {[this]{return driver.GetRawButton(1);}};
@@ -139,7 +147,7 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button BumperRight {[this]{return driver.GetRawButton(6);}};
     driverA.WhileHeld(FlywheelShootRPM(mShooter, 0.0));
     driverB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
-    driverY.ToggleWhenPressed(ParallelShoot(mFeeder, mShooter, mChassis));
+    driverY.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2500));
     driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder, -0.40));
     BumperLeft.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
 }
