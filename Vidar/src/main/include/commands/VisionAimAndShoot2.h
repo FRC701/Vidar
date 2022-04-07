@@ -5,19 +5,18 @@
 #pragma once
 
 #include <frc2/command/CommandHelper.h>
-#include <frc2/command/SequentialCommandGroup.h>
-#include "subsystems/Shooter.h"
+#include <frc2/command/ParallelDeadlineGroup.h>
 #include "subsystems/Chassis.h"
+#include "subsystems/Shooter.h"
 #include "subsystems/Feeder.h"
 
-class VisionAimAndShoot
-    : public frc2::CommandHelper<frc2::SequentialCommandGroup,
-                                 VisionAimAndShoot> {
+class VisionAimAndShoot2
+    : public frc2::CommandHelper<frc2::ParallelDeadlineGroup,
+                                 VisionAimAndShoot2> {
  public:
-  VisionAimAndShoot(Shooter& mShooter, Chassis& mChassis, Feeder& mFeeder);
+  VisionAimAndShoot2(Shooter& mShooter, Chassis& mChassis, Feeder& mFeeder);
 
-  private:
-
+private:
 Shooter& mShooter;
 Chassis& mChassis;
 Feeder& mFeeder;
