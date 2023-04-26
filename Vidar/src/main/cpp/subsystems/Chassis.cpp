@@ -75,7 +75,8 @@ Chassis::Chassis(WPI_TalonFX& leftFront, WPI_TalonFX& leftRear, WPI_TalonFX& rig
 ,mDrive(leftFront, rightFront)
 {
     // TODO: SetSensorPhase does not seem to be having an effect
-    // The velocity is still going in reverse to the direction of travel.
+    // The velocity is still going in reverse to the direction of travel
+
     constexpr bool kLeftSensorPhase {false};
     leftFront.SetSensorPhase(kLeftSensorPhase);
     leftRear.SetSensorPhase(!kLeftSensorPhase);
@@ -94,10 +95,8 @@ Chassis::Chassis(WPI_TalonFX& leftFront, WPI_TalonFX& leftRear, WPI_TalonFX& rig
     leftRear.ConfigMotionCruiseVelocity(1500, 10);
     rightRear.ConfigMotionAcceleration(1500, 10);
     rightFront.ConfigMotionCruiseVelocity(1500, 10);
-    
      leftRear.Follow(leftFront); 
      rightRear.Follow(rightFront); 
-
      SetPID(leftFront, rightFront);
 }
 

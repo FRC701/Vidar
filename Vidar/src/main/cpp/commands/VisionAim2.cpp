@@ -7,6 +7,7 @@
 namespace
 {
   double position = 0;
+
 }
 VisionAim2::VisionAim2(Chassis& chassis)
 : mChassis(chassis)
@@ -23,15 +24,19 @@ void VisionAim2::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void VisionAim2::Execute() 
 {
+   mTimer.Start();
   double output = controller.Calculate(mChassis.TargetOffset(), 0.0);
   mChassis.ArcadeDrive(0, position - output);
 }
 
 // Called once the command ends or is interrupted.
 void VisionAim2::End(bool interrupted) 
-{}
+{
+  mTimer.Stop();
+  mTimer.Reset();
+}
 
 // Returns true when the command should end.
 bool VisionAim2::IsFinished() {
-  return controller.AtSetpoint();
+  return mTimer.HasElapsed(units::second_t(1.75));
 }

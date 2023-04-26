@@ -9,7 +9,7 @@
 
 void Robot::RobotInit() 
 {
-    frc::CameraServer::StartAutomaticCapture();
+    //frc::CameraServer::StartAutomaticCapture();
 }
 /**
  * This function is called every robot packet, no matter the mode. Use

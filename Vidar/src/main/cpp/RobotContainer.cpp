@@ -43,6 +43,7 @@
 #include "commands/NormalVisionShoot.h"
 #include "commands/VisionAimAndShoot2.h"
 #include "commands/VisionFeeder.h"
+#include "commands/Spit2.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -128,15 +129,15 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button coPOV90 {[this]{return coDriver.GetPOV(4);}};
 
     
-    coA.ToggleWhenPressed(ShortShotDeadline(mFeeder, mShooter, 850));    //replace 
+    coA.ToggleWhenPressed(Spit2(mShooter, mFeeder));   //replace 
     coB.ToggleWhenPressed(NormalVisionShoot(mShooter, mChassis, mFeeder, 2000));    //replace 
     coX.ToggleWhenPressed(RunIntake(mIntake, mFeeder, 0.40));   //keep
-    coY.ToggleWhenPressed(VisionAimAndShoot(mShooter, mChassis, mFeeder));    //replace 
+    //coY.ToggleWhenPressed(VisionAimAndShoot(mShooter, mChassis, mFeeder));    //out
     //coY.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
     coBumperLeft.ToggleWhenPressed(UnlockTuskanClimbers(mClimber));    //vision shooting 
     coBumperRight.ToggleWhenPressed(LockTuskanClimbers(mClimber));
-    coPOV0.ToggleWhenPressed(VisionAimAndShoot(mShooter, mChassis, mFeeder));
-    coPOV90.ToggleWhenPressed(VisionFeeder(mFeeder, 0.4));
+    //coPOV0.ToggleWhenPressed(VisionAimAndShoot(mShooter, mChassis, mFeeder)); out
+    //coPOV90.ToggleWhenPressed(VisionFeeder(mFeeder, 0.4)); out
 
 
     frc2::Button driverA {[this]{return driver.GetRawButton(1);}};
@@ -145,11 +146,11 @@ void RobotContainer::ConfigureButtonBindings()
     frc2::Button driverY {[this]{return driver.GetRawButton(4);}};
     frc2::Button BumperLeft {[this]{return driver.GetRawButton(5);}};
     frc2::Button BumperRight {[this]{return driver.GetRawButton(6);}};
-    driverA.WhileHeld(FlywheelShootRPM(mShooter, 0.0));
-    driverB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter));
-    driverY.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2500));
-    driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder, -0.40));
-    BumperLeft.ToggleWhenPressed(VisionShoot(mShooter, mChassis));
+    driverA.ToggleWhenPressed(FlywheelShootRPM(mShooter, 0.0));
+    //driverB.ToggleWhenPressed(ParallelFlywheelShoot(mFeeder, mShooter)); //out
+    driverY.ToggleWhenPressed(ParallelShootRPM(mFeeder, mShooter, 2075)); //change deploy before 29 match
+    driverX.ToggleWhenPressed(RunIntake(mIntake, mFeeder, -0.55));
+    //BumperLeft.ToggleWhenPressed(VisionShoot(mShooter, mChassis)); out
 }
 
 void RobotContainer::ConfigureAutoChooser(){}

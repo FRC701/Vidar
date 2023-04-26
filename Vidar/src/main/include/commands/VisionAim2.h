@@ -8,6 +8,7 @@
 #include <frc2/command/CommandHelper.h>
 #include <frc/controller/PIDController.h>
 #include "subsystems/Chassis.h"
+#include <frc/Timer.h>
 
 /**
  * An example command.
@@ -32,6 +33,9 @@ class VisionAim2
 private:
 
 Chassis& mChassis;
+
+  units::second_t mShooterTimeout;
+  frc::Timer mTimer;
 
 frc2::PIDController controller{0.065, 0, 0.005}; 
 

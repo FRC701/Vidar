@@ -15,6 +15,7 @@
 #include <frc2/command/SubsystemBase.h>
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
+#include <ctre/phoenix/motorcontrol/can/TalonFX.h>
 
 class Chassis : public frc2::SubsystemBase {
  public:

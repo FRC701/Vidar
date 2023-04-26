@@ -23,7 +23,9 @@ void FeederSpin::Execute()
 }
 
 // Called once the command ends or is interrupted.
-void FeederSpin::End(bool interrupted) {}
+void FeederSpin::End(bool interrupted) {
+  mFeeder.FeederSpin(0.0);
+}
 
 // Returns true when the command should end.
 bool FeederSpin::IsFinished() {
